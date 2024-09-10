@@ -1,23 +1,13 @@
-
-import fg from 'api-dylux';
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-
-if (!args[0]) throw `✳️ ${mssg.noLink('Facebook')}\n\n📌 ${mssg.example} :\n*${usedPrefix + command}* https://fb.watch/d7nB8-L-gR/`
-  m.react(⏱️)
-
-  try {
-    let res = await fetch(global.API('fgmods', '/api/downloader/fbdl', { url: args[0] }, 'apikey'))
-    let data = await res.json()
-
-    conn.sendFile(m.chat, data.result.HD, 'fb.mp4', `*\`[ FACEBOOK VIDEO ]\`*`, m)
-    m.react(✅)
-  } catch (error) {
-    m.reply(mssg.error)
-  }
+import { facebookdl, facebookdlv2 } from '@bochilteam/scraper'
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+if (!args[0]) throw `Use example ${usedPrefix + command} https://www.facebook.com/watch?v=636541475139*`
+await m.react('🕓');
+const { result } = await facebookdl(args[0]).catch(async _ => await facebookdlv2(args[0]))
+await m.react('✅');
+for (const { url, isVideo } of result.reverse()) await conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `*\`[ FACEBOOK VIDEO ]\`*`, m, null, rcanal)
 }
-handler.help = ['facebook'].map(v => v + ' <url>')
-handler.tags = ['dl']
-handler.command = /^(facebook2)$/i
-handler.diamond = true
-
+handler.help = ['facebook2'].map(v => v + ' <url>')
+handler.tags = ['downloader']
+handler.command = /^((facebook2|fb2)(downloder2|dl2)?)$/i
+handler.exp = 35
 export default handler
