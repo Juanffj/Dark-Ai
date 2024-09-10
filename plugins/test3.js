@@ -7,6 +7,7 @@ await m.react('✅');
 for (const { url, isVideo } of result.reverse()) await conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `*\`[ FACEBOOK VIDEO ]\`*`, m, null, rcanal)
 }
 handler.help = ['facebook2'].map(v => v + ' <url>')
+handler.corazones = 2
 handler.tags = ['dl']
 handler.command = ['facebook2']
 handler.exp = 35
