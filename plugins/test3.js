@@ -4,7 +4,7 @@ if (!args[0]) throw `Use example ${usedPrefix + command} https://www.facebook.co
 await m.react('🕓');
 const { result } = await facebookdl(args[0]))
 await m.react('✅');
-for (const { url, isVideo } of result.reverse()) await conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `*\`[ FACEBOOK VIDEO ]\`*`, m, null, rcanal)
+await conn.sendFile(m.chat, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `*\`[ FACEBOOK VIDEO ]\`*`, m, null, rcanal)
 }
 handler.help = ['facebook2'].map(v => v + ' <url>')
 handler.tags = ['downloader']
