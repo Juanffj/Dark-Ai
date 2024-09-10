@@ -21,23 +21,24 @@ let handler = async (m, {
       url 
       } = json.data[0]
       let response = `
-*乂  APK - DESCARGAS* 乂
+*乂  APK - DESCARGAS 乂*
 
- ${title}
+ `+'_*`${title}`_*'+`
  
  📦 : ${size}
  🗃️ : ${category}
  ⬇️ : ${download}
  🌟 : ${rating}
 `
-      await conn.sendMessage(m.chat, {document: {url: url }, mimetype: 'application/vnd.android.package-archive', fileName: title + '.apk', caption: null}, {quoted: m});
+await conn.sendMessage(m.chat, {image: {url: icon }, caption: response}, {quoted: m});
+await conn.sendMessage(m.chat, {document: {url: url }, mimetype: 'application/vnd.android.package-archive', fileName: title + '.apk', caption: null}, {quoted: m});
    } catch (e) {
       console.log(e)
       return conn.reply(m.chat, Func.jsonFormat(e), m)
    }
 }
 handler.help = ['apk']
-handler.tags = ['dl']
+handler.tags = ['downloader']
 handler.command = /^(apk|app)$/i
 handler.limit = 1
 export default handler
