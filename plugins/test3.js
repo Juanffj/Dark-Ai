@@ -7,7 +7,7 @@ await m.react('✅');
 for (const { url, isVideo } of result.reverse()) await conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `*\`[ FACEBOOK VIDEO ]\`*`, m, null, rcanal)
 }
 handler.help = ['facebook2'].map(v => v + ' <url>')
-handler.tags = ['downloader']
-handler.command = /^((facebook2|fb2)(downloder2|dl2)?)$/i
+handler.tags = ['dl']
+handler.command = ['facebook2']
 handler.exp = 35
 export default handler
