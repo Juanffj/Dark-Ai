@@ -37,7 +37,7 @@ let handler = async (m, {
    }
 }
 handler.help = ['apk']
-handler.tags = ['internet']
+handler.tags = ['dl']
 handler.command = /^(apk|app)$/i
 handler.limit = 1
 export default handler
