@@ -2,6 +2,8 @@ import { facebookdl, facebookdlv2 } from '@bochilteam/scraper'
 let handler = async (m, { conn, args, usedPrefix, command }) => {
 if (!args[0]) throw `Use example ${usedPrefix + command} https://www.facebook.com/watch?v=636541475139*`
 const { result } = await facebookdl(args[0]).catch(async _ => await facebookdlv2(args[0]))
+//m.reply(result)
+const { url, isVideo } = result.reverse()
 await conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `*\`[ FACEBOOK VIDEO ]\`*`, m, null, rcanal)
 }
 handler.help = ['facebook2'].map(v => v + ' <url>')
