@@ -17,7 +17,7 @@ if (!args[0]) throw `✳️ ${mssg.noLink('Facebook')}\n\n📌 ${mssg.example} :
 }
 handler.help = ['facebook'].map(v => v + ' <url>')
 handler.tags = ['dl']
-handler.command = /^((facebook2)$/i
+handler.command = /^(facebook2)$/i
 handler.diamond = true
 
 export default handler
