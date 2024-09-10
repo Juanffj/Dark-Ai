@@ -5,7 +5,16 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 if (!args[0]) return conn.reply(m.chat, '🤍 Ingrese el enlace de un archivo de Mediafire.', m, rcanal)
 if (!args[0].match(/mediafire/gi)) return conn.reply(m.chat, '🤍 El enlace deve ser de un archivo de Mediafire.', m, rcanal)
 	const { title, size, type, url } = await mediafire(args[0]);
-	await conn.sendFile(m.chat, url, title, `- *Nombre:* ${title}\n- *Tamaño:* ${size}\n- *Type:* ${type}`, m, false, { mimetype: type, asDocument: true });
+let txt = `乂  *¡MEDIAFIRE - DESCARGAS!*  乂\n\n`
+    txt += `✩ *Nombre* : ${title}\n`
+    txt += `✩ *Peso* : ${size}\n`
+//    txt += `✩ *Publicado* : ${aploud}\n`
+    txt += `✩ *MimeType* : ${type}\n\n`
+    txt += `*- ↻ El archivo se esta enviando espera un momento, soy lenta. . .*`
+    let img = await (await fetch('https://i.ibb.co/wLQFn7q/logo-mediafire.jpg')).buffer()
+    await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, fkontak, null, rcanal)
+//	await conn.sendFile(m.chat, url, title, `- *Nombre:* ${title}\n- *Tamaño:* ${size}\n- *Type:* ${type}`, m, false, { mimetype: type, asDocument: true });
+	await conn.sendFile(m.chat, url, title, null, fkontak, null, { mimetype: type, asDocument: true })
 }
 handler.help = ['mediafire'].map(v => v + ' *<url>*')
 handler.tags = ['dl']
