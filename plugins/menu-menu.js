@@ -65,7 +65,7 @@ const defaultMenu = {
   header: '╭• •꒰─• `%category` ·ٜ۬･',
   body: '│ %cmd\n',
   footer: '╰• •───• •───• •───•\n',
-  after: `> BY GENESISBOT-MD`,
+  after: `> BY GENESISBOT-MD X Angel-OFC`,
 }
 let ppp = 'https://i.ibb.co/4dGjmbT/file.jpg'
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
