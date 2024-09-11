@@ -50,7 +50,7 @@ let tags = {
 }
 
 const defaultMenu = {
-  before: `“𝐇𝐨𝐥𝐚 *%name* 𝐒𝐨𝐲 𝐆𝐞𝐧𝐞𝐬𝐢𝐬𝐁𝐨𝐭, %greeting"
+  before: `Hola \`%name\` soy GenesisBot-MD, %greeting
 
 • _\`ɴᴏᴍʙʀᴇ\`_ :: %name
 • _\`ʙᴏᴛ\`_ :: GenesisBot-MD
@@ -212,29 +212,29 @@ function clockString(ms) {
   var ase = new Date();
   var hour = ase.getHours();
 switch(hour){
-  case 0: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌙'; break;
-  case 1: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 💤'; break;
-  case 2: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🦉'; break;
-  case 3: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 ✨'; break;
-  case 4: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 💫'; break;
-  case 5: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 🌅'; break;
-  case 6: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 🌄'; break;
-  case 7: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 🌅'; break;
-  case 8: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 💫'; break;
-  case 9: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 ✨'; break;
-  case 10: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 🌞'; break;
-  case 11: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 🌨'; break;
-  case 12: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 ❄'; break;
-  case 13: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐝𝐢𝐚𝐬 🌤'; break;
-  case 14: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐭𝐚𝐫𝐝𝐞𝐬 🌇'; break;
-  case 15: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐭𝐚𝐫𝐝𝐞𝐬 🥀'; break;
-  case 16: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐭𝐚𝐫𝐝𝐞𝐬 🌹'; break;
-  case 17: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐭𝐚𝐫𝐝𝐞𝐬 🌆'; break;
-  case 18: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌙'; break;
-  case 19: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌃'; break;
-  case 20: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌌'; break;
-  case 21: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌃'; break;
-  case 22: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌙'; break;
-  case 23: hour = '𝐁𝐮𝐞𝐧𝐚𝐬 𝐧𝐨𝐜𝐡𝐞𝐬 🌃'; break;
+  case 0: hour = 'Buenas noches 🌙'; break;
+  case 1: hour = 'Buenas noches 💤'; break;
+  case 2: hour = 'Buenas noches 🦉'; break;
+  case 3: hour = 'Buenas noches ✨'; break;
+  case 4: hour = 'Buenos dias 💫'; break;
+  case 5: hour = 'Buenos dias 🌅'; break;
+  case 6: hour = 'Buenos dias 🌄'; break;
+  case 7: hour = 'Buenos dias 🌅'; break;
+  case 8: hour = 'Buenos dias 💫'; break;
+  case 9: hour = 'Buenos dias ✨'; break;
+  case 10: hour = 'Buenos dias 🌞'; break;
+  case 11: hour = 'Buenos dias 🌨'; break;
+  case 12: hour = 'Buenos dias ❄'; break;
+  case 13: hour = 'Buenos dias 🌤'; break;
+  case 14: hour = 'Buenas tardes 🌇'; break;
+  case 15: hour = 'Buenas tardes 🥀'; break;
+  case 16: hour = 'Buenas tardes 🌹'; break;
+  case 17: hour = 'Buenas tardes 🌆'; break;
+  case 18: hour = 'Buenas noches 🌙'; break;
+  case 19: hour = 'Buenas noches 🌃'; break;
+  case 20: hour = 'Buenas noches 🌌'; break;
+  case 21: hour = 'Buenas noches 🌃'; break;
+  case 22: hour = 'Buenas noches 🌙'; break;
+  case 23: hour = 'Buenas noches 🌃'; break;
 }
   var greeting = hour;
