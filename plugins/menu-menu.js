@@ -27,7 +27,7 @@ let Styles = (text, style = 1) => {
   return output.join('');
 };
 
-let kenisawa = { key: { remoteJid: 'status@broadcast', participant: '0@s.whatsapp.net' }, message: { orderMessage: { itemCount: 9999999999, status: 1, thumbnail: await conn.resize(await getBuffer("https://i.ibb.co/DbzPFGT/file.jpg"),300,150), surface: 1, message: 'Elaina ᴍᴜʟᴛɪᴅᴇᴠɪᴄᴇ', orderTitle: wm, sellerJid: '0@s.whatsapp.net' } } }
+let kenisawa = { key: { remoteJid: 'status@broadcast', participant: '0@s.whatsapp.net' }, message: { orderMessage: { itemCount: 9999999999, status: 1, thumbnail: await conn.resize(await getBuffer("https://i.ibb.co/4dGjmbT/file.jpg"),300,150), surface: 1, message: 'Elaina ᴍᴜʟᴛɪᴅᴇᴠɪᴄᴇ', orderTitle: wm, sellerJid: '0@s.whatsapp.net' } } }
 let user = `@${m.sender.split('@')[0]}`
     
   
