@@ -26,8 +26,8 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
 
     let sbot =
         conn.user.jid == global.conn.user.jid
-        ? "`⠕⃞❨ः亹⠿☛ 𝐁𝐎𝐓:` Principal"
-        : "`⠕⃞❨ः亹⠿☛ 𝐁𝐎𝐓:` Sub - Bot de" + `  Wa.me/${global.conn.user.jid.split`@`[0]}`;
+        ? "`ʙᴏᴛ :: ` Principal"
+        : "`ʙᴏᴛ :: ` Sub - Bot de" + `  Wa.me/${global.conn.user.jid.split`@`[0]}`;
 
     global.fcontact = {
         key: {
@@ -54,7 +54,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     txt += '`ʙᴏᴛ ::`' + ` GenesisBot-MD\n`;
     txt += '`ꜰᴇᴄʜᴀ ::`' + ` ${fecha}\n`;
     txt += '`ᴠᴇʀꜱɪᴏɴ ::`' + ` ${vs}\n`;
-    txt += `ʙᴏᴛ :: ${sbot}\n`;
+    txt += `${sbot}\n`;
     txt += '`ᴘʀᴇꜰɪᴊᴏ ::`' + ` [  ${usedPrefix}  ]\n`;
     txt += '`ᴜꜱᴜᴀʀɪᴏꜱ ::`' + ` ${totalusr}\n`;
     txt += '`ᴠᴇʀɪꜰɪᴄᴀᴅᴏꜱ ::`' + ` ${rtotalreg}\n`;
