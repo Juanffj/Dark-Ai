@@ -6,7 +6,6 @@ import os from 'os'
 import fs from 'fs'
 import fetch from 'node-fetch'
 //const { generateWAMessageFromContent, proto } = (await import('@adiwajshing/baileys')).default
-let handler = async (m, { conn, usedPrefix: _p }) => {
 
 let tags = {
   'main': '𝐈𝐍𝐅𝐎 𝐁𝐎𝐓',
@@ -34,6 +33,8 @@ let tags = {
   'convertir': '𝐂𝐎𝐍𝐕𝐄𝐑𝐓𝐈𝐃𝐎𝐑𝐄𝐒',
   'audios': '𝐀𝐔𝐃𝐈𝐎𝐒',
 }
+
+let handler = async (m, { conn, usedPrefix: _p }) => {
 
 let Styles = (text, style = 1) => {
   var xStr = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
