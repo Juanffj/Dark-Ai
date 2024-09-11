@@ -30,6 +30,25 @@ let tags = {
   'audios': '𝐀𝐔𝐃𝐈𝐎𝐒',
 }
 
+let Styles = (text, style = 1) => {
+  var xStr = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
+  var yStr = Object.freeze({
+    1: 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘqʀꜱᴛᴜᴠᴡxʏᴢ1234567890'
+  });
+  var replacer = [];
+  xStr.map((v, i) => replacer.push({
+    original: v,
+    convert: yStr[style].split('')[i]
+  }));
+  var str = text.toLowerCase().split('');
+  var output = [];
+  str.map(v => {
+    const find = replacer.find(x => x.original == v);
+    find ? output.push(find.convert) : output.push(v);
+  });
+  return output.join('');
+};
+
 const defaultMenu = {
   before: `“𝐇𝐨𝐥𝐚 *%name* 𝐒𝐨𝐲 𝐆𝐞𝐧𝐞𝐬𝐢𝐬𝐁𝐨𝐭, %greeting"
 
