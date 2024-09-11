@@ -78,18 +78,18 @@ let handler = async (m, { conn, text, args, command, usedPrefix }) => {
         if (asd[0].imgSrc.length === 0) {
             throw '🤍 ɴᴏ ʜᴀʏ ɪᴍᴀɢᴇɴ';
         }
-
-        m.reply('🤍 ᴇɴᴠɪᴀɴᴅᴏ ɪᴍᴀɢᴇɴᴇs...');
+        await m.react('🕓');
         for (let i of asd[0].imgSrc) {
             try {
                 await conn.sendFile(m.chat, i, '', null, m);
+            await m.react('✅');
             } catch (e) {
                 console.error(e);
-                m.reply('🤍 ᴇʀʀᴏʀ...');
+                await m.react('✖️');
             }
         }
     } catch (error) {
-        m.reply('🤍 ᴇʀʀᴏʀ');
+      await m.react('✖️');
         console.error(error); 
     }
 }
