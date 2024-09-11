@@ -184,7 +184,7 @@ await conn.reply(m.chat, '*ꪹ͜𓂃͡𝗖𝗮𝗿𝗴𝗮𝗻𝗱𝗼 𝗘𝗹 
 
 // await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), fakegif3, null, m)
 
-await conn.sendButton(m.chat, text.trim()), '@usxr_angelito0', ppp, [
+await conn.sendButton(m.chat, text, '@usxr_angelito0', ppp, [
 ['MENU COMPLETO🤍', '.allmenu'], ['DUEÑO 🫧', '.owner']], null, [['CANAL 🐈‍⬛', `${canal}`]], m)
 
   } catch (e) {
