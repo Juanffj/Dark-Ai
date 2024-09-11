@@ -91,7 +91,7 @@ sᴏʏ ᴇʟᴀɪɴᴀ ɪᴀ ᴜɴ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ ᴄʀ�
       }) * 1000
     }
     
-    let bjir = 'https://i.ibb.co.com/2WTtmsZ/images.jpg'
+    let bjir = 'https://i.ibb.co/4dGjmbT/file.jpg'
     let totalreg = Object.keys(global.db.data.users).length
     let platform = os.platform()
     let muptime = clockString(_muptime)
