@@ -182,7 +182,7 @@ await conn.reply(m.chat, '*ꪹ͜𓂃͡𝗖𝗮𝗿𝗴𝗮𝗻𝗱𝗼 𝗘𝗹 
 
 // await conn.reply(m.chat, '🍟 Enviando el menú.....', m, rcanal)
 
-await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), m* null, rcanal)
+await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), m, null, rcanal)
 
 /* await conn.sendButton(m.chat, text, '@usxr_angelito0', ppp, [
 ['', '']], null, [['CANAL 🐈‍⬛', `${canal}`], ['CANAL 2', `wa.me/59168683798`]], m) */
