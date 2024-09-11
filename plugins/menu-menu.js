@@ -64,7 +64,7 @@ const defaultMenu = {
 
 乂 _\`ᴄ\` \`ᴏ\` \`ᴍ\` \`ᴀ\` \`ɴ\` \`ᴅ\` \`ᴏ\` \`ꜱ\`_ 乂
 `.trimStart(),
-  header: '╭• •꒰─• `%category` ·ٜ۬･',
+  header: '╭• •꒰─• *`%category`* ·ٜ۬･',
   body: '│ %cmd\n',
   footer: '╰• •───• •───• •───•\n',
   after: `> BY GENESISBOT-MD X Angel-OFC`,
