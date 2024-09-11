@@ -8,6 +8,33 @@ import fetch from 'node-fetch'
 //const { generateWAMessageFromContent, proto } = (await import('@adiwajshing/baileys')).default
 let handler = async (m, { conn, usedPrefix: _p }) => {
 
+let tags = {
+  'main': '𝐈𝐍𝐅𝐎 𝐁𝐎𝐓',
+  'buscador': '𝐁𝐔𝐒𝐐𝐔𝐄𝐃𝐀𝐒',
+  'search': '𝐒𝐄𝐀𝐑𝐂𝐇',
+  'game': '𝐃𝐈𝐕𝐄𝐑𝐒𝐈𝐎𝐍',
+  'jadibot': '𝐒𝐔𝐁 𝐁𝐎𝐓𝐒',
+  'rpg': '𝐑𝐏𝐆',
+  'rg': '𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎',
+  'xp': '𝐄𝐗𝐏',
+  'sticker': '𝐒𝐓𝐈𝐂𝐊𝐄𝐑𝐒',
+  'anime': '𝐀𝐍𝐈𝐌𝐄𝐒',
+  'database': '𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄',
+  'fix': '𝐅𝐈𝐗𝐌𝐒𝐆𝐄𝐒𝐏𝐄𝐑𝐀',
+  'grupo': '𝐆𝐑𝐔𝐏𝐎𝐒',
+  'nable': '𝐎𝐍 / 𝐎𝐅𝐅', 
+  'dl': '𝐃𝐄𝐒𝐂𝐀𝐑𝐆𝐀𝐒',
+  'fun': '𝐇𝐄𝐑𝐑𝐀𝐌𝐈𝐄𝐍𝐓𝐀𝐒',
+  'info': '𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂𝐈𝐎𝐍',
+  'nsfw': '𝐍𝐒𝐅𝐖', 
+  'owner': '𝐂𝐑𝐄𝐀𝐃𝐎𝐑',
+  'mods': '𝐒𝐓𝐀𝐅𝐅',
+  'audio': '𝐀𝐔𝐃𝐈𝐎𝐒', 
+  'ai': '𝐀𝐈 𝐁𝐎𝐓',
+  'convertir': '𝐂𝐎𝐍𝐕𝐄𝐑𝐓𝐈𝐃𝐎𝐑𝐄𝐒',
+  'audios': '𝐀𝐔𝐃𝐈𝐎𝐒',
+}
+
 let Styles = (text, style = 1) => {
   var xStr = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
   var yStr = Object.freeze({
