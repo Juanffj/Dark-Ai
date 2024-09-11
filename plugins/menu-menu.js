@@ -144,7 +144,7 @@ sᴏʏ ᴇʟᴀɪɴᴀ ɪᴀ ᴜɴ ʙᴏᴛ ᴅᴇ ᴡʜᴀᴛsᴀᴘᴘ ᴄʀ�
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
 
  conn.sendMessage(m.chat, {
-      image: { url: "https://i.ibb.co/51L8ZBr/file.jpg" },
+      image: { url: "https://i.ibb.co/4dGjmbT/file.jpg" },
 //            mimetype: 'video/mp4',
             fileLength: 100000000,
             caption: Styles(text),
