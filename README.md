@@ -34,6 +34,18 @@
 
 [![Click Aquí](https://img.shields.io/badge/Grupo-Genesis-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EVl0wxlCww74HV3vvZq83a)
 
+### **`Superiority Pro Hosting 🤖`**
+<a href="https://dash.superiority.pro/login"><img src="https://qu.ax/TiBm.jpg" height="125px"></a>
+
+<details>
+ <summary><b>:paperclip: Enlaces Importantes</b></summary>
+
+- **Dashboard:** [`Aquí`](https://store.azuraultra-host.pro)
+- **Grupo - Soporte:** [`Aquí`](https://chat.whatsapp.com/LbjpDV0KmZ48iHFSy6n1Gz)
+- **Canal - Oficial:** [`Aquí`](https://whatsapp.com/channel/0029VaoRzN0KmCPMFNe3TD1b)
+
+</details>
+------------------
 
 ### **`☁️ CORINPLUS HOTS`**
 <a href="https://dash.corinplus.com"><img src="https://qu.ax/ZycD.png" height="125px"></a>
