@@ -184,8 +184,8 @@ await conn.reply(m.chat, '*ꪹ͜𓂃͡𝗖𝗮𝗿𝗴𝗮𝗻𝗱𝗼 𝗘𝗹 
 
 await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), fakegif3, null, fake)
 
-// await conn.sendButton(m.chat, text, '@usxr_angelito0', ppp, [
-['', '']], null, [['CANAL 🐈‍⬛', `${canal}`], ['CANAL 2', `wa.me/59168683798`]], m)
+/* await conn.sendButton(m.chat, text, '@usxr_angelito0', ppp, [
+['', '']], null, [['CANAL 🐈‍⬛', `${canal}`], ['CANAL 2', `wa.me/59168683798`]], m) */
 
   } catch (e) {
     conn.reply(m.chat, '🔵 Lo sentimos, el menú tiene un error', m, rcanal, )
