@@ -148,7 +148,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let img10 = "https://i.ibb.co/SfYFJCG/file.jpg";
     let img11 = "https://i.ibb.co/SfYFJCG/file.jpg";
 
-    await conn.sendListB(m.chat, menu, txt, `「✶」𝐌𝐄𝐍𝐔 𝐋𝐈𝐒𝐓「✶」`, [vid, img, img2, img3, img4, img5, img6, img8, img9, img10, img11].getRandom(), listSections, null, estilo);
+    await conn.sendListB(m.chat, menu, txt, `「✶」𝐌𝐄𝐍𝐔 𝐋𝐈𝐒𝐓「✶」`, [vid, img, img2, img3, img4, img5, img6, img8, img9, img10, img11].getRandom(), listSections, null, [['CANAL 🐈‍⬛', `${canal}`]], estilo);
 };
 
 handler.command = ["menu", "help", "menú"];
