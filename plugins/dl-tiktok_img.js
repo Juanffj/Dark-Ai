@@ -81,7 +81,7 @@ let handler = async (m, { conn, text, args, command, usedPrefix }) => {
         await m.react('🕓');
         for (let i of asd[0].imgSrc) {
             try {
-                await conn.sendFile(m.chat, i, '', null, m, fake);
+                await conn.sendFile(m.chat, i, '', null, m, null, rcanal);
             await m.react('✅');
             } catch (e) {
                 console.error(e);
