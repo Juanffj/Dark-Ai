@@ -182,7 +182,7 @@ await conn.reply(m.chat, '*ꪹ͜𓂃͡𝗖𝗮𝗿𝗴𝗮𝗻𝗱𝗼 𝗘𝗹 
 
 // await conn.reply(m.chat, '🍟 Enviando el menú.....', m, rcanal)
 
-await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), fakegif3, null, fake)
+await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), fakegif3, null, m)
 
   } catch (e) {
     conn.reply(m.chat, '🔵 Lo sentimos, el menú tiene un error', m, rcanal, )
