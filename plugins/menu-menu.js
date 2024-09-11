@@ -64,7 +64,7 @@ const defaultMenu = {
 `.trimStart(),
   header: '╭• •꒰─• `%category` ·ٜ۬･',
   body: '│ %cmd\n',
-  footer: '╰• •───• •───• •───•',
+  footer: '╰• •───• •───• •───•\n',
   after: ``,
 }
 let ppp = 'https://i.ibb.co/4dGjmbT/file.jpg'
