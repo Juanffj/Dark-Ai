@@ -45,7 +45,6 @@
 - **Canal - Oficial:** [`Aquí`](https://whatsapp.com/channel/0029VaoRzN0KmCPMFNe3TD1b)
 
 </details>
-------------------
 
 ### **`☁️ CORINPLUS HOTS`**
 <a href="https://dash.corinplus.com"><img src="https://qu.ax/ZycD.png" height="125px"></a>
