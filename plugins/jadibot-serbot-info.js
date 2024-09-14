@@ -21,8 +21,6 @@ async function handler(m, { conn: stars, usedPrefix }) {
 
 await stars.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, null, fake, false, { mentions: stars.parseMention(responseMessage) })
 
-// await stars.sendMessage(m.chat, { text: responseMessage, mentions: stars.parseMention(responseMessage) }, { quoted: fkontak })
-// await conn.reply(m.chat, responseMessage, m, rcanal)
 }
 
 handler.help = ['bots']
