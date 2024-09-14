@@ -1,25 +1,27 @@
 import ws from 'ws'
-import fetch from 'node-fetch'
 
-async function handler(m, { conn: _envio, usedPrefix }) {
-const uniqueUsers = new Map()
+async function handler(m, { conn: stars, usedPrefix }) {
+  let uniqueUsers = new Map()
 
-global.conns.forEach((conn) => {
-if (conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED) {
-uniqueUsers.set(conn.user.jid.replace(/[^0-9]/g, ''), conn.user)}})
+  global.conns.forEach((conn) => {
+    if (conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED) {
+      uniqueUsers.set(conn.user.jid, conn)
+    }
+  })
 
-const message = Array.from(uniqueUsers.values()).map((user, index) => `┌  ✩  *${index + 1}* : @${user.jid.replace(/[^0-9]/g, '')}\n└  ✩  *Link* : wa.me/${user.jid.replace(/[^0-9]/g, '')}\n`
-  ).join('\n')
+  let users = [...uniqueUsers.values()]
 
-const replyMessage = message.length === 0 ? "" : message
-const totalUsers = uniqueUsers.size;
-const responseMessage = `${`*\`S E R B O T-S U B B O T S\`*\n\n${replyMessage.trim()}`.trim()}`
+  let message = users.map((v, index) => `╭─⬣「 ${packname} 」⬣\n│⁖ฺ۟̇࣪·֗٬̤⃟🚩 *${index + 1}.-* @${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Link:* https://wa.me/${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Nombre:* ${v.user.name || '𝚂𝚄𝙱-𝙱𝙾𝚃'}\n╰─⬣`).join('\n\n')
 
-let img = await (await fetch(`https://i.ibb.co/0FXmhvX/file.jpg`)).buffer()
+  let replyMessage = message.length === 0 ? '' : message
+  global.totalUsers = users.length
+  let responseMessage = `╭━〔 𝗦𝗨𝗕-𝗕𝗢𝗧𝗦 𝗝𝗔𝗗𝗜𝗕𝗢𝗧 🌸 〕⬣\n┃ *𝚃𝙾𝚃𝙰𝙻 𝙳𝙴 𝚂𝚄𝙱𝙱𝙾𝚃𝚂* : ${totalUsers || '0'}\n╰━━━━━━━━━━━━⬣\n\n${replyMessage.trim()}`.trim()
 
-await _envio.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, false, { mentions: _envio.parseMention(responseMessage) })
+await stars.sendMessage(m.chat, { text: responseMessage, mentions: stars.parseMention(responseMessage) }, { quoted: fkontak })
+// await conn.reply(m.chat, responseMessage, m, rcanal)
 }
-handler.command = ['listjadibot', 'bots']
+
 handler.help = ['bots']
 handler.tags = ['serbot']
+handler.command = ['listjadibot', 'bots']
 export default handler
