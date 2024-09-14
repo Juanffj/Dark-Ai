@@ -12,7 +12,10 @@ async function handler(m, { conn: stars, usedPrefix }) {
   let users = [...uniqueUsers.values()]
 
   let img = await (await fetch(`https://i.ibb.co/LSBGpg4/file.jpg`)).buffer()
-  let message = users.map((v, index) => `╭─⬣「 ${packname} 」⬣\n│⁖ฺ۟̇࣪·֗٬̤⃟🚩 *${index + 1}.-* @${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Link:* https://wa.me/${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Nombre:* ${v.user.name || '𝚂𝚄𝙱-𝙱𝙾𝚃'}\n╰─⬣`).join('\n\n')
+  let message = users.map((v, index) => `
+*[ \`${index + 1}\` -  ${v.user.name || '𝚂𝚄𝙱-𝙱𝙾𝚃'} ]* 
+
+ * -* @${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Link:* https://wa.me/${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Nombre:* ╰─⬣`).join('\n\n')
 
   let replyMessage = message.length === 0 ? '' : message
   global.totalUsers = users.length
