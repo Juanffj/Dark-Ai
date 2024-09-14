@@ -22,6 +22,6 @@ conn.reply(m.chat, 'Error al procesar la solicitud. Inténtalo de nuevo más tar
 }
 };
 
-handler.command = ['twitterposts', 'twittposts'];
+handler.command = ['twitterposts', 'xposts'];
 
 export default handler;
