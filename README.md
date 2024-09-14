@@ -1,4 +1,4 @@
-> 🐈‍⬛ Versión Actual: 1.4.0
+> 🐈‍⬛ Versión Actual: 1.5.0
 
 ## 🤍 **`G E N E S I S - B O T`**
 
