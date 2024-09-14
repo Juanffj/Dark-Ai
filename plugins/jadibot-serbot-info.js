@@ -16,7 +16,7 @@ async function handler(m, { conn: stars, usedPrefix }) {
 
   let replyMessage = message.length === 0 ? '' : message
   global.totalUsers = users.length
-  let responseMessage = `*[ _Total Subbots Activos :_ \`${totalUsers || '0'}\` ]\n╰━━━━━━━━━━━━⬣\n\n${replyMessage.trim()}`.trim()
+  let responseMessage = `*[ _Total Subbots Activos :_ \`${totalUsers || '0'}\` ]*\n╰━━━━━━━━━━━━⬣\n\n${replyMessage.trim()}`.trim()
 
 await stars.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, null, fake, false, { mentions: stars.parseMention(responseMessage) })
 
