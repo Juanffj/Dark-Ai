@@ -8,8 +8,19 @@ handler.all = async function(m) {
     conn.sendPresenceUpdate('recording', m.chat);
 conn.reply(m.chat, `🤍 ¡Hola! Soy Ai Genesis, en que puedo ayudarte hoy?\n\n✰ Usa *!menu* para ver mis comandos.`, m, rcanal, )
     m.conn.sendMessage(m.chat, {audio: {url: vn}, fileName: 'error.mp3', mimetype: 'audio/mpeg', ptt: true}, {quoted: m});
-    // conn.sendFile(m.chat, vn, 'HolaXiaBot.mp3', null, m, true, { type: 'audioMessage', seconds: '4556', ptt: true, sendEphemeral: true, quoted: m })
-  }
+}
+if (/^sexo$/i.test(m.text)) {
+conn.reply(m.chat, `*pervertido* 🫣`, m, rcanal, )
+}
+if (/^tetas|teta$/i.test(m.text)) {
+conn.reply(m.chat, `*que caliente eres* 🥵`, m, rcanal, )
+}
+if (/^bug$/i.test(m.text)) {
+conn.reply(m.chat, `*tu mamá we* 😹`, m, rcanal, )
+}
+if (/^pene$/i.test(m.text)) {
+conn.reply(m.chat, `*comes* 😹`, m, rcanal, )
+}
   return !0;
 };
 export default handler;
