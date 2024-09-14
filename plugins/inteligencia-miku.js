@@ -33,7 +33,7 @@ sourceUrl: 'https://whatsapp.com/channel/0029VaJxgcB0bIdvuOwKTM2Y'}}},
 }
 handler.help = ["iaperu <text>"]
 handler.tags = ["ai"];
-handler.command = /^(iamiku|mikuia)$/i
+handler.command = /^(ianakano|nakanoia)$/i
 export default handler
 
 async function chatAi(inputValue) {
