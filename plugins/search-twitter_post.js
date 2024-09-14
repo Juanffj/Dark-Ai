@@ -14,7 +14,9 @@ let info = json.result[Math.floor(Math.random() * json.result.length)];
 
 let txt = `*Usuario* : ${info.user || 'No disponible :('}
 *Post* : ${info.post}
-*Link* : ${info.user_link}`;
+*Link* : ${info.user_link}
+
+> ʙʏ : ɢᴇɴᴇꜱɪꜱ ʏ ᴀɴɢᴇʟ-ᴏꜰᴄ`;
 
 await conn.sendFile(m.chat, info.profile, 'thumbnail.jpg', txt, m, null, fake);
 } catch {
