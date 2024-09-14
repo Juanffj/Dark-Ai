@@ -26,6 +26,9 @@ conn.reply('error :v')
 }
 };
 
+handler.help = ['pinterest2 <txt>']
+handler.estrellas = 1
+handler.tags = ['search']
 handler.command = ['pinterest2', 'pinterestsearch2'];
 
 export default handler;
