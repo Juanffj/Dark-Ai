@@ -26,4 +26,5 @@ await stars.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, null, fak
 handler.help = ['bots']
 handler.tags = ['serbot']
 handler.command = ['listjadibot', 'bots']
+
 export default handler
