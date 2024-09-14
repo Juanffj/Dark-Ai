@@ -27,7 +27,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let sbot =
         conn.user.jid == global.conn.user.jid
         ? "`ʙᴏᴛ ::` Principal"
-        : "`ʙᴏᴛ ::` Sub - Bot de" + `  Wa.me/${global.conn.user.jid.split`@`[0]}`;
+        : "`ꜱᴜʙʙᴏᴛ ᴅᴇ ::`" + `  Wa.me/${global.conn.user.jid.split`@`[0]}`;
 
     global.fcontact = {
         key: {
