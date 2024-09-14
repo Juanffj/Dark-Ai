@@ -10,8 +10,8 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   if (user.registered === true) return m.reply(`🐈‍⬛ Ya estás registrado.\n\n*¿Quiere volver a registrarse?*\n\nUse este comando para eliminar su registro.\n*${usedPrefix}unreg* <Número de serie>`)
   if (!Reg.test(text)) return m.reply(`🐈‍⬛ Formato incorrecto.\n\nUso del comamdo: *${usedPrefix + command} nombre.edad*\nEjemplo : *${usedPrefix + command} ${name2}.18*`)
   let [_, name, splitter, age] = text.match(Reg)
-  if (!name) return m.reply('🐈‍⬛ El nombre no puede estar vacío.')
-  if (!age) return m.reply('🐈‍⬛ La edad no puede estar vacía.')
+  if (!name) return m.reply('🤍 El nombre no puede estar vacío.')
+  if (!age) return m.reply('🤍 La edad no puede estar vacía.')
   if (name.length >= 100) return m.reply('🐈‍⬛ El nombre es demasiado largo.' )
   age = parseInt(age)
   if (age > 100) return m.reply('👴🏻 Wow el abuelo quiere jugar al bot.')
@@ -38,7 +38,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
       txt += `╰┈┈┈┈┈┈┈┈┈┈┈┈•\n\n`
       txt += '☁️ \```Escriba el siguiente comando para ver el menu completo:\```\n'
       txt += `✪ *.allmenu*`
-await conn.sendLuffy(m.chat, botname, textbot, txt, img, img, canal, m, fake)
+await conn.sendLuffy(m.chat, botname, textbot, txt, img, img, canal, m)
 await m.react('✅')
 }
 handler.help = ['reg'].map(v => v + ' *<nombre.edad>*')
