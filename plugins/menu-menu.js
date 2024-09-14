@@ -72,11 +72,11 @@ ${totalf}
   after: `> BY GENESISBOT-MD X Angel-OFC`,
 }
 let ppp = 'https://i.ibb.co/PxFRy62/file.jpg'
-let totalf = Object.values(global.plugins).filter(
-    (v) => v.help && v.tags
-  ).length;
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
+    let totalf = Object.values(global.plugins).filter(
+    (v) => v.help && v.tags
+  ).length;
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
     let { exp, corazones, level, role } = global.db.data.users[m.sender]
     let { min, xp, max } = xpRange(level, global.multiplier)
