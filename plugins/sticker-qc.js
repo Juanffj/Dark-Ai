@@ -15,7 +15,7 @@ let text
     const mishi = text.replace(mentionRegex, '');
    if (mishi.length > 30) return m.reply('➤ `𝗔𝗩𝗜𝗦𝗢` 🐈‍⬛\n\n*EL TEXTO NO PUEDE TENER MAS DE 30 CARACTERES*');
 m.react('🐈‍⬛') 
-    const pp = await conn.profilePictureUrl(who).catch((_) => 'https://i.ibb.co/vD9Bhd3/file.jpg')
+    const pp = await conn.profilePictureUrl(who).catch((_) => 'https://i.ibb.co/rZcyhcL/file.jpg')
     const nombre = await conn.getName(who)
     const obj = {"type": "quote", "format": "png", "backgroundColor": "#000000", "width": 512, "height": 768, "scale": 2, "messages": [{"entities": [], "avatar": true, "from": {"id": 1, "name": `${who?.name || nombre}`, "photo": {url: `${pp}`}}, "text": mishi, "replyMessage": {}}]};
     const json = await axios.post('https://bot.lyo.su/quote/generate', obj, {headers: {'Content-Type': 'application/json'}});
