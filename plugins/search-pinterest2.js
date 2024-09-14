@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, command, args, text, usedPrefix }) => {
 if (!text) return conn.reply(m.chat, '*Ingresa el texto de lo que quieres buscar en Pinterest*', m);
+await m.react('🕒');
 
 try {
 let api = await fetch(`https://apis-starlights-team.koyeb.app/starlight/pinterest-search?text=${encodeURIComponent(text)}`);
@@ -17,8 +18,10 @@ let txt = `*Título* : ${info.title || 'No disponible :('}
 *Publicado* : ${info.publish || 'No disponible :('}
 *Link* : ${info.pin}`;
 
-await conn.sendFile(m.chat, info.image, 'thumbnail.jpg', txt, m);
+await m.react('✅');
+await conn.sendFile(m.chat, info.image, 'thumbnail.jpg', txt, m, null, fake);
 } catch {
+await m.react('✖️');
 conn.reply('error :v')
 }
 };
