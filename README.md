@@ -1,6 +1,6 @@
 > 😼 Versión Actual: 1.5.0
 
-## 🤍 **`G E N E S I S - B O T`**
+## 🤍 **`G E N E S I S - M D`**
 
 ![Genesis](https://i.ibb.co/PxFRy62/file.jpg)
 <div align="center">
