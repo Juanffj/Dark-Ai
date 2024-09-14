@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, command, args, text, usedPrefix }) => {
 if (!text) return conn.reply(m.chat, '*Ingresa el texto de lo que quieres buscar en SoundCloud*', m);
+await m.react('🕒');
 
 try {
 let api = await fetch(`https://apis-starlights-team.koyeb.app/starlight/soundcloud-search?text=${encodeURIComponent(text)}`);
@@ -21,9 +22,11 @@ for (let i = 0; i < json.length; i++) {
       txt += `*Url* : ${json[i].url}`;
     }
 
+await m.react('✅');
 await conn.sendFile(m.chat, json[0].image, 'thumbnail.jpg', txt, m, null, fake);
 
 } catch {
+await m.react('✖️');
 conn.reply('error :v')
 }
 };
