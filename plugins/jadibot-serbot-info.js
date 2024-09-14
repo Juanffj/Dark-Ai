@@ -18,7 +18,7 @@ async function handler(m, { conn: stars, usedPrefix }) {
   global.totalUsers = users.length
   let responseMessage = `╭━〔 𝗦𝗨𝗕-𝗕𝗢𝗧𝗦 𝗝𝗔𝗗𝗜𝗕𝗢𝗧 🌸 〕⬣\n┃ *𝚃𝙾𝚃𝙰𝙻 𝙳𝙴 𝚂𝚄𝙱𝙱𝙾𝚃𝚂* : ${totalUsers || '0'}\n╰━━━━━━━━━━━━⬣\n\n${replyMessage.trim()}`.trim()
 
-await _envio.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, false, { mentions: _envio.parseMention(responseMessage) })
+await _envio.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, false, { mentions: (responseMessage) })
 
 // await stars.sendMessage(m.chat, { text: responseMessage, mentions: stars.parseMention(responseMessage) }, { quoted: fkontak })
 // await conn.reply(m.chat, responseMessage, m, rcanal)
