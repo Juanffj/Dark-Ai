@@ -13,18 +13,17 @@ let handler = async (m, {
     await m.react('😼');
     try {
         const result = await chatAi(text);
-await conn.sendMessage(m.chat, { text: result,
-contextInfo:{
-forwardingScore: 9999999,
-isForwarded: false, 
-"externalAdReply": {
-"showAdAttribution": true,
-"containsAutoReply": true,
-title: `[ 𝗔 𝗜 - 𝗣 𝗘 𝗥 𝗨 ]`,
-body: ``,
-"previewType": "PHOTO",
-thumbnailUrl: 'https://tinyurl.com/253dnhcr', 
-sourceUrl: 'https://whatsapp.com/channel/0029VaJxgcB0bIdvuOwKTM2Y'}}},
+await conn.sendMessage(m.chat, {
+text: result,
+contextInfo: {
+externalAdReply: {
+title: '[ 𝗔 𝗜 - 𝗡 𝗔 𝗞 𝗔 𝗡 𝗢 ]',
+body: '©𝟐𝟎𝟐𝟒 𝐀𝐧𝐠𝐞𝐥𝐢𝐭𝐨-𝐎𝐅𝐂',
+thumbnailUrl: 'https://i.ibb.co/WDj9mhm/file.jpg',
+sourceUrl: canal,
+mediaType: 1,
+renderLargerThumbnail: true
+}}},
 { quoted: m})
     } catch (error) {
         await m.react('😅');
