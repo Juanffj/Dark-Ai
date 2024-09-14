@@ -63,6 +63,8 @@ const defaultMenu = {
 • _\`ɴɪᴠᴇʟ\`_ :: %level
 
 乂 _\`ᴄ\` \`ᴏ\` \`ᴍ\` \`ᴀ\` \`ɴ\` \`ᴅ\` \`ᴏ\` \`ꜱ\`_ 乂
+
+${totalf}
 `.trimStart(),
   header: '╭• •꒰─• *`%category`* ·ٜ۬･',
   body: '│ %cmd\n',
@@ -70,6 +72,9 @@ const defaultMenu = {
   after: `> BY GENESISBOT-MD X Angel-OFC`,
 }
 let ppp = 'https://i.ibb.co/PxFRy62/file.jpg'
+let totalf = Object.values(global.plugins).filter(
+    (v) => v.help && v.tags
+  ).length;
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
