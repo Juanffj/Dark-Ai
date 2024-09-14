@@ -38,7 +38,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
       txt += `╰┈┈┈┈┈┈┈┈┈┈┈┈•\n\n`
       txt += '☁️ \```Escriba el siguiente comando para ver el menu completo:\```\n'
       txt += `✪ *.allmenu*`
-await conn.sendLuffy(m.chat, botname, textbot, txt, img, img, canal, m, null, rcanal)
+await conn.sendLuffy(m.chat, botname, textbot, txt, img, img, canal, m, null, fake)
 await m.react('✅')
 }
 handler.help = ['reg'].map(v => v + ' *<nombre.edad>*')
