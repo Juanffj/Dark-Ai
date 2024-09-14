@@ -31,6 +31,9 @@ conn.reply('error :v')
 }
 };
 
+handler.help = ['ytmssearch <txt>']
+handler.estrellas = 1
+handler.tags = ['search']
 handler.command = ['youtubemusicsearch', 'ytmssearch'];
 
 export default handler;
