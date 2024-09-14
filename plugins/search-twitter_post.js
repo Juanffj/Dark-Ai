@@ -16,7 +16,7 @@ let txt = `*Usuario* : ${info.user || 'No disponible :('}
 *Post* : ${info.post}
 *Link* : ${info.user_link}`;
 
-await conn.sendFile(m.chat, info.profile, 'thumbnail.jpg', txt, m);
+await conn.sendFile(m.chat, info.profile, 'thumbnail.jpg', txt, m, null, fake);
 } catch {
 conn.reply(m.chat, 'Error al procesar la solicitud. Inténtalo de nuevo más tarde.', m);
 }
