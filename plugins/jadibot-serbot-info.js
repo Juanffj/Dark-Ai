@@ -13,7 +13,7 @@ async function handler(m, { conn: stars, usedPrefix }) {
 
   let img = await (await fetch(`https://i.ibb.co/LSBGpg4/file.jpg`)).buffer()
   let message = users.map((v, index) => `
-*[ \`${index + 1}\` -  ${v.user.name || '𝚂𝚄𝙱-𝙱𝙾𝚃'} ]* 
+*[ \`${index + 1}\` -  ${v.user.name || 'Sin Nombre'} ]*\n* *🔗 \`» Link :\`*
 
  * -* @${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Link:* https://wa.me/${v.user.jid.replace(/[^0-9]/g, '')}\n│❀ *Nombre:* ╰─⬣`).join('\n\n')
 
