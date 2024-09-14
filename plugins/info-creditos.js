@@ -12,15 +12,15 @@ let staff = `☁️ *EQUIPO DE AYUDANTES*
 
 🤍 *Colaboradores:* 🤍
 
-• Maxz XB
+• Maxz
 ☁️ *Rol:* Colab
 ☁️ *GitHub:* https://github.com/Maxz-on
 
-• Alermz XB
+• Alermz
 ☁️ *Rol:* Colab
 ☁️ *GitHub:* https://github.com/ale-rmz
 
-• Sebas XB
+• Kenisawa Dev
 ☁️ *Rol:* Colab
 ☁️ *GitHub:* https://github.com/sebas-mod`
 await conn.sendFile(m.chat, icons, 'yaemori.jpg', staff.trim(), fkontak, true, {
