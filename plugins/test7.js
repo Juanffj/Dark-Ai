@@ -33,11 +33,11 @@ const handler = async (m, { conn, usedPrefix, command }) => {
             buttons: [
                 {
                 "name": "quick_reply",
-                "buttonParamsJson": "{\"display_text\":\"〘 الــتـــــالـي 〙\",\"id\":\".cr7\"}"
+                "buttonParamsJson": "{\"display_text\":\"〘 الــتـــــالـي 〙\",\"id\":\".test7\"}"
              }, 
                 {
                 "name": "quick_reply",
-                "buttonParamsJson": "{\"display_text\":\"〘 الـــــــدعــــم 〙\",\"id\":\".الدعم\"}"
+                "buttonParamsJson": "{\"display_text\":\"〘 الـــــــدعــــم 〙\",\"id\":\".test7\"}"
               }
            ],
           }) 
