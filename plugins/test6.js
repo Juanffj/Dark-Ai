@@ -1,12 +1,7 @@
 // codigo adaptado por Angel-OFC 
 import fetch from 'node-fetch';
 
-let handler = async (m, {
-    conn,
-    args,
-    usedPrefix,
-    text,
-    command
+if (m.mentionedJid.includes(this.user.jid) && m.isGroup && !chat.isBanned) {
 }) => {
 
  if (!text) throw '➤ `𝗔𝗩𝗜𝗦𝗢` ♣️\n\n*PARA USAR GENESIS IA*\n_Ejemplo: .iakurumi que sos?_';
