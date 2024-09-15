@@ -32,7 +32,7 @@ renderLargerThumbnail: true
 }
 handler.help = ["iakurumi <text>"]
 handler.tags = ["ai"];
-handler.command = /^(test6|iakurumi)$/i
+handler.command = /^(test6|@5493436238323)$/i
 export default handler
 
 async function chatAi(inputValue) {
