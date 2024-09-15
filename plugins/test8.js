@@ -9,9 +9,9 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   if (!text) {
     return conn.reply(message.chat, "🤍 *¿Qué quieres buscar en Google?*", message, rcanal);
   }
-  
+
   await message.react(rwait);
-  
+
   async function createImageMessage(imageUrl) {
     const { imageMessage } = await generateWAMessageContent({
       'image': {
@@ -22,18 +22,18 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     });
     return imageMessage;
   }
-  
+
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
-  
+
   const apiKey = 'YOUR_SERPAPI_KEY';  // Replace with your SerpAPI key
   const searchQuery = encodeURIComponent(text);
   const url = `https://serpapi.com/search?engine=google&tbm=isch&q=${searchQuery}&api_key=${apiKey}`;
-  
+
   let imageUrls = [];
   try {
     const { data } = await axios.get(url);
@@ -46,7 +46,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   shuffleArray(imageUrls);
   const imagesToSend = imageUrls.slice(0, 5);
   const messages = [];
-  
+
   let count = 1;
   for (const imageUrl of imagesToSend) {
     messages.push({
@@ -69,7 +69,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
       })
     });
   }
-  
+
   const responseMessage = generateWAMessageFromContent(message.chat, {
     'viewOnceMessage': {
       'message': {
@@ -96,7 +96,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   }, {
     'quoted': message
   });
-  
+
   await message.react(done);
   await conn.relayMessage(message.chat, responseMessage.message, {
     'messageId': responseMessage.key.id
