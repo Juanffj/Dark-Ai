@@ -1,17 +1,6 @@
-import _0x36ae01 from 'axios';
-const {
-  generateWAMessageContent,
-  generateWAMessageFromContent,
-  proto
-} = (await import("@whiskeysockets/baileys"))["default"];
-let handler = async (_0x10bd40, {
-  conn: _0x9c7141,
-  text: _0x27db11,
-  usedPrefix: _0x55e61b,
-  command: _0x5ad406
-}) => {
-  if (!_0x27db11) {
-    return _0x9c7141.reply(_0x10bd40.chat, "🤍 *¿Que quieres buscar en pinterest?*", _0x10bd40, rcanal);
+import {googleImage} from '@bochilteam/scraper';
+const handler = async (m, {conn, text, usedPrefix, command}) => {
+  if (!text) throw `*🤍 Uso Correcto: ${usedPrefix + command} La playa*`;
   }
     await _0x10bd40.react(rwait);
   async function _0x3f3fc7(_0x5f4723) {
