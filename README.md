@@ -34,7 +34,7 @@
 
 [![Click Aquí](https://img.shields.io/badge/Grupo-Genesis-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EVl0wxlCww74HV3vvZq83a)
 
-### **`Superiority Pro Hosting 🤖`**
+### **`SUPERIORITY PRO HOSTING 🤖`**
 <a href="https://dash.superiority.pro/login"><img src="https://qu.ax/TiBm.jpg" height="125px"></a>
 
 <details>
