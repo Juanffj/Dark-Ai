@@ -41,11 +41,7 @@ const handler = async (m, { conn, usedPrefix, command }) => {
   });
   await _0x10bd40.react(done);
   await _0x9c7141.relayMessage(_0x10bd40.chat, _0x1ca5c6.message, {
-    'messageId': _0x1ca5c6.key.id
-  });
-   },{}) 
-    // إرسال الرسالة
-    await conn.relayMessage(msg.key.remoteJid, msg.message, { messageId: msg.key.id })
+    'messageId': _0x1ca5c6.key.id })
     } 
 handler.help = ['Cristiano6', 'cr7', 'Ronaldo'];
 handler.tags = ['internet'];
