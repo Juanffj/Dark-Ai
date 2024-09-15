@@ -37,10 +37,14 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   let imageUrls = [];
   try {
     const { data } = await axios.get(url);
-    imageUrls = data.images_results.map(result => result.original);
+    if (data.images_results) {
+      imageUrls = data.images_results.map(result => result.original);
+    } else {
+      throw new Error("No image results found.");
+    }
   } catch (error) {
     console.error('Error fetching images:', error);
-    return conn.reply(message.chat, "❌ Error al buscar imágenes.", message);
+    return conn.reply(message.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", message);
   }
 
   shuffleArray(imageUrls);
