@@ -1,9 +1,5 @@
 import { googleImage } from '@bochilteam/scraper';
-const {
-  generateWAMessageContent,
-  generateWAMessageFromContent,
-  proto
-} = (await import("@whiskeysockets/baileys"))["default"];
+const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await import("@whiskeysockets/baileys"))["default"];
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `*🤍 Uso Correcto: ${usedPrefix + command} La playa*`;
@@ -19,30 +15,29 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   let imageUrls = [];
   try {
     const results = await googleImage(text);
-    console.log('Results from googleImage:', results); // Debugging line
+    console.log('Resultados de googleImage:', results); // Línea de depuración
 
     if (results && results.length > 0) {
-      imageUrls = results.map(result => result.url).filter(url => url); // Filter out invalid URLs
-      console.log('Filtered image URLs:', imageUrls); // Debugging line
-      if (imageUrls.length === 0) throw new Error("No image results found.");
+      imageUrls = results.map(result => result.url).filter(url => url); // Filtra URLs inválidas
+      console.log('URLs de imágenes filtradas:', imageUrls); // Línea de depuración
+      if (imageUrls.length === 0) throw new Error("No se encontraron resultados de imagen.");
     } else {
-      throw new Error("No image results found.");
+      throw new Error("No se encontraron resultados de imagen.");
     }
   } catch (error) {
-    console.error('Error fetching images:', error);
+    console.error('Error al buscar imágenes:', error);
     return conn.reply(m.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", m);
   }
 
-  // Ensure we have images to show
+  // Asegúrate de que hay imágenes para mostrar
   if (imageUrls.length === 0) {
     return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
   }
 
-  // Shuffle and limit to 5 images
+  // Limita a 5 imágenes y crea el carrusel
   imageUrls = imageUrls.slice(0, 5);
-  console.log('Final image URLs for carousel:', imageUrls); // Debugging line
+  console.log('URLs finales para el carrusel:', imageUrls); // Línea de depuración
 
-  // Generate carousel messages
   const messages = [];
   let count = 1;
   for (const imageUrl of imageUrls) {
@@ -75,12 +70,12 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         })
       });
     } catch (error) {
-      console.error('Error creating image message:', error);
+      console.error('Error al crear el mensaje de imagen:', error);
       continue;
     }
   }
 
-  // Ensure messages array is not empty
+  // Asegúrate de que hay mensajes para enviar
   if (messages.length === 0) {
     return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
   }
@@ -120,7 +115,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 handler.help = ['imagen <query>'];
 handler.corazones = 2;
 handler.tags = ['buscador'];
-handler.command = /^(googleimages)$/i;
+handler.command = /^(image|imagen)$/i;
 handler.register = true;
 
 export default handler;
