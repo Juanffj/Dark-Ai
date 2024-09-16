@@ -2,7 +2,7 @@ import axios from 'axios';
 import { proto, generateWAMessageFromContent, prepareWAMessageMedia } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (m, { command, conn, usedPrefix }) => {
-  m.react('✅');
+await m.react('✅');
 
   try {
     // Fetch the JSON data from the URL
