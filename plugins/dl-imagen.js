@@ -11,7 +11,7 @@ const res = await googleImage(text);
 const image = await res.getRandom();
 const link = image;
 const messages = [['Imagen 1', dev, await res.getRandom(),
-[[]], [[]], [[]], [[]]], ['Imagen 2', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 3', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 4', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 5', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 6', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 7', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 8', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 9', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 10', dev, await res.getRandom(), [[]], [[]], [[]], [[]]]]
+[[]], [[]], [[]], [[]]], ['Imagen 2', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 3', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 4', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 5', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 6', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 7', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 8', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 9', dev, await res.getRandom(), [[]], [[]], [[]], [[]]]
 await conn.sendCarousel(m.chat, '🚩 Buscador - Imagenes', `🔍 Resultado de: ${text}`, text, messages, m);
 };
 handler.help = ['imagen <query>'];
