@@ -12,29 +12,7 @@ const {
 
 let handler = async (m, { command, conn, usedPrefix }) => {
   await m.react('🕒');
-const keni = {
-			key: {
-				fromMe: false,
-				participant: "0@s.whatsapp.net",
-				remoteJid: "status@broadcast"
-			},
-			message: {
-				orderMessage: {
-					orderId: "2029",
-					thumbnail: global.imagen1,
-					itemCount: `777`,
-					status: "INQUIRY",
-					surface: "CATALOG",
-					message: `𝑮𝒆𝒏𝒆𝒔𝒊𝒔-𝑩𝒐𝒕 - 𝑪𝒉𝒂𝒏𝒏𝒆𝒍`,
-					token: "AR6xBKbXZn0Xwmu76Ksyd7rnxI+Rx87HfinVlW4lwXa6JA=="
-				}
-			},
-			contextInfo: {
-				mentionedJid: [m.sender],
-				forwardingScore: 999,
-				isForwarded: true
-			}
-		}
+
   try {
     // Fetch the JSON data from the URL
     const res = (await axios.get(`https://raw.githubusercontent.com/WOTCHITA/YaemoriBot-MD/master/src/JSON/anime-${command}.json`)).data;
