@@ -26,6 +26,9 @@ await m.react('✖️')
 }
 };
 
+handler.help = ['tiktoksearch2 <txt>']
+handler.estrellas = 1
+handler.tags = ['search']
 handler.command = ['tiktoksearch2'];
 
 export default handler;
