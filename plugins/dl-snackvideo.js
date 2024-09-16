@@ -2,7 +2,7 @@ import cheerio from 'cheerio'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
-  if (!text) throw `Ejemplo: ${usedPrefix + command} https://s.snackvideo.com/p/j9jKr9dR`
+  if (!text) throw `*\`Ingresa El link Del vídeo a descargar 🤍\`*`
   conn.sendMessage(m.chat, { react: { text: '🕐', key: m.key }})
 try {
   let res= await snack(text) 
