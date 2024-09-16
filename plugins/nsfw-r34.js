@@ -60,7 +60,7 @@ const handler = async (m, { conn, text }) => {
           title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝙍𝙪𝙡𝙚 𝟑𝟒⏜࣪᷼︵۬ ͜ ',
           body: '(⁄ ⁄•⁄ω⁄•⁄ ⁄) 𝙈𝙚𝙜𝙪𝙢𝙞𝙣🔥',
           previewType: 0, 
-          thumbnail: rule,
+          thumbnail: icons,
           sourceUrl: cn 
         }
       }
