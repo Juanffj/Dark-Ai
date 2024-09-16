@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 
 var handler = async (m, { conn, args, usedPrefix, command }) => {
 
-if (!args[0]) return conn.reply(m.chat, `*\`Ingresa El link Del vídeo a descargar 🤍\`*`, m, fake, )
+if (!args[0]) return conn.reply(m.chat, `*\`Ingresa El link a descargar 🤍\`*`, m, fake, )
 if (!args[0].match(/latestmodapks/gi)) return conn.reply(m.chat, `🤍 *Enlace incorrecto*`, m, fake, )
 
 try {
