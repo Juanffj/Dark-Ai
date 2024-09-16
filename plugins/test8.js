@@ -4,17 +4,25 @@ const heartRewards = {
   'CODE789': 30
 };
 
+const usedCodes = new Set(); // Conjunto para almacenar los códigos de canje ya utilizados
+
 const free = 25;
 const prem = 15;
 
 var handler = async (m, { conn, isPrems, text }) => {
   if (text.startsWith('canjear ')) {
     const code = text.slice(8).trim(); // Extrae el código de canje del texto
+    
+    if (usedCodes.has(code)) {
+      return conn.reply(m.chat, '❌ Este código de canje ya ha sido utilizado.', m);
+    }
+
     const hearts = heartRewards[code];
 
     if (hearts) {
       // Agrega la cantidad de corazones al usuario
       global.db.data.users[m.sender].hearts = (global.db.data.users[m.sender].hearts || 0) + hearts;
+      usedCodes.add(code); // Marca el código como utilizado
       return conn.reply(m.chat, `🎉 ¡Has canjeado ${hearts} corazones con éxito!`, m);
     } else {
       return conn.reply(m.chat, '❌ Código de canje inválido.', m);
@@ -28,11 +36,6 @@ var handler = async (m, { conn, isPrems, text }) => {
   
   global.db.data.users[m.sender].diamond += d;
   global.db.data.users[m.sender].money += d;
-
-  let time = global.db.data.users[m.sender].lastclaim + 86400000; // 24 Horas
-  if (new Date - global.db.data.users[m.sender].lastclaim < 7200000) {
-    return conn.reply(m.chat, `🕚 *Vuelve en ${msToTime(time - new Date())}*`, m);
-  }
   
   global.db.data.users[m.sender].exp += isPrems ? exppremium : exp;
   
@@ -48,7 +51,7 @@ Recursos:
 
 handler.help = ['daily', 'claim', 'canjear'];
 handler.tags = ['rpg'];
-handler.command = /^(canjeo)$/i;
+handler.command = /^(daily|claim|canjear)$/i;
 
 handler.register = true;
 
