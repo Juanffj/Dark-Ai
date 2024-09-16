@@ -21,7 +21,6 @@ conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: 
 handler.help = ['tiktokrandom']
 handler.tags = ['dl']
 handler.command = /^(tiktokmusic)$/i
-handler.limit = true 
 handler.register = true
 
 export default handler
