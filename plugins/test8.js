@@ -13,6 +13,9 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   await message.react(rwait);
 
   async function createImageMessage(imageUrl) {
+    if (!imageUrl) {
+      throw new Error("Image URL is undefined or null.");
+    }
     const { imageMessage } = await generateWAMessageContent({
       'image': {
         'url': imageUrl
@@ -49,25 +52,31 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
 
   let count = 1;
   for (const imageUrl of imagesToSend) {
-    messages.push({
-      'body': proto.Message.InteractiveMessage.Body.fromObject({
-        'text': `Imagen - ${count++}`
-      }),
-      'footer': proto.Message.InteractiveMessage.Footer.fromObject({
-        'text': text
-      }),
-      'header': proto.Message.InteractiveMessage.Header.fromObject({
-        'title': '',
-        'hasMediaAttachment': true,
-        'imageMessage': await createImageMessage(imageUrl)
-      }),
-      'nativeFlowMessage': proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-        'buttons': [{
-          'name': "cta_url",
-          'buttonParamsJson': `{"display_text":"url 📫","Url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}","merchant_url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}"}`
-        }]
-      })
-    });
+    try {
+      const imageMessage = await createImageMessage(imageUrl);
+      messages.push({
+        'body': proto.Message.InteractiveMessage.Body.fromObject({
+          'text': `Imagen - ${count++}`
+        }),
+        'footer': proto.Message.InteractiveMessage.Footer.fromObject({
+          'text': text
+        }),
+        'header': proto.Message.InteractiveMessage.Header.fromObject({
+          'title': '',
+          'hasMediaAttachment': true,
+          'imageMessage': imageMessage
+        }),
+        'nativeFlowMessage': proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+          'buttons': [{
+            'name': "cta_url",
+            'buttonParamsJson': `{"display_text":"url 📫","Url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}","merchant_url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}"}`
+          }]
+        })
+      });
+    } catch (error) {
+      console.error('Error creating image message:', error);
+      continue;
+    }
   }
 
   const responseMessage = generateWAMessageFromContent(message.chat, {
