@@ -5,9 +5,7 @@ import path from 'path';
 const {
   proto,
   generateWAMessageFromContent,
-  prepareWAMessageMedia,
-  generateWAMessageContent,
-  getDevice
+  prepareWAMessageMedia
 } = (await import("@whiskeysockets/baileys")).default;
 
 const dbFilePath = path.resolve('./sentUrls.json');
@@ -54,21 +52,19 @@ const handler = async (m, { command, conn, text }) => {
   try {
     conn.reply(m.chat, '🔥  *ENVIANDO SUS RESULTADOS..*', m);
 
+    // Clean the database
     await cleanDb();
-    const apiUrl = `https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&tags=${encodeURIComponent(text)}&json=1`;
-    const response = await fetch(apiUrl);
 
-    if (!response.ok) {
-      throw new Error('Error en la solicitud a la API');
-    }
+    // Fetch data from JSON file
+    const res = (await axios.get(`https://raw.githubusercontent.com/WOTCHITA/YaemoriBot-MD/master/src/JSON/anime-${command}.json`)).data;
+    const images = res.map(url => ({ file_url: url })); // Assuming the JSON contains image URLs directly
 
-    const data = await response.json();
-    if (!Array.isArray(data) || data.length === 0) {
+    if (!Array.isArray(images) || images.length === 0) {
       throw new Error('No se encontraron imágenes');
     }
 
     const db = await readDb();
-    const newImages = data.filter(post => !db[post.file_url]);
+    const newImages = images.filter(post => !db[post.file_url]);
 
     if (newImages.length === 0) {
       throw new Error('No se encontraron nuevas imágenes para mostrar');
@@ -88,7 +84,7 @@ const handler = async (m, { command, conn, text }) => {
         body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
         footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: 'Desliza para ver más' }),
         header: proto.Message.InteractiveMessage.Header.fromObject({
-          title: `Hentai ${index + 1}`,
+          title: `Imagen ${index + 1}`,
           hasMediaAttachment: true,
           imageMessage: mediaMessage.imageMessage
         }),
