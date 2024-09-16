@@ -14,7 +14,7 @@ await m.react('🕒');
 
   try {
     // Fetch the JSON data from the URL
-    const res = (await axios.get(`https://raw.githubusercontent.com/Incongnito45/ExoticoBot-MD/master/NODE_EXOTICO_JSON/node-exotico-anime-boy/hot-${command}.json`)).data;
+    const res = (await axios.get(`https://raw.githubusercontent.com/WOTCHITA/YaemoriBot-MD/master/src/JSON/anime-${command}.json`)).data;
     
     // Ensure the array contains items
     if (!Array.isArray(res) || res.length === 0) {
@@ -54,7 +54,7 @@ await m.react('🕒');
           },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
             body: proto.Message.InteractiveMessage.Body.create({
-              text: `🔥🐻🍃 _${command}_ 🍃🐻🔥`
+              text: `🤍 _${command}_ 🤍`
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
               text: "Desliza para ver más imágenes"
@@ -83,7 +83,7 @@ await m.react('✅');
   }
 };
 
-handler.command = handler.help = ['takeda', 'asuma', 'endeavor'];
+handler.command = handler.help = ['akira', 'akiyama', 'anna', 'asuna', 'ayuzawa', 'boruto', 'chiho', 'chitoge', 'deidara', 'erza', 'elaina', 'eba', 'emilia', 'hestia', 'hinata', 'inori', 'isuzu', 'itachi', 'itori', 'kaga', 'kagura', 'kaori', 'keneki', 'kotori', 'kurumi', 'madara', 'mikasa', 'miku', 'minato', 'naruto', 'nezuko', 'sagiri', 'sasuke', 'sakura', 'cosplay'];
 handler.tags = ['nsfw'];
 
 export default handler;
