@@ -48,7 +48,7 @@ let handler = async (m, { command, conn, usedPrefix }) => {
         body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
         footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '*[ GenesisBot By Angel-OFC ]*' }),
         header: proto.Message.InteractiveMessage.Header.fromObject({
-          title: `Imagen ${index + 1}`,
+          title: `*\`Imagen De :\`* ${command}`,
           hasMediaAttachment: true,
           imageMessage: mediaMessage.imageMessage
         }),
