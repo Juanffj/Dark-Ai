@@ -1,6 +1,5 @@
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   const rewardCodes = {
-    '123': 100,    // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
     'CODE456': 200,
     'CODE789': 300
   };
