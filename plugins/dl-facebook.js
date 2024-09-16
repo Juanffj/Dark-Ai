@@ -2,7 +2,7 @@
 
 const handler = async (m, { text, conn, args, usedPrefix, command }) => {
   if (!args[0]) {
-    return conn.reply(m.chat, '*`INGRESA EL LINK DE FACEBOOK`*', m, fake);
+    return conn.reply(m.chat, '*\`Ingresa El link Del vídeo a descargar\`*', m, fake);
   }
 
   await m.react('🕒');
