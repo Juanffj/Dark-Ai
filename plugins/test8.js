@@ -3,15 +3,22 @@ const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(m.chat, `*🤍 Uso Correcto: ${usedPrefix + command} La playa*`, m);
+    return conn.reply(m.chat, `*🤍 Uso Correcto: ${usedPrefix + command} <consulta>*`, m);
   }
 
   conn.reply(m.chat, '🤍 *Descargando imágenes...*', m, {
-    contextInfo: { externalAdReply: { mediaUrl: null, mediaType: 1, showAdAttribution: true,
-    title: packname,
-    body: wm,
-    previewType: 0, thumbnail: icons,
-    sourceUrl: canal } }
+    contextInfo: {
+      externalAdReply: {
+        mediaUrl: null,
+        mediaType: 1,
+        showAdAttribution: true,
+        title: packname,
+        body: wm,
+        previewType: 0,
+        thumbnail: icons,
+        sourceUrl: canal
+      }
+    }
   });
 
   let imageUrls = [];
@@ -108,7 +115,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 };
 
-handler.help = ['imagen <query>'];
+handler.help = ['imagen <consulta>'];
 handler.corazones = 2;
 handler.tags = ['buscador'];
 handler.command = /^(googleimages)$/i;
