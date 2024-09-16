@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const query = [  'canciones', 
-  'musica%20regueton%20popular',
-  'video%20musical%20latino']
+  'musica%20regueton',
+  '%20musicas%20canciones']
 
 let handler = async (m, {
     conn,
