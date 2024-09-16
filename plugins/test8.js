@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { googleImage } from '@bochilteam/scraper';
 const {
   generateWAMessageContent,
   generateWAMessageFromContent,
@@ -30,15 +30,11 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     }
   }
 
-  const apiKey = 'YOUR_SERPAPI_KEY';  // Replace with your SerpAPI key
-  const searchQuery = encodeURIComponent(text);
-  const url = `https://serpapi.com/search?engine=google&tbm=isch&q=${searchQuery}&api_key=${apiKey}`;
-
   let imageUrls = [];
   try {
-    const { data } = await axios.get(url);
-    if (data.images_results) {
-      imageUrls = data.images_results.map(result => result.original);
+    const results = await googleImage(text);
+    if (results && results.length > 0) {
+      imageUrls = results.map(result => result.url);
     } else {
       throw new Error("No image results found.");
     }
@@ -68,7 +64,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
       'nativeFlowMessage': proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
         'buttons': [{
           'name': "cta_url",
-          'buttonParamsJson': `{"display_text":"url 📫","Url":"https://www.google.com/search?hl=en&tbm=isch&q=${searchQuery}","merchant_url":"https://www.google.com/search?hl=en&tbm=isch&q=${searchQuery}"}`
+          'buttonParamsJson': `{"display_text":"url 📫","Url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}","merchant_url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}"}`
         }]
       })
     });
