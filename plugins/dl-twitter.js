@@ -1,7 +1,7 @@
 import axios from 'axios';
 let enviando = false;
 const handler = async (m, {conn, text, usedPrefix, command}) => {
-if (!text) throw `*INGRESA EL ENLACE*\n_.x <link>_`;
+if (!text) throw `*\`Ingresa El link Del vídeo a descargar 🤍\`*`;
 if (enviando) return;
     enviando = true;
 try {
