@@ -17,11 +17,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   let imageUrls = [];
   try {
     const results = await googleImage(text);
-    console.log('Resultados de googleImage:', results); // Línea de depuración
+    console.log('Resultados de googleImage:', results);
 
     if (results && results.length > 0) {
-      imageUrls = results.map(result => result.url).filter(url => url); // Filtra URLs inválidas
-      console.log('URLs de imágenes filtradas:', imageUrls); // Línea de depuración
+      imageUrls = results.map(result => result.url).filter(url => url);
+      console.log('URLs de imágenes filtradas:', imageUrls);
       if (imageUrls.length === 0) throw new Error("No se encontraron resultados de imagen.");
     } else {
       throw new Error("No se encontraron resultados de imagen.");
@@ -31,14 +31,9 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     return conn.reply(m.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", m);
   }
 
-  // Asegúrate de que hay imágenes para mostrar
-  if (imageUrls.length === 0) {
-    return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
-  }
-
   // Limita a 5 imágenes y crea el carrusel
   imageUrls = imageUrls.slice(0, 5);
-  console.log('URLs finales para el carrusel:', imageUrls); // Línea de depuración
+  console.log('URLs finales para el carrusel:', imageUrls);
 
   const messages = [];
   let count = 1;
@@ -53,22 +48,16 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       });
 
       messages.push({
-        'body': proto.Message.InteractiveMessage.Body.fromObject({
-          'text': `Imagen - ${count++}`
-        }),
-        'footer': proto.Message.InteractiveMessage.Footer.fromObject({
-          'text': text
-        }),
         'header': proto.Message.InteractiveMessage.Header.fromObject({
-          'title': '',
+          'title': `Imagen - ${count++}`,
           'hasMediaAttachment': true,
           'imageMessage': imageMessage
         }),
-        'nativeFlowMessage': proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-          'buttons': [{
-            'name': "cta_url",
-            'buttonParamsJson': `{"display_text":"url 📫","Url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}","merchant_url":"https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(text)}"}`
-          }]
+        'body': proto.Message.InteractiveMessage.Body.fromObject({
+          'text': ''
+        }),
+        'footer': proto.Message.InteractiveMessage.Footer.fromObject({
+          'text': text
         })
       });
     } catch (error) {
