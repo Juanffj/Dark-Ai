@@ -16,7 +16,7 @@ tiktoks(`${query.getRandom()}`).then(a => {
 let cap = a.title
 // conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m})
 
-await conn.sendFile(m.chat, video, 'tiktok.mp4', cap, m, null, rcanal);
+await conn.sendFile(m.chat, video, 'url', cap, m, null, rcanal);
 }).catch(err => {
 })
 }
