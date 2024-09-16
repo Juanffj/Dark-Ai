@@ -12,11 +12,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         mediaUrl: null,
         mediaType: 1,
         showAdAttribution: true,
-        title: packname,
-        body: wm,
+        title: packname || 'Pack Name',
+        body: wm || 'Watermark',
         previewType: 0,
-        thumbnail: icons,
-        sourceUrl: canal
+        thumbnail: icons || Buffer.from('base64-image-data'),
+        sourceUrl: canal || 'https://example.com'
       }
     }
   });
@@ -26,7 +26,8 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const results = await googleImage(text);
     console.log('Resultados de googleImage:', results);
 
-    if (results && results.length > 0) {
+    // Verifica la estructura de los resultados
+    if (results && Array.isArray(results) && results.length > 0) {
       imageUrls = results.map(result => result.url).filter(url => url);
       console.log('URLs de imágenes filtradas:', imageUrls);
       if (imageUrls.length === 0) throw new Error("No se encontraron resultados de imagen.");
@@ -47,24 +48,22 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   for (const imageUrl of imageUrls) {
     try {
       const { imageMessage } = await generateWAMessageContent({
-        'image': {
-          'url': imageUrl
-        }
+        image: { url: imageUrl }
       }, {
-        'upload': conn.waUploadToServer
+        upload: conn.waUploadToServer
       });
 
       messages.push({
-        'header': proto.Message.InteractiveMessage.Header.fromObject({
-          'title': `Imagen - ${count++}`,
-          'hasMediaAttachment': true,
-          'imageMessage': imageMessage
+        header: proto.Message.InteractiveMessage.Header.fromObject({
+          title: `Imagen - ${count++}`,
+          hasMediaAttachment: true,
+          imageMessage: imageMessage
         }),
-        'body': proto.Message.InteractiveMessage.Body.fromObject({
-          'text': ''
+        body: proto.Message.InteractiveMessage.Body.fromObject({
+          text: ''
         }),
-        'footer': proto.Message.InteractiveMessage.Footer.fromObject({
-          'text': text
+        footer: proto.Message.InteractiveMessage.Footer.fromObject({
+          text: text
         })
       });
     } catch (error) {
@@ -80,34 +79,34 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     const responseMessage = generateWAMessageFromContent(m.chat, {
-      'viewOnceMessage': {
-        'message': {
-          'messageContextInfo': {
-            'deviceListMetadata': {},
-            'deviceListMetadataVersion': 2
+      viewOnceMessage: {
+        message: {
+          messageContextInfo: {
+            deviceListMetadata: {},
+            deviceListMetadataVersion: 2
           },
-          'interactiveMessage': proto.Message.InteractiveMessage.fromObject({
-            'body': proto.Message.InteractiveMessage.Body.create({
-              'text': `🤍 Resultado de: ${text}`
+          interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+            body: proto.Message.InteractiveMessage.Body.create({
+              text: `🤍 Resultado de: ${text}`
             }),
-            'footer': proto.Message.InteractiveMessage.Footer.create({
-              'text': '🔎 Google - Búsquedas'
+            footer: proto.Message.InteractiveMessage.Footer.create({
+              text: '🔎 Google - Búsquedas'
             }),
-            'header': proto.Message.InteractiveMessage.Header.create({
-              'hasMediaAttachment': false
+            header: proto.Message.InteractiveMessage.Header.create({
+              hasMediaAttachment: false
             }),
-            'carouselMessage': proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-              'cards': messages
+            carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+              cards: messages
             })
           })
         }
       }
     }, {
-      'quoted': m
+      quoted: m
     });
 
     await conn.relayMessage(m.chat, responseMessage.message, {
-      'messageId': responseMessage.key.id
+      messageId: responseMessage.key.id
     });
   } catch (error) {
     console.error('Error al generar o enviar el mensaje de carrusel:', error);
