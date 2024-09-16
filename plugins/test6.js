@@ -69,7 +69,7 @@ let handler = async (m, { command, conn, usedPrefix }) => {
               text: `🤍 \`${command}\` 🤍`
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
-              text: "_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\`_"
+              text: "\n_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\`_"
             }),
             header: proto.Message.InteractiveMessage.Header.create({
               hasMediaAttachment: false
