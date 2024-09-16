@@ -1,3 +1,5 @@
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+
 const rewardCodes = {
   '123': 100,  // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
   'CODE456': 200,
@@ -6,8 +8,6 @@ const rewardCodes = {
 
 const usedCodes = new Set();  // Para llevar un registro de los códigos ya utilizados
 
-var handler = async (m, { conn, text }) => {
-  // Verifica si el texto comienza con el comando 'canjear'
   if (text.startsWith('canjear ')) {
     const code = text.slice(8).trim();  // Extrae el código de canje del texto
 
