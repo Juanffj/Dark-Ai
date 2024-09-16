@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const query = [  'canciones%20paradedicar', 
+const query = [  'musica%20paradedicar', 
   'musica%20regueton',
   '%20rolas%20indirectas']
 
