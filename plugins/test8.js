@@ -1,15 +1,15 @@
 let handler = async (m, { conn, text, usedPrefix, command }) => {
+  const rewardCodes = {
+    '123': 100,   // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
+    'CODE456': 200,
+    'CODE789': 300
+  };
 
-const rewardCodes = {
-  '123': 100,  // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
-  'CODE456': 200,
-  'CODE789': 300
-};
+  // Para llevar un registro de los códigos ya utilizados, deberías considerar almacenamiento persistente
+  const usedCodes = new Set();  // Considera persistir esto en una base de datos o archivo
 
-const usedCodes = new Set();  // Para llevar un registro de los códigos ya utilizados
-
-  if (text.startsWith('canjeo')) {
-    const code = text.slice(8).trim();  // Extrae el código de canje del texto
+  if (text.startsWith(`${usedPrefix}${command}`)) {
+    const code = text.slice(`${usedPrefix}${command}`.length).trim();  // Extrae el código de canje del texto
 
     if (!code) {
       return conn.reply(m.chat, '❌ Por favor, proporciona un código de canje.', m);
@@ -22,6 +22,10 @@ const usedCodes = new Set();  // Para llevar un registro de los códigos ya util
     const coins = rewardCodes[code];
 
     if (coins) {
+      // Asegúrate de que el usuario tenga un registro y monedas iniciales
+      if (!global.db.data.users[m.sender]) {
+        global.db.data.users[m.sender] = { coins: 0 };
+      }
       global.db.data.users[m.sender].coins = (global.db.data.users[m.sender].coins || 0) + coins;
       usedCodes.add(code);  // Marca el código como utilizado
       return conn.reply(m.chat, `🎉 ¡Has canjeado ${coins} monedas con éxito!`, m);
@@ -29,7 +33,7 @@ const usedCodes = new Set();  // Para llevar un registro de los códigos ya util
       return conn.reply(m.chat, '❌ Código de canje inválido.', m);
     }
   } else {
-    conn.reply(m.chat, '❌ Comando no reconocido. Usa "canjeo <código>" para canjear un código de monedas.', m);
+    return conn.reply(m.chat, '❌ Comando no reconocido. Usa "canjeo <código>" para canjear un código de monedas.', m);
   }
 }
 
