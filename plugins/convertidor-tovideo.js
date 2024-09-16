@@ -11,7 +11,7 @@ const handler = async (m, {conn, usedPrefix, command}) => {
   title: packname,
   body: wm,
   previewType: 0, thumbnail: icons,
-  sourceUrl: channel }}})
+  sourceUrl: canal }}})
   if (/webp/.test(mime)) {
     out = await webp2mp4(media);
   } else if (/audio/.test(mime)) {
