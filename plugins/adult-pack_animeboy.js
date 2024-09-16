@@ -1,4 +1,4 @@
-import axios from "axios"
+/* import axios from "axios"
 let handler = async (m, {command, conn, usedPrefix}) => {
         m.react('✅')
 let res = (await axios.get(`https://raw.githubusercontent.com/Incongnito45/ExoticoBot-MD/master/NODE_EXOTICO_JSON/node-exotico-anime-boy/hot-${command}.json`)).data  
@@ -8,4 +8,4 @@ conn.sendButton(m.chat, `🔥🐻🍃 _${command}_ 🍃🐻🔥`.trim(), packnam
 }
 handler.command = handler.help = ['takeda', 'asuma', 'endeavor']
 handler.tags = ['nsfw']
-export default handler
+export default handler */
