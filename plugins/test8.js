@@ -5,58 +5,46 @@ const {
   proto
 } = (await import("@whiskeysockets/baileys"))["default"];
 
-let handler = async (message, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(message.chat, "🤍 *¿Qué quieres buscar en Google?*", message, rcanal);
-  }
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `*🤍 Uso Correcto: ${usedPrefix + command} La playa*`;
 
-  await message.react(rwait);
-
-  async function createImageMessage(imageUrl) {
-    if (!imageUrl) {
-      throw new Error("Image URL is undefined or null.");
-    }
-    const { imageMessage } = await generateWAMessageContent({
-      'image': {
-        'url': imageUrl
-      }
-    }, {
-      'upload': conn.waUploadToServer
-    });
-    return imageMessage;
-  }
-
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
+  conn.reply(m.chat, '🤍 *Descargando imágenes...*', m, {
+    contextInfo: { externalAdReply: { mediaUrl: null, mediaType: 1, showAdAttribution: true,
+    title: packname,
+    body: wm,
+    previewType: 0, thumbnail: icons,
+    sourceUrl: canal } }
+  });
 
   let imageUrls = [];
   try {
     const results = await googleImage(text);
-    console.log('Search Results:', results); // Log search results for debugging
-
     if (results && results.length > 0) {
       imageUrls = results.map(result => result.url);
-      console.log('Image URLs:', imageUrls); // Log image URLs for debugging
+      if (imageUrls.length === 0) throw new Error("No image results found.");
     } else {
       throw new Error("No image results found.");
     }
   } catch (error) {
     console.error('Error fetching images:', error);
-    return conn.reply(message.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", message);
+    return conn.reply(m.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", m);
   }
 
-  shuffleArray(imageUrls);
-  const imagesToSend = imageUrls.slice(0, 5);
-  const messages = [];
+  // Shuffle and limit to 5 images
+  imageUrls = imageUrls.slice(0, 5);
 
+  // Generate carousel messages
+  const messages = [];
   let count = 1;
-  for (const imageUrl of imagesToSend) {
+  for (const imageUrl of imageUrls) {
     try {
-      const imageMessage = await createImageMessage(imageUrl);
+      const { imageMessage } = await generateWAMessageContent({
+        'image': {
+          'url': imageUrl
+        }
+      }, {
+        'upload': conn.waUploadToServer
+      });
       messages.push({
         'body': proto.Message.InteractiveMessage.Body.fromObject({
           'text': `Imagen - ${count++}`
@@ -82,12 +70,11 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     }
   }
 
-  // Ensure messages array is not empty
   if (messages.length === 0) {
-    return conn.reply(message.chat, "❌ No se encontraron imágenes para mostrar.", message);
+    return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
   }
 
-  const responseMessage = generateWAMessageFromContent(message.chat, {
+  const responseMessage = generateWAMessageFromContent(m.chat, {
     'viewOnceMessage': {
       'message': {
         'messageContextInfo': {
@@ -111,19 +98,18 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
       }
     }
   }, {
-    'quoted': message
+    'quoted': m
   });
 
-  await message.react(done);
-  await conn.relayMessage(message.chat, responseMessage.message, {
+  await conn.relayMessage(m.chat, responseMessage.message, {
     'messageId': responseMessage.key.id
   });
 };
 
-handler.help = ["googleimages"];
-handler.tags = ["search"];
-handler.premium = 1;
-handler.register = true;
+handler.help = ['imagen <query>'];
+handler.corazones = 2;
+handler.tags = ['buscador'];
 handler.command = /^(googleimages)$/i;
+handler.register = true;
 
 export default handler;
