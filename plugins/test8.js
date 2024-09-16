@@ -46,6 +46,9 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     return conn.reply(message.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", message);
   }
 
+  // Debugging: log the image URLs to verify the data
+  console.log('Image URLs:', imageUrls);
+
   shuffleArray(imageUrls);
   const imagesToSend = imageUrls.slice(0, 5);
   const messages = [];
