@@ -2,6 +2,7 @@ import {googleImage} from '@bochilteam/scraper';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
 if (!text) return conn.reply(m.chat, `*🤍 Uso Correcto: ${usedPrefix + command} la playa*`, m, rcanal);
 await m.react('🕓');
+let capt = ``
 const res = await googleImage(text);
 const image = await res.getRandom();
 const link = image;
