@@ -139,7 +139,7 @@ const handler = async (m, { conn, text }) => {
     });
 
     await conn.relayMessage(m.chat, messageContent.message, {
-      messageId: messageContent.key.id, m, null, rcanal
+      messageId: messageContent.key.id
     });
 
   } catch (error) {
