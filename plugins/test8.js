@@ -6,13 +6,15 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     'CODE789': 300
   };
 
-  // Para llevar un registro de los códigos ya utilizados, considera almacenamiento persistente
+  // Para llevar un registro de los códigos ya utilizados (considera persistencia en una base de datos o archivo)
   const usedCodes = new Set(); // Esta variable solo retiene datos en memoria
 
-  // Asegúrate de que el texto esté en el formato correcto
-  if (text.startsWith(`${usedPrefix}${command}`)) {
+  // El formato esperado del mensaje es: ".canjeo <código>"
+  // Verificar si el texto comienza con el prefijo seguido del comando
+  const commandPrefix = `${usedPrefix}${command}`; // Por ejemplo, ".canjeo"
+  if (text.startsWith(commandPrefix)) {
     // Extraer el código de canje del texto
-    const code = text.slice(`${usedPrefix}${command}`.length).trim();
+    const code = text.slice(commandPrefix.length).trim();
 
     // Depuración: imprime el texto completo y el código extraído
     console.log('Texto completo:', text);
@@ -40,7 +42,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       return conn.reply(m.chat, '❌ Código de canje inválido.', m);
     }
   } else {
-    return conn.reply(m.chat, `❌ Comando no reconocido. Usa "${usedPrefix}${command} <código>" para canjear un código de monedas.`, m);
+    return conn.reply(m.chat, `❌ Comando no reconocido. Usa "${commandPrefix} <código>" para canjear un código de monedas.`, m);
   }
 }
 
