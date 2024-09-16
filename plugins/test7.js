@@ -15,7 +15,6 @@ await m.react('🕒');
 tiktoks(`${query.getRandom()}`).then(a => {
 let cap = a.title
 conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m})
-await m.react('✅');
 }).catch(err => {
 await m.react('✖️');
 })
