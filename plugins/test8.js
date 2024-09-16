@@ -48,7 +48,7 @@ Recursos:
 
 handler.help = ['daily', 'claim', 'canjear'];
 handler.tags = ['rpg'];
-handler.command = /^(canjear2)$/i;
+handler.command = /^(canjeo)$/i;
 
 handler.register = true;
 
