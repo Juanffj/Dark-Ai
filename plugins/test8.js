@@ -32,7 +32,7 @@ var handler = async (m, { conn, text }) => {
   }
 }
 
-handler.help = ['canjear <código>'];
+handler.help = ['canjeo <código>'];
 handler.tags = ['economía'];
 handler.command = /^(canjeo)$/i;
 
