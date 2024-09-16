@@ -46,7 +46,7 @@ let handler = async (m, { command, conn, usedPrefix }) => {
       const mediaMessage = await prepareWAMessageMedia({ image: imageBuffer }, { upload: conn.waUploadToServer });
       return {
         body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
-        footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: 'Desliza para ver más' }),
+        footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '*[ GenesisBot By Angel-OFC ]*' }),
         header: proto.Message.InteractiveMessage.Header.fromObject({
           title: `Imagen ${index + 1}`,
           hasMediaAttachment: true,
