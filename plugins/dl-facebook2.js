@@ -1,6 +1,6 @@
 import { facebookdl, facebookdlv2 } from '@bochilteam/scraper'
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-if (!args[0]) throw `Use example ${usedPrefix + command} https://www.facebook.com/watch?v=636541475139*`
+if (!args[0]) throw `*\`Ingresa El link Del vídeo a descargar 🤍\`*`
 await m.react('🕓');
 const { result } = await facebookdl(args[0]).catch(async _ => await facebookdlv2(args[0]))
 await m.react('✅');
