@@ -88,7 +88,7 @@ const keni = {
           },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
             body: proto.Message.InteractiveMessage.Body.create({
-              text: `🤍\`${command}\` 🤍`
+              text: `🤍 \`${command}\` 🤍`
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
               text: "Desliza para ver más imágenes"
