@@ -1,5 +1,5 @@
 const rewardCodes = {
-  '910736': 100,  // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
+  'CODE123': 100,  // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
   'CODE456': 200,
   'CODE789': 300
 };
@@ -7,6 +7,7 @@ const rewardCodes = {
 const usedCodes = new Set();  // Para llevar un registro de los códigos ya utilizados
 
 var handler = async (m, { conn, text }) => {
+  // Verifica si el texto comienza con el comando 'canjear'
   if (text.startsWith('canjear ')) {
     const code = text.slice(8).trim();  // Extrae el código de canje del texto
 
@@ -28,13 +29,13 @@ var handler = async (m, { conn, text }) => {
       return conn.reply(m.chat, '❌ Código de canje inválido.', m);
     }
   } else {
-    conn.reply(m.chat, '❌ Comando no reconocido. Usa "canjeo <código>" para canjear un código de monedas.', m);
+    conn.reply(m.chat, '❌ Comando no reconocido. Usa "canjear <código>" para canjear un código de monedas.', m);
   }
 }
 
-handler.help = ['canjeo <código>'];
+handler.help = ['canjear <código>'];
 handler.tags = ['economía'];
-handler.command = /^(canjeo)$/i;
+handler.command = /^(canjear)$/i;
 
 handler.register = true;
 
