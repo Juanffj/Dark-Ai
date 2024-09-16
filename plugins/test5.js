@@ -5,6 +5,7 @@ import axios from 'axios';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 if (!text) return conn.reply(m.chat, '*ingresa el texto de lo que quieres buscar en tiktok*', m);
+await m.react('🕒');
   
 
 try {
@@ -15,11 +16,13 @@ let info = json[Math.floor(json.length * Math.random())];
 
 if (info) {
 await conn.sendMessage(m.chat, { video: { url: info.nowm }, caption: info.url }, { quoted: m });
+await m.react('✅');
 } else {
 conn.reply('error :v')
 }
 } catch {
-conn.reply('error :v')
+conn.reply('error :v');
+await m.react('✖️')
 }
 };
 
