@@ -36,8 +36,11 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   let imageUrls = [];
   try {
     const results = await googleImage(text);
+    console.log('Search Results:', results); // Log search results for debugging
+
     if (results && results.length > 0) {
       imageUrls = results.map(result => result.url);
+      console.log('Image URLs:', imageUrls); // Log image URLs for debugging
     } else {
       throw new Error("No image results found.");
     }
@@ -45,9 +48,6 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     console.error('Error fetching images:', error);
     return conn.reply(message.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", message);
   }
-
-  // Debugging: log the image URLs to verify the data
-  console.log('Image URLs:', imageUrls);
 
   shuffleArray(imageUrls);
   const imagesToSend = imageUrls.slice(0, 5);
