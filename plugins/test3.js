@@ -1,5 +1,13 @@
-import axios from 'axios';
-import { proto, generateWAMessageFromContent, prepareWAMessageMedia } = (await import("@whiskeysockets/baileys")).default;
+import fetch from 'node-fetch';
+import fs from 'fs/promises';
+import path from 'path';
+const {
+  proto,
+  generateWAMessageFromContent,
+  prepareWAMessageMedia,
+  generateWAMessageContent,
+  getDevice
+} = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (m, { command, conn, usedPrefix }) => {
 await m.react('🕒');
