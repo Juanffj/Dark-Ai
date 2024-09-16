@@ -20,7 +20,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     const results = await googleImage(text);
     if (results && results.length > 0) {
-      imageUrls = results.map(result => result.url);
+      imageUrls = results.map(result => result.url).filter(url => url); // Filter out invalid URLs
       if (imageUrls.length === 0) throw new Error("No image results found.");
     } else {
       throw new Error("No image results found.");
@@ -28,6 +28,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   } catch (error) {
     console.error('Error fetching images:', error);
     return conn.reply(m.chat, "❌ Error al buscar imágenes. Por favor, intenta de nuevo.", m);
+  }
+
+  // Ensure we have images to show
+  if (imageUrls.length === 0) {
+    return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
   }
 
   // Shuffle and limit to 5 images
@@ -70,6 +75,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     }
   }
 
+  // Ensure messages array is not empty
   if (messages.length === 0) {
     return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
   }
