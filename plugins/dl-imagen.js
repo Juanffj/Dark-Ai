@@ -1,17 +1,13 @@
 import {googleImage} from '@bochilteam/scraper';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
 if (!text) return conn.reply(m.chat, `*🤍 Uso Correcto: ${usedPrefix + command} la playa*`, m, rcanal);
-conn.reply(m.chat, '🤍 *Descargando su imagen...*', m, {
-contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, showAdAttribution: true,
-title: packname,
-body: wm,
-previewType: 0, thumbnail: icons,
-sourceUrl: canal }}})
+await m.react('🕓');
 const res = await googleImage(text);
 const image = await res.getRandom();
 const link = image;
 const messages = [['Imagen 1', dev, await res.getRandom(),
 [[]], [[]], [[]], [[]]], ['Imagen 2', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 3', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 4', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 5', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 6', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 7', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 8', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 8', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 9', dev, await res.getRandom(), [[]], [[]], [[]], [[]]], ['Imagen 10', dev, await res.getRandom(), [[]], [[]], [[]], [[]]]]
+await m.react('✅');
 await conn.sendCarousel(m.chat, '🤍 Buscador - Imagenes', `🔍 Resultado de: ${text}`, text, messages, m, null, fake);
 };
 handler.help = ['imagen <query>'];
