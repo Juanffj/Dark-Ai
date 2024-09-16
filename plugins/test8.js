@@ -6,15 +6,16 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     'CODE789': 300
   };
 
-  // Para llevar un registro de los códigos ya utilizados (considera persistencia en una base de datos o archivo)
-  const usedCodes = new Set(); // En producción, deberías almacenar esto de manera persistente
+  // Para llevar un registro de los códigos ya utilizados, considera almacenamiento persistente
+  const usedCodes = new Set(); // Esta variable solo retiene datos en memoria
 
-  // Verificar si el mensaje comienza con el comando esperado
+  // Asegúrate de que el texto esté en el formato correcto
   if (text.startsWith(`${usedPrefix}${command}`)) {
     // Extraer el código de canje del texto
     const code = text.slice(`${usedPrefix}${command}`.length).trim();
 
-    // Debugging: imprime el código extraído
+    // Depuración: imprime el texto completo y el código extraído
+    console.log('Texto completo:', text);
     console.log('Código extraído:', code);
 
     if (!code) {
