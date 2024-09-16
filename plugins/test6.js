@@ -21,7 +21,7 @@ const keni = {
 			message: {
 				orderMessage: {
 					orderId: "2029",
-					thumbnail: global.imagen1,
+					thumbnail: icons,
 					itemCount: `777`,
 					status: "INQUIRY",
 					surface: "CATALOG",
