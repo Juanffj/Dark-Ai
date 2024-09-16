@@ -11,11 +11,13 @@ let handler = async (m, {
     usedPrefix,
     command
 }) => {
- m.reply(wait)
+await m.react('🕒');
 tiktoks(`${query.getRandom()}`).then(a => {
 let cap = a.title
+await m.react('✅');
 conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m})
 }).catch(err => {
+await m.react('✖️');
 m.reply(eror)
 })
 }
