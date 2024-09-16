@@ -14,9 +14,7 @@ let handler = async (m, {
 await m.react('✅');
 tiktoks(`${query.getRandom()}`).then(a => {
 let cap = a.title
-// conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m})
-
-await conn.sendFile(m.chat, video, 'url', cap, m, null, rcanal);
+conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m, null, rcanal})
 }).catch(err => {
 })
 }
