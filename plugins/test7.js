@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const query = [  'canciones%20paradedicar', 
   'musica%20regueton',
-  '%20musicas%20indirectas']
+  '%20rolas%20indirectas']
 
 let handler = async (m, {
     conn,
