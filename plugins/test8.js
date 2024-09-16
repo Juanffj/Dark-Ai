@@ -29,13 +29,13 @@ var handler = async (m, { conn, text }) => {
       return conn.reply(m.chat, '❌ Código de canje inválido.', m);
     }
   } else {
-    conn.reply(m.chat, '❌ Comando no reconocido. Usa "canjear <código>" para canjear un código de monedas.', m);
+    conn.reply(m.chat, '❌ Comando no reconocido. Usa "canjeo <código>" para canjear un código de monedas.', m);
   }
 }
 
-handler.help = ['canjear <código>'];
+handler.help = ['canjeo <código>'];
 handler.tags = ['economía'];
-handler.command = /^(canjear)$/i;
+handler.command = /^(canjeo)$/i;
 
 handler.register = true;
 
