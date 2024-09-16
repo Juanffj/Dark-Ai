@@ -2,7 +2,7 @@ import axios from "axios";
 import cheerio from "cheerio";
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-if (!args[0]) return conn.reply(m.chat, '🤍 Ingrese el enlace de un archivo de Mediafire.', m, rcanal)
+if (!args[0]) return conn.reply(m.chat, '*\`Ingresa El link Del archivo a descargar 🤍\`*', m, rcanal)
 if (!args[0].match(/mediafire/gi)) return conn.reply(m.chat, '🤍 El enlace deve ser de un archivo de Mediafire.', m, rcanal)
 	const { title, size, type, url } = await mediafire(args[0]);
 let txt = `乂  *¡MEDIAFIRE - DESCARGAS!*  乂\n\n`
