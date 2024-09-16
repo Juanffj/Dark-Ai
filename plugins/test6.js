@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import path from 'path';
+import axios from 'axios'; // Asegúrate de importar axios
 const {
   proto,
   generateWAMessageFromContent,
@@ -10,19 +11,30 @@ const {
 } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (m, { command, conn, usedPrefix }) => {
-await m.react('🕒');
+  await m.react('🕒');
 
   try {
     // Fetch the JSON data from the URL
     const res = (await axios.get(`https://raw.githubusercontent.com/WOTCHITA/YaemoriBot-MD/master/src/JSON/anime-${command}.json`)).data;
-    
+
     // Ensure the array contains items
     if (!Array.isArray(res) || res.length === 0) {
       throw new Error('No se encontraron imágenes');
     }
 
-    // Select random images
-    const images = res.slice(0, 10); // Limiting to 6 images for the carousel
+    // Function to shuffle an array
+    const shuffleArray = (array) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    };
+
+    // Shuffle the images array
+    shuffleArray(res);
+
+    // Select the first 10 random images
+    const images = res.slice(0, 10);
 
     // Prepare the results for the carousel
     const results = await Promise.all(images.map(async (imageUrl, index) => {
@@ -72,7 +84,7 @@ await m.react('🕒');
       quoted: m
     });
 
-await m.react('✅');
+    await m.react('✅');
     await conn.relayMessage(m.chat, messageContent.message, {
       messageId: messageContent.key.id
     });
