@@ -115,7 +115,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 handler.help = ['imagen <query>'];
 handler.corazones = 2;
 handler.tags = ['buscador'];
-handler.command = /^(image|imagen)$/i;
+handler.command = /^(googleimages)$/i;
 handler.register = true;
 
 export default handler;
