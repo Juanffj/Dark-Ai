@@ -2,7 +2,9 @@ import { googleImage } from '@bochilteam/scraper';
 const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await import("@whiskeysockets/baileys"))["default"];
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `*🤍 Uso Correcto: ${usedPrefix + command} La playa*`;
+  if (!text) {
+    return conn.reply(m.chat, `*🤍 Uso Correcto: ${usedPrefix + command} La playa*`, m);
+  }
 
   conn.reply(m.chat, '🤍 *Descargando imágenes...*', m, {
     contextInfo: { externalAdReply: { mediaUrl: null, mediaType: 1, showAdAttribution: true,
@@ -80,36 +82,41 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     return conn.reply(m.chat, "❌ No se encontraron imágenes para mostrar.", m);
   }
 
-  const responseMessage = generateWAMessageFromContent(m.chat, {
-    'viewOnceMessage': {
-      'message': {
-        'messageContextInfo': {
-          'deviceListMetadata': {},
-          'deviceListMetadataVersion': 2
-        },
-        'interactiveMessage': proto.Message.InteractiveMessage.fromObject({
-          'body': proto.Message.InteractiveMessage.Body.create({
-            'text': `🤍 Resultado de: ${text}`
-          }),
-          'footer': proto.Message.InteractiveMessage.Footer.create({
-            'text': '🔎 Google - Búsquedas'
-          }),
-          'header': proto.Message.InteractiveMessage.Header.create({
-            'hasMediaAttachment': false
-          }),
-          'carouselMessage': proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-            'cards': messages
+  try {
+    const responseMessage = generateWAMessageFromContent(m.chat, {
+      'viewOnceMessage': {
+        'message': {
+          'messageContextInfo': {
+            'deviceListMetadata': {},
+            'deviceListMetadataVersion': 2
+          },
+          'interactiveMessage': proto.Message.InteractiveMessage.fromObject({
+            'body': proto.Message.InteractiveMessage.Body.create({
+              'text': `🤍 Resultado de: ${text}`
+            }),
+            'footer': proto.Message.InteractiveMessage.Footer.create({
+              'text': '🔎 Google - Búsquedas'
+            }),
+            'header': proto.Message.InteractiveMessage.Header.create({
+              'hasMediaAttachment': false
+            }),
+            'carouselMessage': proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+              'cards': messages
+            })
           })
-        })
+        }
       }
-    }
-  }, {
-    'quoted': m
-  });
+    }, {
+      'quoted': m
+    });
 
-  await conn.relayMessage(m.chat, responseMessage.message, {
-    'messageId': responseMessage.key.id
-  });
+    await conn.relayMessage(m.chat, responseMessage.message, {
+      'messageId': responseMessage.key.id
+    });
+  } catch (error) {
+    console.error('Error al generar o enviar el mensaje de carrusel:', error);
+    return conn.reply(m.chat, "❌ Error al enviar el carrusel de imágenes. Por favor, intenta de nuevo.", m);
+  }
 };
 
 handler.help = ['imagen <query>'];
