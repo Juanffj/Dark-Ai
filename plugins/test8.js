@@ -6,13 +6,16 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     'CODE789': 300
   };
 
-  // Para llevar un registro de los códigos ya utilizados (necesita persistencia)
-  const usedCodes = new Set(); // Necesitarías almacenar esto en una base de datos o archivo en producción
+  // Para llevar un registro de los códigos ya utilizados (considera persistencia en una base de datos o archivo)
+  const usedCodes = new Set(); // En producción, deberías almacenar esto de manera persistente
 
-  // Verificar si el mensaje empieza con el comando ".canjeo"
+  // Verificar si el mensaje comienza con el comando esperado
   if (text.startsWith(`${usedPrefix}${command}`)) {
     // Extraer el código de canje del texto
     const code = text.slice(`${usedPrefix}${command}`.length).trim();
+
+    // Debugging: imprime el código extraído
+    console.log('Código extraído:', code);
 
     if (!code) {
       return conn.reply(m.chat, '❌ Por favor, proporciona un código de canje.', m);
