@@ -79,6 +79,11 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     }
   }
 
+  // Ensure messages array is not empty
+  if (messages.length === 0) {
+    return conn.reply(message.chat, "❌ No se encontraron imágenes para mostrar.", message);
+  }
+
   const responseMessage = generateWAMessageFromContent(message.chat, {
     'viewOnceMessage': {
       'message': {
@@ -97,7 +102,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
             'hasMediaAttachment': false
           }),
           'carouselMessage': proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-            'cards': [...messages]
+            'cards': messages
           })
         })
       }
