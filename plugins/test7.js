@@ -16,8 +16,8 @@ tiktoks(`${query.getRandom()}`).then(a => {
 let cap = a.title
 conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m})
 }).catch(err => {
-await m.react('✖️');
 })
+await m.react('✖️');
 }
 handler.help = ['tiktokrandom']
 handler.tags = ['dl']
