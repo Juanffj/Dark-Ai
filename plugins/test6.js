@@ -21,7 +21,7 @@ const keni = {
 			message: {
 				orderMessage: {
 					orderId: "2029",
-					thumbnail: icons,
+					thumbnail: global.imagen1,
 					itemCount: `777`,
 					status: "INQUIRY",
 					surface: "CATALOG",
@@ -88,7 +88,7 @@ const keni = {
           },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
             body: proto.Message.InteractiveMessage.Body.create({
-              text: `🤍 _${command}_ 🤍`
+              text: `🤍 \`${command}\` 🤍`
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
               text: "Desliza para ver más imágenes"
@@ -113,7 +113,7 @@ const keni = {
         }
       }
     }, {
-      quoted: keni
+      quoted: fakegif3
     });
 
     await m.react('✅');
