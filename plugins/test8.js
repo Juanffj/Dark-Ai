@@ -19,8 +19,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   let imageUrls = [];
   try {
     const results = await googleImage(text);
+    console.log('Results from googleImage:', results); // Debugging line
+
     if (results && results.length > 0) {
       imageUrls = results.map(result => result.url).filter(url => url); // Filter out invalid URLs
+      console.log('Filtered image URLs:', imageUrls); // Debugging line
       if (imageUrls.length === 0) throw new Error("No image results found.");
     } else {
       throw new Error("No image results found.");
@@ -37,6 +40,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   // Shuffle and limit to 5 images
   imageUrls = imageUrls.slice(0, 5);
+  console.log('Final image URLs for carousel:', imageUrls); // Debugging line
 
   // Generate carousel messages
   const messages = [];
@@ -50,6 +54,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       }, {
         'upload': conn.waUploadToServer
       });
+
       messages.push({
         'body': proto.Message.InteractiveMessage.Body.fromObject({
           'text': `Imagen - ${count++}`
@@ -115,7 +120,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 handler.help = ['imagen <query>'];
 handler.corazones = 2;
 handler.tags = ['buscador'];
-handler.command = /^(googleimages)$/i;
+handler.command = /^(image|imagen)$/i;
 handler.register = true;
 
 export default handler;
