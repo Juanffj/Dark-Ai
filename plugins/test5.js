@@ -23,6 +23,6 @@ conn.reply('error :v')
 }
 };
 
-handler.command = ['tiktoksearch'];
+handler.command = ['tiktoksearch2'];
 
 export default handler;
