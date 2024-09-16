@@ -26,7 +26,7 @@ m.reply(eror)
 }
 handler.help = ['tiktokrandom']
 handler.tags = ['dl']
-handler.command = /^(tiktokrandom|ttrandom)$/i
+handler.command = /^(tiktokmusic)$/i
 handler.limit = true 
 handler.register = true
 
