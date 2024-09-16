@@ -1,5 +1,5 @@
 const rewardCodes = {
-  'KARIM': 100,  // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
+  '910736': 100,  // Ejemplos de códigos de canje y la cantidad de monedas que otorgan
   'CODE456': 200,
   'CODE789': 300
 };
