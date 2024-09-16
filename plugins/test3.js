@@ -72,6 +72,7 @@ await m.react('🕒');
       quoted: m
     });
 
+await m.react('✅');
     await conn.relayMessage(m.chat, messageContent.message, {
       messageId: messageContent.key.id
     });
