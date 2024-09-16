@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const query = [  'canciones%20famosas%20latinoamerica', 
+const query = [  'canciones%20famosas%20virales', 
   'musica%20latina%20popular',
   'video%20musical%20latino',
   'canciones%20famosas%20de%20latinoamerica',
   'musica%20latina',
-  'videos%20de%20canciones%20latinas',
-  'canciones%20viral%20latino',
+  'videos%20de%20canciones%20famosas2024',
+  'canciones%20viral',
   'hits%20latinos']
 
 let handler = async (m, {
