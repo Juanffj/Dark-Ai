@@ -135,7 +135,7 @@ const handler = async (m, { conn, text }) => {
         }
       }
     }, {
-      quoted: m
+      quoted: m, null, rcanal
     });
 
     await conn.relayMessage(m.chat, messageContent.message, {
