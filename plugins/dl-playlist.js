@@ -1,7 +1,7 @@
 
 import yts from 'yt-search';
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-    if (!text) throw `✳️ ejemplo *${usedPrefix + command}* Lil Peep hate my life`;
+    if (!text) throw `*\`Ingresa El Nombre De Lo Que Quieres Buscar\`*`;
     m.react('📀');
 
     let result = await yts(text);
