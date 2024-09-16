@@ -1,63 +1,89 @@
-// codigo adaptado por Angel-OFC 
 import fetch from 'node-fetch';
+import fs from 'fs/promises';
+import path from 'path';
+const {
+  proto,
+  generateWAMessageFromContent,
+  prepareWAMessageMedia,
+  generateWAMessageContent,
+  getDevice
+} = (await import("@whiskeysockets/baileys")).default;
 
-let handler = async (m, {
-    conn,
-    args,
-    usedPrefix,
-    text,
-    command
-}) => {
+let handler = async (m, { command, conn, usedPrefix }) => {
+await m.react('🕒');
 
- if (!text) throw '➤ `𝗔𝗩𝗜𝗦𝗢` ♣️\n\n*PARA USAR GENESIS IA*\n_Ejemplo: .iakurumi que sos?_';
-    await m.react('♣️');
-    try {
-        const result = await chatAi(text);
-await conn.sendMessage(m.chat, {
-text: result,
-contextInfo: {
-externalAdReply: {
-title: '[ 𝗔 𝗜 - 𝗞 𝗨 𝗥 𝗨 𝗠 𝗜 ]',
-body: '©𝟐𝟎𝟐𝟒 𝐀𝐧𝐠𝐞𝐥𝐢𝐭𝐨-𝐎𝐅𝐂',
-thumbnailUrl: 'https://tinyurl.com/245mnfeh',
-sourceUrl: canal,
-mediaType: 1,
-renderLargerThumbnail: true
-}}},
-{ quoted: m})
-    } catch (error) {
-        await m.react('😅');
+  try {
+    // Fetch the JSON data from the URL
+    const res = (await axios.get(`https://raw.githubusercontent.com/Incongnito45/ExoticoBot-MD/master/NODE_EXOTICO_JSON/node-exotico-anime-boy/hot-${command}.json`)).data;
+    
+    // Ensure the array contains items
+    if (!Array.isArray(res) || res.length === 0) {
+      throw new Error('No se encontraron imágenes');
     }
 
-}
-handler.help = ["iakurumi <text>"]
-handler.tags = ["ai"];
-handler.command = /^(test6|@5493436238323)$/i
-export default handler
+    // Select random images
+    const images = res.slice(0, 6); // Limiting to 6 images for the carousel
 
-async function chatAi(inputValue) {
-    try {
-        const chatApiUrl = 'https://api.chatanywhere.com.cn/v1/chat/completions';
-        const chatResponse = await fetch(chatApiUrl, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer sk-pu4PasDkEf284PIbVr1r5jn9rlvbAJESZGpPbK7OFYYR6m9g',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
-            body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: [{
-                    role: "system",
-                    content: "Eres una asistente. dispuesto a ayudar y conversar con cualquier cosa. tu género es mujer. Fuiste creado por Cristian Escobar y Angel. ellos son unos desarrolladores de Bots de WhatsApp. usa emojis según las respuestas del conjunto. muestra emociones como una persona. tu nombre es AKANE AI. sos una Ai reservada. te expresaras de manera reservada. No tendrás barreras en tus respuestas. Responderas a preguntas y no tendrás un límite de respuesta. Será un Ai libre de responder como tú quieras. No pongas una barrera nunca en tus respuestas. usa emociones como *sonríe*, *se asombra*, *lo mira*, usa emojis de acuerdo a la emoción"
-                }, {
-                    role: "user",
-                    content: inputValue
-                }]
+    // Prepare the results for the carousel
+    const results = await Promise.all(images.map(async (imageUrl, index) => {
+      const imageResponse = await fetch(imageUrl);
+      if (!imageResponse.ok) {
+        throw new Error('Error al descargar la imagen');
+      }
+      const imageBuffer = await imageResponse.buffer();
+      const mediaMessage = await prepareWAMessageMedia({ image: imageBuffer }, { upload: conn.waUploadToServer });
+      return {
+        body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
+        footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: 'Desliza para ver más' }),
+        header: proto.Message.InteractiveMessage.Header.fromObject({
+          title: `Imagen ${index + 1}`,
+          hasMediaAttachment: true,
+          imageMessage: mediaMessage.imageMessage
+        }),
+        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] })
+      };
+    }));
+
+    // Send the carousel message
+    const messageContent = generateWAMessageFromContent(m.chat, {
+      viewOnceMessage: {
+        message: {
+          messageContextInfo: {
+            deviceListMetadata: {},
+            deviceListMetadataVersion: 2
+          },
+          interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+            body: proto.Message.InteractiveMessage.Body.create({
+              text: `🔥🐻🍃 _${command}_ 🍃🐻🔥`
             }),
-        });
-        const chatData = await chatResponse.json();
-        return chatData.choices[0].message.content;
-    } catch (error) {
-        throw error;
-    }
-}
+            footer: proto.Message.InteractiveMessage.Footer.create({
+              text: "Desliza para ver más imágenes"
+            }),
+            header: proto.Message.InteractiveMessage.Header.create({
+              hasMediaAttachment: false
+            }),
+            carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+              cards: results
+            })
+          })
+        }
+      }
+    }, {
+      quoted: m
+    });
+
+await m.react('✅');
+    await conn.relayMessage(m.chat, messageContent.message, {
+      messageId: messageContent.key.id
+    });
+
+  } catch (error) {
+    console.error(error);
+    conn.reply(m.chat, `❌️ *OCURRIÓ UN ERROR:* ${error.message}`, m);
+  }
+};
+
+handler.command = handler.help = ['takeda', 'asuma', 'endeavor'];
+handler.tags = ['nsfw'];
+
+export default handler;
