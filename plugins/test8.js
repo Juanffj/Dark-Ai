@@ -8,7 +8,7 @@ const rewardCodes = {
 
 const usedCodes = new Set();  // Para llevar un registro de los códigos ya utilizados
 
-  if (text.startsWith('canjear ')) {
+  if (text.startsWith('canjeo')) {
     const code = text.slice(8).trim();  // Extrae el código de canje del texto
 
     if (!code) {
