@@ -61,7 +61,7 @@ const handler = async (m, { conn, text }) => {
           body: '(⁄ ⁄•⁄ω⁄•⁄ ⁄) 𝙈𝙚𝙜𝙪𝙢𝙞𝙣🔥',
           previewType: 0, 
           thumbnail: icons,
-          sourceUrl: cn 
+          sourceUrl: canal 
         }
       }
     });
