@@ -22,7 +22,7 @@ await m.react('🕒');
     }
 
     // Select random images
-    const images = res.slice(0, 6); // Limiting to 6 images for the carousel
+    const images = res.slice(0, 9); // Limiting to 6 images for the carousel
 
     // Prepare the results for the carousel
     const results = await Promise.all(images.map(async (imageUrl, index) => {
