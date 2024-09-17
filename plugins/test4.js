@@ -52,7 +52,7 @@ ${link}
 }
 handler.help = ['tourl']
 handler.tags = ['tools']
-handler.command = /^(tourl|upload)$/i
+handler.command = /^(tourl3|upload)$/i
 export default handler
 
 async function shortUrl(url) {
