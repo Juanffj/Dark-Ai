@@ -92,7 +92,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.help = ["ytslide"];
 handler.tags = ["buscador"];
-handler.command = ["ytslide"];
+handler.command = ["ytsearch2|yts2"];
 
 export default handler;
 
