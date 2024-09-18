@@ -6,7 +6,7 @@ import FormData from "form-data";
 import Jimp from "jimp";
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) return m.reply(`• *Ejemplo:* ${usedPrefix + command} elaina edit`);
+    if (!text) return m.reply(`• *Ejemplo:* ${usedPrefix + command} Genesis AI`);
 
     await m.react('🕒');
 
@@ -28,7 +28,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     let push = [];
     let results = await yts(text);
-    let videos = results.videos.slice(0, 5); // Ambil 5 hasil teratas
+    let videos = results.videos.slice(0, 6); // Ambil 5 hasil teratas
     shuffleArray(videos); // Mengacak hasil video
 
     let i = 1;
