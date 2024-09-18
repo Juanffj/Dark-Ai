@@ -90,9 +90,9 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     await conn.relayMessage(m.chat, bot.message, { messageId: bot.key.id });
 }
 
-handler.help = ["ytslide"];
+handler.help = ["ytslide <text>"];
 handler.tags = ["buscador"];
-handler.command = ["ytsearch2|yts2"];
+handler.command = /^(ytsearch2|yts2)$/i
 
 export default handler;
 
