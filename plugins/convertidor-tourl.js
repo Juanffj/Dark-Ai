@@ -5,28 +5,35 @@ import fetch from 'node-fetch'
 let handler = async (m) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || ''
-  if (!mime) return conn.reply(m.chat, '🍭 Responde a una *Imagen* o *Vídeo.*', m, rcanal)
-  await m.react('🕓')
+  if (!mime) return conn.reply(m.chat, '💥 Responde a una *Imagen* o *Vídeo.*', m, rcanal)
+  await m.react(rwait)
   try {
+  conn.reply(m.chat, global.wait, m, {
+  contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, showAdAttribution: true,
+  title: packname,
+  body: wm,
+  previewType: 0, thumbnail: icons,
+  sourceUrl: canal }}})
   let media = await q.download()
   let isTele = /image\/(png|jpe?g|gif)|video\/mp4/.test(mime)
   let link = await (isTele ? uploadImage : uploadFile)(media)
   let img = await (await fetch(`${link}`)).buffer()
-  let txt = '`T E L E G R A P H`\n\n'
-      txt += `*🔖 Enlace* : ${link}\n`
-      txt += `*🔖 Acortado* : ${await shortUrl(link)}\n`
-      txt += `*🔖 Tamaño* : ${formatBytes(media.length)}\n`
-      txt += `*🔖 Expiración* : ${isTele ? 'No expira' : 'Desconocido'}\n\n`
-      txt += `🐈‍⬛ *${textbot}*`
+  let txt = `乂  *L I N K - E N L A C E*  乂\n\n`
+      txt += `*» Enlace* : ${link}\n`
+      txt += `*» Acortado* : ${await shortUrl(link)}\n`
+      txt += `*» Tamaño* : ${formatBytes(media.length)}\n`
+      txt += `*» Expiración* : ${isTele ? 'No expira' : 'Desconocido'}\n\n`
+      txt += `> *${dev}*`
 
-await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, null, rcanal)
-await m.react('✅')
+await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, fkontak, rcanal)
+await m.react(done)
 } catch {
-await m.react('✖️')
+await m.react(error)
 }}
 handler.help = ['tourl']
-handler.tags = ['convertir']
-handler.command = /^(tourl|upload)$/i
+handler.tags = ['transformador']
+handler.register = true
+handler.command = ['tourl','upload']
 export default handler
 
 function formatBytes(bytes) {
