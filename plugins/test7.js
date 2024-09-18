@@ -99,6 +99,6 @@ try {
 }
 handler.help = ['ytsearch']
 handler.tags = ['buscador']
-handler.command = ['playlist8', 'ytbuscar', 'yts', 'ytsearch']
+handler.command = ['playlist888', 'ytbuscar', 'yts', 'ytsearch']
 
 handler.register = true
