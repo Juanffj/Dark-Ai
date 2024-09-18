@@ -69,7 +69,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
                 },
                 interactiveMessage: proto.Message.InteractiveMessage.fromObject({
                     body: proto.Message.InteractiveMessage.Body.create({
-                        text: "*`\Resultados De:\`* ${text}"
+                        text: "*`\Resultados De Tu Búsqueda\`*"
                     }),
                     footer: proto.Message.InteractiveMessage.Footer.create({
                         text: '_\`ʏ\` \`ᴛ\` \`-\` \`ꜱ\` \`ᴇ\` \`ᴀ\` \`ʀ\` \`ᴄ\` \`ʜ\`_' // Sesuaikan dengan watermark Anda
