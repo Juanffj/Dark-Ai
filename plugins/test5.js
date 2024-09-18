@@ -42,7 +42,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
                 text: `🎬 *Título:* ${video.title}\n⌛ *Duración:* ${video.timestamp}\n👀 *Vistas:* ${video.views}\n🔗 *Link:* ${video.url}`
             }),
             footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                text: '乂 Y O U T U B E' // Sesuaikan dengan watermark Anda
+                text: '*[ GenesisBot By Angel-OFC ]*' // Sesuaikan dengan watermark Anda
             }),
             header: proto.Message.InteractiveMessage.Header.fromObject({
                 title: `Video - ${i++}`,
