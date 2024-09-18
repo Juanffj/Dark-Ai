@@ -72,7 +72,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
                         text: "Resultados de la búsqueda completos..."
                     }),
                     footer: proto.Message.InteractiveMessage.Footer.create({
-                        text: '乂 Y O U T U B E' // Sesuaikan dengan watermark Anda
+                        text: '*[ GenesisBot By Angel-OFC ]*' // Sesuaikan dengan watermark Anda
                     }),
                     header: proto.Message.InteractiveMessage.Header.create({
                         hasMediaAttachment: false
