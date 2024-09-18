@@ -90,7 +90,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     await conn.relayMessage(m.chat, bot.message, { messageId: bot.key.id });
 }
 
-handler.help = ["ytslide <text>"];
+handler.help = ["ytsearch2 <text>"];
 handler.tags = ["buscador"];
 handler.command = /^(ytsearch2|yts2)$/i
 
