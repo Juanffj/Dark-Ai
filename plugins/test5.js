@@ -39,13 +39,13 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       let pr = await remini(imageB, "enhance")
         push.push({
             body: proto.Message.InteractiveMessage.Body.fromObject({
-                text: `🎬 *Título:* ${video.title}\n⌛ *Duración:* ${video.timestamp}\n👀 *Vistas:* ${video.views}\n🔗 *Link:* ${video.url}`
+                text: `\n🎬 *Título:* ${video.title}\n⌛ *Duración:* ${video.timestamp}\n👀 *Vistas:* ${video.views}\n🔗 *Link:* ${video.url}`
             }),
             footer: proto.Message.InteractiveMessage.Footer.fromObject({
                 text: '*[ GenesisBot By Angel-OFC ]*' // Sesuaikan dengan watermark Anda
             }),
             header: proto.Message.InteractiveMessage.Header.fromObject({
-                title: `Video - ${i++}`,
+                title: `\`[ YOUTUBE - SEARCH ]\``,
                 hasMediaAttachment: true,
                 imageMessage: await createImage(pr) // Thumbnail video
             }),
