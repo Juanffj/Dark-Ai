@@ -80,20 +80,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
                     carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
                         cards: [...push] // Mengisi carousel dengan hasil video
                     })
-                    contextInfo: {
-									mentionedJid: [m.sender],
-									forwardingScore: 999,
-									isForwarded: true,
-									forwardedNewsletterMessageInfo: {
-										newsletterJid: "120363220939514640@newsletter",
-										newsletterName: "𝑮𝒆𝒏𝒆𝒔𝒊𝒔-𝑩𝒐𝒕 - 𝑪𝒉𝒂𝒏𝒏𝒆𝒍",
-										serverMessageId: 143
-									}
-								}
+                    
                 })
             }
         }
-    }, {fakegif3});
+    }, {});
 
     await conn.relayMessage(m.chat, bot.message, { messageId: bot.key.id });
 }
