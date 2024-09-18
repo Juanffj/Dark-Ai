@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 
 let handler = async (m) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let pp = await conn.profilePictureUrl(who).catch(_ => icons.getRandom())
+let pp = 'https://i.ibb.co/72Wvs3D/file.jpg',
 let alok = {
         key : {
                           participant : '0@s.whatsapp.net'
