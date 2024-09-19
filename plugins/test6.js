@@ -55,7 +55,7 @@ async function pixivDl(query) {
     } else {
         let res = await pixiv.getIllustsByTag(query);
         if (!res.length) return null;
-        const randomIllustIds = res.sort(() => Math.random() - Math.random()).slice(0, 6).map(v => v.id); // Obtener hasta 6 IDs aleatorios
+        const randomIllustIds = res.sort(() => Math.random() - Math.random()).slice(0, 5).map(v => v.id); // Obtener hasta 6 IDs aleatorios
         const media = [];
 
         for (const id of randomIllustIds) {
