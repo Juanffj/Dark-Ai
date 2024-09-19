@@ -11,11 +11,18 @@ let handler = async (m, { conn, text }) => {
         let res = await pixivDl(text);
         if (!res) return m.reply('Resultados no encontrados.');
 
+        const caption = `*» Nombre :* ${res.caption}\n*» Subido por :* ${res.artist}\n*» Tags* : ${res.tags.join(', ')}`;
         const messages = [];
-        for (let i = 0; i < res.media.length; i++) {
-            let caption = i == 0 ? `*» Nombre :* ${res.caption}\n*» Subido por :* ${res.artist}\n*» Tags* : ${res.tags.join(', ')}` : '';
+
+        // Obtener un máximo de 6 imágenes aleatorias
+        const numImages = Math.min(res.media.length, 6);
+        const randomIndices = Array.from({ length: res.media.length }, (_, i) => i)
+            .sort(() => Math.random() - Math.random())
+            .slice(0, numImages);
+
+        for (let i of randomIndices) {
             let mime = (await fileTypeFromBuffer(res.media[i])).mime;
-            messages.push([`Imagen ${i + 1}`, caption, res.media[i], [[]], [[]], [[]], [[]]]);
+            messages.push([`Imagen ${messages.length + 1}`, caption, res.media[i], [[]], [[]], [[]], [[]]]);
         }
 
         await m.react('✅');
@@ -29,7 +36,7 @@ let handler = async (m, { conn, text }) => {
 
 handler.help = ['pixiv *<búsqueda>*'];
 handler.tags = ['search'];
-handler.command = /^(pixivvv|pixivdl)$/i;
+handler.command = /^(pixibgv|pixivdl)$/i;
 handler.register = true;
 
 export default handler;
@@ -48,12 +55,20 @@ async function pixivDl(query) {
     } else {
         let res = await pixiv.getIllustsByTag(query);
         if (!res.length) return null;
-        res = res[~~(Math.random() * res.length)].id;
-        res = await pixiv.getIllustByID(res);
-        let media = [];
-        for (let x = 0; x < res.urls.length; x++) media.push(await pixiv.download(new URL(res.urls[x].original)));
+        const randomIllustIds = res.sort(() => Math.random() - Math.random()).slice(0, 6).map(v => v.id); // Obtener hasta 6 IDs aleatorios
+        const media = [];
+
+        for (const id of randomIllustIds) {
+            let illust = await pixiv.getIllustByID(id);
+            if (illust) {
+                for (let x = 0; x < illust.urls.length; x++) {
+                    media.push(await pixiv.download(new URL(illust.urls[x].original)));
+                }
+            }
+        }
+
         return {
-            artist: res.user.name, caption: res.title, tags: res.tags.tags.map(v => v.tag), media
+            artist: illust.user.name, caption: illust.title, tags: illust.tags.tags.map(v => v.tag), media
         };
     }
 }
