@@ -3,13 +3,16 @@ import fetch from 'node-fetch';
 import { youtubedl, youtubedlv2 } from '@bochilteam/scraper';
 import search from 'yt-search';
 
+// Función para buscar en Spotify a través de un proxy o API pública
 async function spotifySearch(query) {
-    let token = await getToken();
-    let response = await axios.get(`https://api.spotify.com/v1/search?q=`, {
-        headers: { Authorization: 'Bearer ' + token },
+    const response = await axios.get(`https://api.spottyapi.com/v1/search`, {
+        params: {
+            q: query,
+            type: 'track',
+        }
     });
 
-    const tracks = response.data.tracks.items;
+    const tracks = response.data.tracks;
     return tracks.map((track) => ({
         name: track.name,
         artist: track.artists.map((artist) => artist.name).join(', '),
@@ -20,22 +23,14 @@ async function spotifySearch(query) {
     }));
 }
 
-async function getToken() {
-    const response = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: 'Basic ' + Buffer.from('CLIENT_ID:CLIENT_SECRET').toString('base64'),
-        },
-    });
-    return response.data.access_token;
-}
-
-function formatDuration(time) {
-    const minutes = Math.floor(time / 60000);
-    const seconds = Math.floor((time % 60000) / 1000);
+// Formatear duración
+function formatDuration(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
+// Búsqueda en YouTube
 async function searchYouTube(query) {
     const { all: [bestItem, ...moreItems] } = await search(query);
     return {
@@ -58,7 +53,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
         const buttons = [];
 
-        // Spotify results
+        // Resultados de Spotify
         if (spotifyResults.length) {
             const res = spotifyResults[0];
             buttons.push({
@@ -68,7 +63,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             });
         }
 
-        // YouTube results
+        // Resultados de YouTube
         youtubeResults.videoItems.forEach((item, index) => {
             buttons.push({
                 buttonId: `ytplay ${item.url}`,
@@ -94,7 +89,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.help = ['spotify <cancion>', 'ytsearch <cancion>'];
 handler.tags = ['search', 'dl'];
-handler.command = /^(spotifytgf|music|ytsearch)$/i;
+handler.command = /^(spotify|music|ytsearch)$/i;
 handler.register = true;
 
 export default handler;
