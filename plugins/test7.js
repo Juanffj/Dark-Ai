@@ -1,6 +1,17 @@
 // By Jtxs 🐢
 import fetch from 'node-fetch';
-import { prepareWAMessageMedia, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys';
+import fs from 'fs/promises';
+import path from 'path';
+import axios from 'axios';
+import FormData from "form-data";
+import Jimp from "jimp";
+const {
+  proto,
+  generateWAMessageFromContent,
+  prepareWAMessageMedia,
+  generateWAMessageContent,
+  getDevice
+} = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (m, { conn, command, text, usedPrefix }) => {
     if (!text) return conn.reply(m.chat, '*Ingresa el texto de lo que quieres buscar en YouTube Music*', m);
