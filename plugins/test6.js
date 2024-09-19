@@ -5,7 +5,7 @@ import search from 'yt-search';
 
 // Función para buscar en Spotify a través de un proxy o API pública
 async function spotifySearch(query) {
-    const response = await axios.get(`https://api.spottyapi.com/v1/search`, {
+    const response = await axios.get(`https://api.spotify.com/v1/search?q=`, {
         params: {
             q: query,
             type: 'track',
