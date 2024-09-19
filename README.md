@@ -55,6 +55,9 @@
 - **Dashboard:** [`Aquí`](https://control.azuraultra-host.pro/)
 - **Panel:** [`Aquí`](https://control.azuraultra-host.pro/)
 - **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029VaWABAMG8l5K8K9PAB3v)
+
+<a href="https://store.azuraultra-host.pro/login"><img src="https://qu.ax/lgUn.jpg" height="125px"></a>
+
 </details>
 
 ### **`TK HOST 📲`**
