@@ -23,6 +23,9 @@ let handler = async (m, { command, conn }) => {
     // Obtener imágenes de la API
     for (let i = 0; i < imageCount; i++) {
       const res = await fetch('https://api.waifu.pics/sfw/waifu');
+  const data = await response.json();
+  return data.url; // Devuelve la URL de la imagen
+};
       if (!res.ok) throw new Error('Error al obtener imagen de waifu');
       const json = await res.json();
       if (!json.url) throw new Error('No se encontró la URL de la imagen');
