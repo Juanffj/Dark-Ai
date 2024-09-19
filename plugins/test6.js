@@ -1,6 +1,7 @@
-import { URL_REGEX } from '@whiskeysockets/baileys';
-import { fileTypeFromBuffer } from 'file-type';
-import { Pixiv } from '@ibaraki-douji/pixivts';
+import { URL_REGEX } from '@whiskeysockets/baileys'
+import { fileTypeFromBuffer } from 'file-type'
+import { Pixiv } from '@ibaraki-douji/pixivts'
+const pixiv = new Pixiv()
 import { prepareWAMessageMedia, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys';
 const pixiv = new Pixiv();
 
