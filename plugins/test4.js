@@ -1,60 +1,43 @@
 import fetch from 'node-fetch';
-import axios from 'axios';
 import {
   proto,
   generateWAMessageFromContent,
   prepareWAMessageMedia
 } from "@whiskeysockets/baileys";
 
-let handler = async (m, { command, conn }) => {
+let handler = async (m, { conn }) => {
   await m.react('🕒');
 
   try {
-    // Fetching the Waifu image
-    const waifuRes = await fetch('https://api.waifu.pics/sfw/waifu');
-    if (!waifuRes.ok) return;
-    const waifuJson = await waifuRes.json();
-    if (!waifuJson.url) return;
+    // Número de imágenes a solicitar
+    const imageCount = 10;
+    const results = [];
 
-    // Fetching additional images
-    const animeRes = await axios.get(`https://raw.githubusercontent.com/WOTCHITA/YaemoriBot-MD/master/src/JSON/anime-${command}.json`);
-    const animeImages = animeRes.data;
-
-    if (!Array.isArray(animeImages) || animeImages.length === 0) {
-      throw new Error('No se encontraron imágenes');
-    }
-
-    // Shuffle and select images
-    const shuffleArray = (array) => {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    };
-    shuffleArray(animeImages);
-    const selectedImages = [waifuJson.url, ...animeImages.slice(0, 9)]; // Add the waifu image and 9 more
-
-    // Prepare the carousel results
-    const results = await Promise.all(selectedImages.map(async (imageUrl) => {
-      const imageResponse = await fetch(imageUrl);
-      if (!imageResponse.ok) throw new Error('Error al descargar la imagen');
-      const mediaMessage = await prepareWAMessageMedia({ image: imageUrl }, { upload: conn.waUploadToServer });
-      return {
+    // Obtener imágenes de la API
+    for (let i = 0; i < imageCount; i++) {
+      const res = await fetch('https://api.waifu.pics/sfw/waifu');
+      if (!res.ok) throw new Error('Error al obtener imagen de waifu');
+      const json = await res.json();
+      if (!json.url) throw new Error('No se encontró la URL de la imagen');
+      
+      // Preparar el mensaje de la imagen
+      const mediaMessage = await prepareWAMessageMedia({ image: json.url }, { upload: conn.waUploadToServer });
+      results.push({
         body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
         footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '*[ GenesisBot By Angel-OFC ]*' }),
         header: proto.Message.InteractiveMessage.Header.fromObject({
-          title: '*Imagen*',
+          title: '*Imagen de Waifu*',
           hasMediaAttachment: true,
           imageMessage: mediaMessage.imageMessage
         }),
-      };
-    }));
+      });
+    }
 
-    // Send the carousel message
+    // Enviar el mensaje en carrusel
     const messageContent = generateWAMessageFromContent(m.chat, {
       interactiveMessage: proto.Message.InteractiveMessage.fromObject({
         body: proto.Message.InteractiveMessage.Body.create({
-          text: `🤍 \`${command}\` 🤍`
+          text: `🤍 Waifus para ti 🤍`
         }),
         footer: proto.Message.InteractiveMessage.Footer.create({
           text: "_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_"
