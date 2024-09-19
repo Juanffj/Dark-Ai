@@ -12,42 +12,80 @@ const {
   getDevice
 } = (await import("@whiskeysockets/baileys")).default;
 
-let handler = async (m, { command, conn }) => {
-  await m.react('🕒');
+let handler = async (m, { conn, command, text, usedPrefix }) => {
+    if (!text) return conn.reply(m.chat, '*Ingresa el texto de lo que quieres buscar en YouTube Music*', m);
+    await m.react('🕒');
 
-  try {
-    // Número de imágenes a solicitar
-    const imageCount = 10;
-    const messages = [];
+    try {
+        let api = await fetch(`https://apis-starlights-team.koyeb.app/starlight/youtube-music-search?text=${encodeURIComponent(text)}`);
+        let json = await api.json();
+        if (!Array.isArray(json) || json.length === 0) return conn.reply(m.chat, 'No se encontraron resultados.', m);
 
-    // Obtener imágenes de la API
-    for (let i = 0; i < imageCount; i++) {
-      const res = await fetch('https://api.waifu.pics/sfw/waifu');
-      if (!res.ok) throw new Error('Error al obtener imagen de waifu');
-      const json = await res.json();
-      if (!json.url) throw new Error('No se encontró la URL de la imagen');
+        let results = [];
 
-      // Preparar el mensaje
-      const caption = ``;
-      messages.push([caption, '*[ GenesisBot By Angel-OFC ]*', json.url, [[]], [[]], [[]], [[]]]);
+        // Preparar los mensajes de cada resultado para el carrusel
+        for (let i = 0; i < json.length; i++) {
+            const mediaMessage = await prepareWAMessageMedia({ image: json[i].thumbnail }, { upload: conn.waUploadToServer });
+            results.push({
+                body: proto.Message.InteractiveMessage.Body.fromObject({
+                    text: `*Título:* ${json[i].title}\n*Artista:* ${json[i].artists.join(', ')}\n*Álbum:* ${json[i].album}\n*Duración:* ${json[i].duration.label}\n*Url:* ${json[i].link}`
+                }),
+                footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '*[ GenesisBot By Angel-OFC ]*' }),
+                header: proto.Message.InteractiveMessage.Header.fromObject({
+                    title: `*\`Nro: ${i + 1}\`*`,
+                    hasMediaAttachment: true,
+                    imageMessage: mediaMessage.imageMessage
+                }),
+                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] }),
+            });
+        }
+
+        // Enviar el mensaje en carrusel
+        const messageContent = generateWAMessageFromContent(m.chat, {
+            viewOnceMessage: {
+                message: {
+                    messageContextInfo: {
+                        deviceListMetadata: {},
+                        deviceListMetadataVersion: 2
+                    },
+                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+                        body: proto.Message.InteractiveMessage.Body.create({
+                            text: `🤍 \`${command}\` 🤍`
+                        }),
+                        footer: proto.Message.InteractiveMessage.Footer.create({
+                            text: "_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_"
+                        }),
+                        header: proto.Message.InteractiveMessage.Header.create({
+                            hasMediaAttachment: false
+                        }),
+                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+                            cards: results
+                        }),
+                        contextInfo: {
+                            mentionedJid: [m.sender],
+                            forwardingScore: 999,
+                            isForwarded: true,
+                        }
+                    })
+                }
+            }
+        }, {
+            quoted: m
+        });
+
+        await conn.sendMessage(m.chat, messageContent, { quoted: m });
+        await m.react('✅');
+
+    } catch (error) {
+        console.error(error);
+        conn.reply(m.chat, 'Error al procesar la solicitud', m);
+        await m.react('✖️');
     }
-
-    // mensajes para enviarlos de forma random 
-    const shuffledMessages = messages.sort(() => 0.5 - Math.random());
-
-    // Enviar el carrusel
-    await m.react('✅');
-    await conn.sendCarousel(m.chat, '*\`[ W A I F U - P I C S ]\`*\n', `_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_`, command, shuffledMessages, null);
-
-  } catch (error) {
-    console.error(error);
-    conn.reply(m.chat, 'Error al procesar la solicitud', m);
-  }
 };
 
-handler.help = ['waifu'];
-handler.tags = ['anime'];
-handler.command = ['waifu'];
-handler.register = true;
+handler.help = ['ytmssearch <txt>'];
+handler.estrellas = 1;
+handler.tags = ['search'];
+handler.command = ['youtubemusicsearch', 'ytmssearch'];
 
 export default handler;
