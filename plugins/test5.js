@@ -1,16 +1,9 @@
 import fetch from 'node-fetch';
-import fs from 'fs/promises';
-import path from 'path';
-import axios from 'axios';
-import FormData from "form-data"
-import Jimp from "jimp"
-const {
+import {
   proto,
   generateWAMessageFromContent,
-  prepareWAMessageMedia,
-  generateWAMessageContent,
-  getDevice
-} = (await import("@whiskeysockets/baileys")).default;
+  prepareWAMessageMedia
+} from "@whiskeysockets/baileys";
 
 let handler = async (m, { command, conn }) => {
   await m.react('🕒');
