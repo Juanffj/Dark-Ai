@@ -19,7 +19,6 @@ let handler = async (m, { command, conn }) => {
     // Número de imágenes a solicitar
     const imageCount = 10;
     const messages = [];
-    let capt = `*[ GenesisBot By Angel-OFC ]*`
 
     // Obtener imágenes de la API
     for (let i = 0; i < imageCount; i++) {
@@ -30,7 +29,7 @@ let handler = async (m, { command, conn }) => {
 
       // Preparar el mensaje
       const caption = `Imagen ${i + 1}`;
-      messages.push([caption, 'capt', json.url, [[]], [[]], [[]], [[]]]);
+      messages.push([caption, '*[ GenesisBot By Angel-OFC ]*', json.url, [[]], [[]], [[]], [[]]]);
     }
 
     // Enviar el carrusel
