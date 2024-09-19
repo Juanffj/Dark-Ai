@@ -37,7 +37,7 @@ let handler = async (m, { command, conn }) => {
 
     // Enviar el carrusel
     await m.react('✅');
-    await conn.sendCarousel(m.chat, '*\`[ W A I F U - P I C S ]\`*', `_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_`, command, shuffledMessages, null);
+    await conn.sendCarousel(m.chat, '*\`[ W A I F U - P I C S ]\`*\n', `_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_`, command, shuffledMessages, null);
 
   } catch (error) {
     console.error(error);
