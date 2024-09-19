@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+/* import fetch from 'node-fetch'
 
 let handler = async (m, { conn, usedPrefix, command }) => {
 try {
@@ -20,4 +20,4 @@ handler.help = ['waifu']
 handler.tags = ['anime']
 handler.command = ['waifu']
 handler.register = true 
-export default handler
+export default handler */
