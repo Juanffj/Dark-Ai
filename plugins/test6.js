@@ -51,7 +51,7 @@ const handler = async (m, { conn, usedPrefix, args, command }) => {
 
 handler.help = ['spotifysearch *<text>*'];
 handler.tags = ['dl'];
-handler.command = /^spotifysearch|spbuscar$/i;
+handler.command = /^spotifysearchtg|spbuscar$/i;
 handler.register = true;
 handler.estrellas = 2;
 
