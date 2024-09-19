@@ -10,7 +10,7 @@ let handler = async (m, { command, conn }) => {
 
   try {
     // Número de imágenes a solicitar
-    const imageCount = 10;
+    const imageCount = 6;
     const results = [];
 
     // Obtener imágenes de la API
