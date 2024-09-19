@@ -19,7 +19,7 @@ let handler = async (m, { conn, text }) => {
         }
 
         await m.react('✅');
-        await conn.sendCarousel(m.chat, '🤍 Buscador - Imágenes', `🔍 Resultado de: ${text}`, text, messages, fakegif3);
+        await conn.sendCarousel(m.chat, '🤍 Buscador - Imágenes', `🔍 Resultado de: ${text}`, text, messages, fakegif3, null, rcanal);
 
     } catch {
         await m.react('✖️');
