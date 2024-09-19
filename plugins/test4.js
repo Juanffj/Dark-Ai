@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+/* import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import path from 'path';
 import axios from 'axios';
@@ -91,4 +91,4 @@ handler.tags = ['anime'];
 handler.command = ['waifu'];
 handler.register = true;
 
-export default handler;
+export default handler; */
