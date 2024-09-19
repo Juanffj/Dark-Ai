@@ -86,6 +86,6 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
 handler.help = ['ytmssearch <txt>'];
 handler.estrellas = 1;
 handler.tags = ['search'];
-handler.command = ['youtubemusicsearch', 'ytmssearch'];
+handler.command = ['youtubemusichgt', 'ytmssearch'];
 
 export default handler;
