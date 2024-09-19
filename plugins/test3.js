@@ -66,7 +66,7 @@ let handler = async(m, { conn, usedPrefix, command, text }) => {
         },
         interactiveMessage: proto.Message.InteractiveMessage.fromObject({
           body: proto.Message.InteractiveMessage.Body.create({
-            text: `Resultados de *${text}*`
+            text: `🤍 *\`Resultados de:\`* ${text}`
           }),
           footer: proto.Message.InteractiveMessage.Footer.create({
             text: '_\`ᴛ\` \`ᴛ\` \`-\` \`ꜱ\` \`ᴇ\` \`ᴀ\` \`ʀ\` \`ᴄ\` \`ʜ\`_',
