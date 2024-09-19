@@ -89,7 +89,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.help = ['spotify <cancion>', 'ytsearch <cancion>'];
 handler.tags = ['search', 'dl'];
-handler.command = /^(spotify|music|ytsearch)$/i;
+handler.command = /^(spotifytgd|music|ytsearch)$/i;
 handler.register = true;
 
 export default handler;
