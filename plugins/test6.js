@@ -15,7 +15,7 @@ let handler = async (m, { conn, text }) => {
         const messages = [];
 
         // Obtener un máximo de 6 imágenes aleatorias
-        const numImages = Math.min(res.media.length, 6);
+        const numImages = Math.min(res.media.length, 5);
         const randomIndices = Array.from({ length: res.media.length }, (_, i) => i)
             .sort(() => Math.random() - Math.random())
             .slice(0, numImages);
