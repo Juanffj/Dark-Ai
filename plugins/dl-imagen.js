@@ -11,10 +11,9 @@ let handler = async (m, { conn, text }) => {
         let res = await pixivDl(text);
         if (!res) return m.reply('Resultados no encontrados.');
 
-        const caption = `*» Nombre :* ${res.caption}\n*» Subido por :* ${res.artist}\n*» Tags* : ${res.tags.join(', ')}`;
         const messages = [];
-
         for (let i = 0; i < res.media.length; i++) {
+            let caption = i == 0 ? `*» Nombre :* ${res.caption}\n*» Subido por :* ${res.artist}\n*» Tags* : ${res.tags.join(', ')}` : '';
             let mime = (await fileTypeFromBuffer(res.media[i])).mime;
             messages.push([`Imagen ${i + 1}`, caption, res.media[i], [[]], [[]], [[]], [[]]]);
         }
@@ -30,7 +29,7 @@ let handler = async (m, { conn, text }) => {
 
 handler.help = ['pixiv *<búsqueda>*'];
 handler.tags = ['search'];
-handler.command = /^(pixivvf|pixivdl)$/i;
+handler.command = /^(pixiv|pixivdl)$/i;
 handler.register = true;
 
 export default handler;
