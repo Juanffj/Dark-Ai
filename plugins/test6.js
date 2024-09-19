@@ -1,95 +1,103 @@
-import axios from 'axios';
-import fetch from 'node-fetch';
-import { youtubedl, youtubedlv2 } from '@bochilteam/scraper';
-import search from 'yt-search';
+import { URL_REGEX } from '@whiskeysockets/baileys';
+import { fileTypeFromBuffer } from 'file-type';
+import { Pixiv } from '@ibaraki-douji/pixivts';
+import { prepareWAMessageMedia, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys';
+const pixiv = new Pixiv();
 
-// Función para buscar en Spotify a través de un proxy o API pública
-async function spotifySearch(query) {
-    const response = await axios.get(`https://accounts.spotify.com/api/token`, {
-        params: {
-            q: query,
-            type: 'track',
-        }
-    });
-
-    const tracks = response.data.tracks;
-    return tracks.map((track) => ({
-        name: track.name,
-        artist: track.artists.map((artist) => artist.name).join(', '),
-        album: track.album.name,
-        duration: formatDuration(track.duration_ms),
-        url: track.external_urls.spotify,
-        image: track.album.images.length ? track.album.images[0].url : '',
-    }));
-}
-
-// Formatear duración
-function formatDuration(ms) {
-    const minutes = Math.floor(ms / 60000);
-    const seconds = Math.floor((ms % 60000) / 1000);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
-
-// Búsqueda en YouTube
-async function searchYouTube(query) {
-    const { all: [bestItem, ...moreItems] } = await search(query);
-    return {
-        bestItem,
-        videoItems: moreItems.filter(item => item.type === 'video'),
-    };
-}
-
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `⊱ *${usedPrefix + command} Bellyache*`;
+let handler = async (m, { conn, text }) => {
+    if (!text) return m.reply('🤍 *`INGRESA NOMBRE DE LA IMG`*');
+    await m.react('🕓');
 
     try {
-        m.react('🕒');
-        const spotifyResults = await spotifySearch(text);
-        const youtubeResults = await searchYouTube(text);
+        let res = await pixivDl(text);
+        if (!res) return m.reply('No se encontraron resultados.');
 
-        if (!spotifyResults.length && !youtubeResults.videoItems.length) {
-            throw `*No se encontró ninguna canción o video.*`;
-        }
-
-        const buttons = [];
-
-        // Resultados de Spotify
-        if (spotifyResults.length) {
-            const res = spotifyResults[0];
-            buttons.push({
-                buttonId: `play ${res.url}`,
-                buttonText: { displayText: `🎶 ${res.name} - ${res.artist}` },
-                type: 1,
+        let results = [];
+        for (let i = 0; i < res.media.length; i++) {
+            const mediaMessage = await prepareWAMessageMedia({ image: res.media[i] }, { upload: conn.waUploadToServer });
+            results.push({
+                body: proto.Message.InteractiveMessage.Body.fromObject({
+                    text: `*» Nombre:* ${res.caption}\n*» Subido por:* ${res.artist}\n*» Tags:* ${res.tags.join(', ')}`
+                }),
+                footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '*[ Pixiv Search ]*' }),
+                header: proto.Message.InteractiveMessage.Header.fromObject({
+                    title: `*Imagen ${i + 1}*`,
+                    hasMediaAttachment: true,
+                    imageMessage: mediaMessage.imageMessage
+                }),
+                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] }),
             });
         }
 
-        // Resultados de YouTube
-        youtubeResults.videoItems.forEach((item, index) => {
-            buttons.push({
-                buttonId: `ytplay ${item.url}`,
-                buttonText: { displayText: `${index + 1}. ${item.title}` },
-                type: 1,
-            });
+        // Enviar el mensaje en carrusel
+        const messageContent = generateWAMessageFromContent(m.chat, {
+            viewOnceMessage: {
+                message: {
+                    messageContextInfo: {
+                        deviceListMetadata: {},
+                        deviceListMetadataVersion: 2
+                    },
+                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+                        body: proto.Message.InteractiveMessage.Body.create({
+                            text: `🤍 *Resultados de búsqueda para:* \`${text}\``
+                        }),
+                        footer: proto.Message.InteractiveMessage.Footer.create({
+                            text: "_\`Pixiv Search\`_"
+                        }),
+                        header: proto.Message.InteractiveMessage.Header.create({
+                            hasMediaAttachment: false
+                        }),
+                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+                            cards: results
+                        }),
+                        contextInfo: {
+                            mentionedJid: [m.sender],
+                            forwardingScore: 999,
+                            isForwarded: true,
+                        }
+                    })
+                }
+            }
+        }, {
+            quoted: m
         });
 
-        const buttonMessage = {
-            text: `Resultados encontrados:\n\nSpotify:\n- ${spotifyResults[0]?.name || 'No disponible'}\n\nYouTube:\n${youtubeResults.videoItems.map((item, i) => `${i + 1}. ${item.title}`).join('\n')}`,
-            footer: 'Selecciona un resultado',
-            buttons,
-            headerType: 1,
-        };
+        await conn.sendMessage(m.chat, messageContent, { quoted: m });
+        await m.react('✅');
 
-        await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
-        m.react('✅');
-    } catch (error) {
-        console.error(error);
-        conn.reply(m.chat, `Ocurrió un error: ${error.message}`, m);
+    } catch {
+        await m.react('✖️');
+        m.reply('Ocurrió un error.');
     }
 };
 
-handler.help = ['spotify <cancion>', 'ytsearch <cancion>'];
-handler.tags = ['search', 'dl'];
-handler.command = /^(spotifytgd|music|ytsearch)$/i;
+handler.help = ['pixiv *<búsqueda>*'];
+handler.tags = ['search'];
+handler.command = /^(pixivthg|pixivdl)$/i;
 handler.register = true;
 
 export default handler;
+
+async function pixivDl(query) {
+    if (query.match(URL_REGEX)) {
+        if (!/https:\/\/www.pixiv.net\/en\/artworks\/[0-9]+/i.test(query)) return null;
+        query = query.replace(/\D/g, '');
+        let res = await pixiv.getIllustByID(query).catch(() => null);
+        if (!res) return null; // Cambiar a 'null' para evitar enviar un mensaje si no se encuentra nada
+        let media = [];
+        for (let x = 0; x < res.urls.length; x++) media.push(await pixiv.download(new URL(res.urls[x].original)));
+        return {
+            artist: res.user.name, caption: res.title, tags: res.tags.tags.map(v => v.tag), media
+        };
+    } else {
+        let res = await pixiv.getIllustsByTag(query);
+        if (!res.length) return null; // Cambiar a 'null' para evitar enviar un mensaje si no se encuentra nada
+        res = res[~~(Math.random() * res.length)].id;
+        res = await pixiv.getIllustByID(res);
+        let media = [];
+        for (let x = 0; x < res.urls.length; x++) media.push(await pixiv.download(new URL(res.urls[x].original)));
+        return {
+            artist: res.user.name, caption: res.title, tags: res.tags.tags.map(v => v.tag), media
+        };
+    }
+}
