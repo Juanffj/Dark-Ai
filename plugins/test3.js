@@ -49,8 +49,8 @@ let handler = async(m, { conn, usedPrefix, command, text }) => {
       nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
         buttons: [
           {
-            "name": "quick_reply",
-            "buttonParamsJson": `{"display_text":"Buscar De Nuevo ","id":".ttsearchslide ${text}"}`
+            "name": "cta_url",
+            "buttonParamsJson": `{"display_text":"Canal","url":"${canal}"}`
           }
         ]
       })
