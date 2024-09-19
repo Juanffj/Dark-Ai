@@ -32,7 +32,7 @@ let handler = async (m, { command, conn }) => {
       messages.push([caption, '*[ GenesisBot By Angel-OFC ]*', json.url, [[]], [[]], [[]], [[]]]);
     }
 
-    // Barajar los mensajes para enviarlos de forma aleatoria
+    // mensajes para enviarlos de forma random 
     const shuffledMessages = messages.sort(() => 0.5 - Math.random());
 
     // Enviar el carrusel
