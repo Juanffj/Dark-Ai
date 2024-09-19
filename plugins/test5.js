@@ -28,7 +28,7 @@ let handler = async (m, { command, conn }) => {
       if (!json.url) throw new Error('No se encontró la URL de la imagen');
 
       // Preparar el mensaje
-      const caption = `Imagen ${i + 1}`;
+      const caption = ``;
       messages.push([caption, '*[ GenesisBot By Angel-OFC ]*', json.url, [[]], [[]], [[]], [[]]]);
     }
 
