@@ -50,7 +50,7 @@ let handler = async(m, { conn, usedPrefix, command, text }) => {
         buttons: [
           {
             "name": "quick_reply",
-            "buttonParamsJson": `{"display_text":"Buscar De Nuevo ","id":".ttsearchslide ${text}"}`
+            "buttonParamsJson": `{"display_text":"Buscar De Nuevo ","id":".ttsearchslide ${text}"}`
           }
         ]
       })
