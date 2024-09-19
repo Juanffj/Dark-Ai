@@ -5,7 +5,7 @@ import search from 'yt-search';
 
 async function spotifySearch(query) {
     let token = await getToken();
-    let response = await axios.get(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track`, {
+    let response = await axios.get(`https://api.spotify.com/v1/search?q=`, {
         headers: { Authorization: 'Bearer ' + token },
     });
 
