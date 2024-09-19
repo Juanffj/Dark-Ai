@@ -1,17 +1,19 @@
 import axios from 'axios';
 
 const searchSpotify = async (query) => {
-  const response = await axios.get(`https://api.spotify.com/v1/search`, {
-    params: {
-      q: query,
-      type: 'track',
-      limit: 5 // Número de resultados por búsqueda
-    },
-    headers: {
-      'Authorization': `Bearer YOUR_ACCESS_TOKEN` // Aquí puedes usar un token de acceso genérico
-    }
-  });
-  return response.data.tracks.items;
+  try {
+    const response = await axios.get(`https://api.spottyapi.com/v1/search`, {
+      params: {
+        q: query,
+        type: 'track',
+        limit: 5 // Número de resultados por búsqueda
+      }
+    });
+    return response.data.tracks; // Ajusta esto según la estructura de respuesta de la API
+  } catch (error) {
+    console.error('Error buscando en Spotify:', error);
+    throw new Error('Error al buscar en Spotify');
+  }
 };
 
 const handler = async (m, { conn, usedPrefix, args, command }) => {
@@ -24,7 +26,7 @@ const handler = async (m, { conn, usedPrefix, args, command }) => {
 
     const tracks = await searchSpotify(text);
 
-    if (tracks.length === 0) {
+    if (!tracks || tracks.length === 0) {
       return conn.reply(m.chat, `🤍 *No se encontraron resultados para:* ${text}`, m);
     }
 
