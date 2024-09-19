@@ -2,8 +2,8 @@ import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import path from 'path';
 import axios from 'axios';
-import FormData from "form-data"
-import Jimp from "jimp"
+import FormData from "form-data";
+import Jimp from "jimp";
 const {
   proto,
   generateWAMessageFromContent,
@@ -32,9 +32,12 @@ let handler = async (m, { command, conn }) => {
       messages.push([caption, '*[ GenesisBot By Angel-OFC ]*', json.url, [[]], [[]], [[]], [[]]]);
     }
 
+    // Barajar los mensajes para enviarlos de forma aleatoria
+    const shuffledMessages = messages.sort(() => 0.5 - Math.random());
+
     // Enviar el carrusel
     await m.react('✅');
-    await conn.sendCarousel(m.chat, '*\`[ W A I F U - P I C S ]\`*', `_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_`, command, messages, null);
+    await conn.sendCarousel(m.chat, '*\`[ W A I F U - P I C S ]\`*', `_\`ᴀ\` \`ɴ\` \`ɪ\` \`ᴍ\` \`ᴇ\` - \`2\` \`0\` \`2\` \`4\`_`, command, shuffledMessages, null);
 
   } catch (error) {
     console.error(error);
