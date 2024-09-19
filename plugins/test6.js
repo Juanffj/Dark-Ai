@@ -6,14 +6,18 @@ const pixiv = new Pixiv()
 let handler = async (m, { conn, text }) => {
     if (!text) return m.reply('🤍 *`INGRESA NOMBRE DE LA IMG`*')
     await m.react('🕓')
+    
     try {
         let res = await pixivDl(text)
         if (!res) return m.reply('Resultados no encontrados.')
-        
+
         let messages = []
         for (let i = 0; i < res.media.length; i++) {
             let mime = (await fileTypeFromBuffer(res.media[i])).mime 
-            messages.push([`Imagen ${i + 1}`, res.media[i], { caption: i == 0 ? `*» Nombre :* ${res.caption}\n*» Subido por :* ${res.artist}\n*» Tags* : ${res.tags.join(', ')}` : '', mimetype: mime }])
+            messages.push([`Imagen ${i + 1}`, res.media[i], {
+                caption: i === 0 ? `*» Nombre :* ${res.caption}\n*» Subido por :* ${res.artist}\n*» Tags :* ${res.tags.join(', ')}` : '',
+                mimetype: mime
+            }, [[]], [[]], [[]], [[]]]) // Add empty arrays as placeholders
         }
         
         await conn.sendCarousel(m.chat, `🚩 Resultado de ${text}`, '🔎 Imagen - Descargas', null, messages, m);
@@ -25,7 +29,7 @@ let handler = async (m, { conn, text }) => {
 
 handler.help = ['pixiv *<búsqueda>*']
 handler.tags = ['search']
-handler.command = /^(pixibvvv|pixivdl)$/i
+handler.command = /^(pixbbciv|pixivdl)$/i
 handler.register = true 
 export default handler
 
