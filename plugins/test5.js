@@ -30,7 +30,7 @@ let handler = async (m, { command, conn }) => {
 
       // Preparar el mensaje
       const caption = `Imagen ${i + 1}`;
-      messages.push([caption, '', json.url, [[]], [[]], [[]], [[]]]);
+      messages.push([caption, capt, '', json.url, [[]], [[]], [[]], [[]]]);
     }
 
     // Enviar el carrusel
