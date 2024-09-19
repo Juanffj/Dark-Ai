@@ -1,60 +1,100 @@
 import axios from 'axios';
+import fetch from 'node-fetch';
+import { youtubedl, youtubedlv2 } from '@bochilteam/scraper';
+import search from 'yt-search';
 
-const searchSpotify = async (query) => {
-  try {
-    const response = await axios.get(`https://api.spottyapi.com/v1/search`, {
-      params: {
-        q: query,
-        type: 'track',
-        limit: 5 // Número de resultados por búsqueda
-      }
+async function spotifySearch(query) {
+    let token = await getToken();
+    let response = await axios.get(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track`, {
+        headers: { Authorization: 'Bearer ' + token },
     });
-    return response.data.tracks; // Ajusta esto según la estructura de respuesta de la API
-  } catch (error) {
-    console.error('Error buscando en Spotify:', error);
-    throw new Error('Error al buscar en Spotify');
-  }
-};
 
-const handler = async (m, { conn, usedPrefix, args, command }) => {
-  try {
-    const text = args.length >= 1 ? args.join(" ") : (m.quoted?.text || m.quoted?.caption || m.quoted?.description) || null;
+    const tracks = response.data.tracks.items;
+    return tracks.map((track) => ({
+        name: track.name,
+        artist: track.artists.map((artist) => artist.name).join(', '),
+        album: track.album.name,
+        duration: formatDuration(track.duration_ms),
+        url: track.external_urls.spotify,
+        image: track.album.images.length ? track.album.images[0].url : '',
+    }));
+}
 
-    if (!text) {
-      return conn.reply(m.chat, `🤍 *Escriba el título de una canción de Spotify*\n\nEjemplo, ${usedPrefix + command} Génesis AI`, m);
-    }
+async function getToken() {
+    const response = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: 'Basic ' + Buffer.from('CLIENT_ID:CLIENT_SECRET').toString('base64'),
+        },
+    });
+    return response.data.access_token;
+}
 
-    const tracks = await searchSpotify(text);
+function formatDuration(time) {
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
 
-    if (!tracks || tracks.length === 0) {
-      return conn.reply(m.chat, `🤍 *No se encontraron resultados para:* ${text}`, m);
-    }
-
-    const bestTrack = tracks[0];
-    const formattedData = {
-      title: `\`[ SPOTIFY - SEARCH ]\`\n\n> 🤍 *\`Título:\`* ${bestTrack.name}\n> 🤍 *\`Artista:\`* ${bestTrack.artists.map(artist => artist.name).join(', ')}\n> 🤍 *\`Álbum:\`* ${bestTrack.album.name}\n> 🤍 *\`Url:\`* ${bestTrack.external_urls.spotify}`,
-      rows: tracks.map((track, index) => ({
-        header: `${index + 1}). ${track.name}`,
-        id: `play ${track.id}`, // Cambia esto por el comando que uses para reproducir
-        title: track.name,
-        description: track.artists.map(artist => artist.name).join(', ')
-      }))
+async function searchYouTube(query) {
+    const { all: [bestItem, ...moreItems] } = await search(query);
+    return {
+        bestItem,
+        videoItems: moreItems.filter(item => item.type === 'video'),
     };
+}
 
-    await conn.sendButtonMessages(m.chat, [
-      [formattedData.title, null, bestTrack.album.images[0]?.url || null, [], null, [[], [["ʀᴇꜱᴜʟᴛᴀᴅᴏꜜ🍂", formattedData.rows]]]]
-    ], m);
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) throw `⊱ *${usedPrefix + command} Bellyache*`;
 
-  } catch (error) {
-    console.error(error);
-    conn.reply(m.chat, `Ocurrió un error: ${error.message}`, m);
-  }
+    try {
+        m.react('🕒');
+        const spotifyResults = await spotifySearch(text);
+        const youtubeResults = await searchYouTube(text);
+
+        if (!spotifyResults.length && !youtubeResults.videoItems.length) {
+            throw `*No se encontró ninguna canción o video.*`;
+        }
+
+        const buttons = [];
+
+        // Spotify results
+        if (spotifyResults.length) {
+            const res = spotifyResults[0];
+            buttons.push({
+                buttonId: `play ${res.url}`,
+                buttonText: { displayText: `🎶 ${res.name} - ${res.artist}` },
+                type: 1,
+            });
+        }
+
+        // YouTube results
+        youtubeResults.videoItems.forEach((item, index) => {
+            buttons.push({
+                buttonId: `ytplay ${item.url}`,
+                buttonText: { displayText: `${index + 1}. ${item.title}` },
+                type: 1,
+            });
+        });
+
+        const buttonMessage = {
+            text: `Resultados encontrados:\n\nSpotify:\n- ${spotifyResults[0]?.name || 'No disponible'}\n\nYouTube:\n${youtubeResults.videoItems.map((item, i) => `${i + 1}. ${item.title}`).join('\n')}`,
+            footer: 'Selecciona un resultado',
+            buttons,
+            headerType: 1,
+        };
+
+        await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
+        m.react('✅');
+    } catch (error) {
+        console.error(error);
+        conn.reply(m.chat, `Ocurrió un error: ${error.message}`, m);
+    }
 };
 
-handler.help = ['spotifysearch *<text>*'];
-handler.tags = ['dl'];
-handler.command = /^spotifysearchtg|spbuscar$/i;
+handler.help = ['spotify <cancion>', 'ytsearch <cancion>'];
+handler.tags = ['search', 'dl'];
+handler.command = /^(spotifytgf|music|ytsearch)$/i;
 handler.register = true;
-handler.estrellas = 2;
 
 export default handler;
