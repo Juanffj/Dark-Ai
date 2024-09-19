@@ -19,6 +19,7 @@ let handler = async (m, { command, conn }) => {
     // Número de imágenes a solicitar
     const imageCount = 10;
     const messages = [];
+    let capt = `*[ GenesisBot By Angel-OFC ]*`
 
     // Obtener imágenes de la API
     for (let i = 0; i < imageCount; i++) {
