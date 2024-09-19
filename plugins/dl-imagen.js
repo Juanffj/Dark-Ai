@@ -30,7 +30,7 @@ let handler = async (m, { conn, text }) => {
 
 handler.help = ['pixiv *<búsqueda>*'];
 handler.tags = ['search'];
-handler.command = /^(pixiv|pixivdl)$/i;
+handler.command = /^(pixivvf|pixivdl)$/i;
 handler.register = true;
 
 export default handler;
