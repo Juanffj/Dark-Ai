@@ -30,7 +30,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args }) => {
         sections: [
             {
                 title: "🌸 Elaina AI",
-                rows: [{ title: "Descargar Video", description: "", id: '.rules' }]
+                rows: [{ title: "Descargar Video", description: "", id: '.tiktok3 rules' }]
             },
             {
                 title: "",
