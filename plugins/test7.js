@@ -224,6 +224,6 @@ let handler = async (m, { conn, usedPrefix, command, text, args }) => {
 
 handler.help = ['tiktok','tiktok2','tiktokmp3','tiktokmp4','ttsearchslide'];
 handler.tags = ['main']
-handler.command = ['tiktok','tiktok2','tiktokmp3','tiktokmp4','ttsearchslide'];
+handler.command = ['tiktok'];
 
 export default handler
