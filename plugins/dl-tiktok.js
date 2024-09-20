@@ -1,6 +1,6 @@
 //creditos a kenisawa Dev
 //modificaciones Angel-OFC
-/* import { ttdl } from 'ruhend-scraper';
+import { ttdl } from 'ruhend-scraper';
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
  if (!args || !args[0]) return conn.reply(m.chat, '*\`Ingresa El link Del vídeo a descargar 🤍\`*', m, fake, )
@@ -49,6 +49,6 @@ txt += `> 🤍 *\`» Publicado :\`* ${published || '❌'}\n\n`;
 handler.help = ['tiktok3 *<link>*']
 handler.corazones = 3
 handler.tags = ['dl']
-handler.command = /^(tiktok)$/i;
+handler.command = /^(tiktok3)$/i;
 
-export default handler; */
+export default handler;
