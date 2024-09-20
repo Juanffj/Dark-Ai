@@ -1,7 +1,7 @@
 // Coded by KenisawaDev 
 // ======================
 
-/* import axios from 'axios';
+import axios from 'axios';
 import cheerio from 'cheerio';
 
 let handler = async (m, { conn, text, args, command, usedPrefix }) => {
@@ -98,4 +98,4 @@ handler.help = ['tiktokimg <url>']
 handler.tags = ['dl']
 handler.command = /^(ttimg|tiktokimg)$/i
 
-export default handler */
+export default handler
