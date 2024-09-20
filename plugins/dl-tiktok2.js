@@ -1,4 +1,4 @@
-/* import axios from "axios";
+import axios from "axios";
 import FormData from "form-data";
 import cheerio from "cheerio";
 
@@ -77,4 +77,4 @@ async function tiktokdl(url) {
     }
 
     return result;
-} */
+}
