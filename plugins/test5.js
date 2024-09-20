@@ -1,3 +1,5 @@
+// Modificado por: Angel-OFC 
+// si lo tomas respeta créditos
 import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import path from 'path';
