@@ -1,5 +1,5 @@
-const { generateWAMessageFromContent, prepareWAMessageMedia,  proto, generateWAMessageContent  } = (await import("@whiskeysockets/baileys")).defaultimport
 import { ttdl } from 'ruhend-scraper';
+const { generateWAMessageFromContent, prepareWAMessageMedia,  proto, generateWAMessageContent  } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (m, { conn, usedPrefix, command, text, args }) => {
     const creador_code = 'KenisawaDev';
