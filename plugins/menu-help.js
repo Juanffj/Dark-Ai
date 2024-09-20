@@ -110,7 +110,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
                 id: `${usedPrefix}menuai`,
             },
             {
-                header: "𝗥𝗘𝗗𝗘𝗦 𝗠𝗮𝘅-𝗕𝗼𝘁 🍄",
+                header: "𝗥𝗘𝗗𝗘𝗦 🍄",
                 title: "",
                 description: `𝘔𝘶𝘦𝘴𝘵𝘳𝘢 𝘭𝘢𝘴 𝘳𝘦𝘥𝘦𝘴 𝘥𝘦𝘭 𝘣𝘰𝘵`,
                 id: `${usedPrefix}redes`,
