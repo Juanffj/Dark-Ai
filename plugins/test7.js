@@ -1,4 +1,4 @@
-const { generateWAMessageFromContent, prepareWAMessageMedia,  proto, generateWAMessageContent  } = (await import("@whiskeysockets/baileys")).defaultimport { ttdl } from 'ruhend-scraper';//modulo exportado para crear la variable 'ttdl'
+const { generateWAMessageFromContent, prepareWAMessageMedia,  proto, generateWAMessageContent  } = (await import("@whiskeysockets/baileys")).defaultimport { ttdl } from 'ruhend-scraper';
 
 let handler = async (m, { conn, usedPrefix, command, text, args }) => {
     const creador_code = 'KenisawaDev';
