@@ -22,7 +22,7 @@ let handler = async (m, { args, conn }) => {
         await new Promise(resolve => setTimeout(resolve, 2000));
         
         await m.react('✅');
-        await conn.sendFile(m.chat, imgUrl, 'imagen.jpg', '*\`IMAGEN DE THREADS\`*', null, m, fake);
+        await conn.sendFile(m.chat, imgUrl, 'imagen.jpg', '*\`[ IMAGEN DE THREADS ]\`*', null, m, fake);
     } catch (error) {
         console.error(error);
         await m.react('❌');
