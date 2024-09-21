@@ -14,7 +14,7 @@ let handler = async (m, { args, conn }) => {
         const $ = cheerio.load(response.data);
         
         const imgUrl = $('meta[property="og:image"]').attr('content'); 
-        const username = $('meta[property="og:title"]').attr('content'); // Nombre de quien subió la imagen
+        const username = $('meta[property="title"]').attr('content'); // Nombre de quien subió la imagen
         const likes = $('span[data-testid="like"]').text() || '0'; // Likes
         const comments = $('span[data-testid="comment"]').text() || '0'; // Comentarios
         const shares = $('span[data-testid="share"]').text() || '0'; // Compartidos
