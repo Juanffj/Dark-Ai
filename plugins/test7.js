@@ -6,19 +6,19 @@ let handler = async (m, { conn, text }) => {
     await m.react('⏳'); // Espera
     conn.reply(m.chat, `🤍 *Buscando ${text}...*`, m);
 
-    const url = `https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(text)}`;
+    const url = `https://es.dragonball.fandom.com/api/v1/Articles/List?name=${encodeURIComponent(text)}`;
     const response = await fetch(url);
     const json = await response.json();
 
-    if (!response.ok || json.data.length === 0) {
+    if (!response.ok || !json.items || json.items.length === 0) {
         await m.react('❌'); // Error
         return conn.reply(m.chat, '🤍 *¡Oops! No se encontró el personaje. Inténtalo de nuevo.*', m);
     }
 
-    const anime = json.data[0]; // Toma el primer anime que coincida
-    const characterInfo = `🤍 *Información sobre ${anime.attributes.canonicalTitle}*\n\n` +
-                          `🤍 *Sinopsis:* ${anime.attributes.synopsis || 'Sin sinopsis disponible.'}\n` +
-                          `🔗 Más detalles en: ${anime.attributes.canonicalTitle}`;
+    const character = json.items[0]; // Toma el primer personaje que coincida
+    const characterInfo = `🤍 *Información sobre ${character.title}*\n\n` +
+                          `🤍 *Descripción:* ${character.description || 'Sin descripción disponible.'}\n` +
+                          `🔗 Más detalles en: ${character.url}`;
 
     conn.reply(m.chat, characterInfo, m);
     await m.react('✅'); // Hecho
