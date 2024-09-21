@@ -14,10 +14,10 @@ let handler = async (m, { args, conn }) => {
         const $ = cheerio.load(response.data);
         
         const imgUrl = $('meta[property="og:image"]').attr('content'); 
-        const username = $('meta[property="og:title"]').attr('content'); // Asumiendo que el título contiene el nombre del usuario
-        const likes = $('meta[property="og:likes"]').attr('content') || '0'; // Asegúrate de que esta meta esté disponible
-        const comments = $('meta[property="og:comments"]').attr('content') || '0'; // Asegúrate de que esta meta esté disponible
-        const shares = $('meta[property="og:shares"]').attr('content') || '0'; // Asegúrate de que esta meta esté disponible
+        const username = $('meta[property="og:title"]').attr('content'); // Nombre de quien subió la imagen
+        const likes = $('span[data-testid="like"]').text() || '0'; // Likes
+        const comments = $('span[data-testid="comment"]').text() || '0'; // Comentarios
+        const shares = $('span[data-testid="share"]').text() || '0'; // Compartidos
 
         if (!imgUrl) {
             throw new Error('No se encontró la imagen.');
