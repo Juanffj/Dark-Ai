@@ -9,13 +9,11 @@ let handler = async (m, { args, conn }) => {
     }
 
     try {
-        await m.react('🕑');
-        
+        await m.react('🕑');        
         const response = await axios.get(args[0]);
         const $ = cheerio.load(response.data);
         
-        // Ajusta el selector según la estructura de la página de Threads
-        const imgUrl = $('meta[property="og:image"]').attr('content'); // Usa la meta etiqueta de Open Graph
+        const imgUrl = $('meta[property="og:image"]').attr('content'); 
 
         if (!imgUrl) {
             throw new Error('No se encontró la imagen.');
