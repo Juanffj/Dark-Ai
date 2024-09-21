@@ -9,7 +9,7 @@ let handler = async (m, { args, conn }) => {
     }
 
     try {
-        await m.react('🕑');        
+        await m.react('🕒');        
         const response = await axios.get(args[0]);
         const $ = cheerio.load(response.data);
         
