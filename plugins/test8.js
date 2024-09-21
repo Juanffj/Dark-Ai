@@ -2,7 +2,7 @@ import axios from "axios";
 const { generateWAMessageFromContent, prepareWAMessageMedia, proto, generateWAMessageContent } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
-    if (!text) return m.reply(`• *Ejemplo:* ${usedPrefix + command} metamorfosis 8d`);
+    if (!text) return m.reply(`• *Ejemplo:* ${usedPrefix + command} dedicatorias`);
 
     await m.reply(wait);
 
@@ -39,10 +39,10 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     for (let lucuy of ult) {
         push.push({
             body: proto.Message.InteractiveMessage.Body.fromObject({
-                text: `*Titulo:* ${lucuy.title}\n*Autor:* ${lucuy.author.nickname}`
+                text: `*Título:* ${lucuy.title}\n*Autor:* ${lucuy.author.nickname}`
             }),
             footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                text: `👁️: ${formatViews(lucuy.play_count)}\n️❤️: ${formatViews(lucuy.digg_count)}\n️💬: ${formatViews(lucuy.comment_count)}\n➡️: ${formatViews(lucuy.share_count)}`
+                text: `👁️: ${formatViews(lucuy.play_count)}\n❤️: ${formatViews(lucuy.digg_count)}\n💬: ${formatViews(lucuy.comment_count)}\n➡️: ${formatViews(lucuy.share_count)}`
             }),
             header: proto.Message.InteractiveMessage.Header.fromObject({
                 title: '', 
@@ -53,7 +53,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
                 buttons: [
                     {
                         "name": "cta_url",
-                        "buttonParamsJson": `{"display_text":"Canal","url":"${canal}"}`
+                        "buttonParamsJson": `{"display_text":"Canal","url":"${lucuy.author.channel_url}"}`
                     }
                 ]
             })
@@ -63,13 +63,9 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     const bot = generateWAMessageFromContent(m.chat, {
         viewOnceMessage: {
             message: {
-                messageContextInfo: {
-                    deviceListMetadata: {},
-                    deviceListMetadataVersion: 2
-                },
                 interactiveMessage: proto.Message.InteractiveMessage.fromObject({
                     body: proto.Message.InteractiveMessage.Body.create({
-                        text: `🤍 *\`Resultados de:\`* ${text}`
+                        text: `🤍 *Resultados de: ${text}*`
                     }),
                     footer: proto.Message.InteractiveMessage.Footer.create({
                         text: '_\`ᴛ\` \`ᴛ\` \`-\` \`ꜱ\` \`ᴇ\` \`ᴀ\` \`ʀ\` \`ᴄ\` \`ʜ\`_',
@@ -90,9 +86,9 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     });
 }
 
-handler.help = ["tiktoksearchslide", "ttsearchslide"];
+handler.help = ["likeesearchslide", "ls"];
 handler.tags = ["internet", "search"];
-handler.command = /^(tiktoksearchslide|ttsearchslide)$/i;
+handler.command = /^(likeesearchslide|ls)$/i;
 
 export default handler;
 
