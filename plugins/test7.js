@@ -6,19 +6,19 @@ let handler = async (m, { conn, text }) => {
     await m.react('⏳'); // Espera
     conn.reply(m.chat, `🤍 *Buscando ${text}...*`, m);
 
-    const url = `https://es.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${encodeURIComponent(text)}&utf8=1`;
+    const url = `https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(text)}`;
     const response = await fetch(url);
     const json = await response.json();
 
-    if (!response.ok || json.query.search.length === 0) {
+    if (!response.ok || json.data.length === 0) {
         await m.react('❌'); // Error
         return conn.reply(m.chat, '🤍 *¡Oops! No se encontró el personaje. Inténtalo de nuevo.*', m);
     }
 
-    const pageTitle = json.query.search[0].title;
-    const pageUrl = `https://es.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}`;
-    
-    const characterInfo = `🤍 *Información sobre ${pageTitle}*\n🔗 Más detalles en: ${pageUrl}`;
+    const anime = json.data[0]; // Toma el primer anime que coincida
+    const characterInfo = `🤍 *Información sobre ${anime.attributes.canonicalTitle}*\n\n` +
+                          `🤍 *Sinopsis:* ${anime.attributes.synopsis || 'Sin sinopsis disponible.'}\n` +
+                          `🔗 Más detalles en: ${anime.attributes.canonicalTitle}`;
 
     conn.reply(m.chat, characterInfo, m);
     await m.react('✅'); // Hecho
