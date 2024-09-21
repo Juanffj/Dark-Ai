@@ -2,79 +2,62 @@ import { promises } from 'fs'
 import { join } from 'path'
 import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
-import axios from 'axios';
-
-let Styles = (text, style = 1) => {
-  var xStr = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
-  var yStr = Object.freeze({
-    1: 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘqʀꜱᴛᴜᴠᴡxʏᴢ1234567890'
-  });
-  var replacer = [];
-  xStr.map((v, i) => replacer.push({
-    original: v,
-    convert: yStr[style].split('')[i]
-  }));
-  var str = text.toLowerCase().split('');
-  var output = [];
-  str.map(v => {
-    const find = replacer.find(x => x.original == v);
-    find ? output.push(find.convert) : output.push(v);
-  });
-  return output.join('');
-};
 
 let tags = {
-  'main': 'ɪɴꜰᴏ ʙᴏᴛ',
-  'buscador': 'ʙᴜꜱQᴜᴇᴅᴀꜱ',
-  'search': 'ꜱᴇᴀʀᴄʜ',
-  'game': 'ᴅɪᴠᴇʀꜱɪᴏɴ',
-  'jadibot': 'ꜱᴜʙ ʙᴏᴛꜱ',
-  'rpg': 'ʀᴘɢ',
-  'rg': 'ʀᴇɢɪꜱᴛʀᴏ',
-  'xp': 'ᴇxᴘ',
-  'sticker': 'ꜱᴛɪᴄᴋᴇʀꜱ',
-  'anime': 'ᴀɴɪᴍᴇꜱ',
-  'database': 'ᴅᴀᴛᴀʙᴀꜱᴇ',
-  'fix': 'ꜰɪxᴍꜱɢᴇꜱᴘᴇʀᴀ',
-  'grupo': 'ɢʀᴜᴘᴏꜱ',
-  'nable': 'ᴏɴ / ᴏꜰꜰ', 
-  'dl': 'ᴅᴇꜱᴄᴀʀɢᴀꜱ',
-  'fun': 'ʜᴇʀʀᴀᴍɪᴇɴᴛᴀꜱ',
-  'info': 'ɪɴꜰᴏʀᴍᴀᴄɪᴏɴ',
-  'nsfw': 'ɴꜱꜰᴡ', 
-  'owner': 'ᴄʀᴇᴀᴅᴏʀ',
-  'mods': 'ꜱᴛᴀꜰꜰ',
-  'audio': 'ᴀᴜᴅɪᴏꜱ', 
-  'ai': 'ᴀɪ ʙᴏᴛ',
-  'convertir': 'ᴄᴏɴᴠᴇʀᴛɪᴅᴏʀᴇꜱ',
-  'audios': 'ᴀᴜᴅɪᴏꜱ',
+  'main': 'Info × Yaemori',
+  'buscador': 'Busquedas × Yaemori',
+  'fun': 'Juegos × Yaemori',
+  'gacha': 'Gacha × Yaemori',
+  'serbot': 'Sub bots × Yaemori',
+  'rpg': 'Rpg × Yaemori',
+  'rg': 'Registro × Yaemori',
+  'xp': 'Exp × Yaemori',
+  'sticker': 'Stickers × Yaemori',
+  'anime': 'Animes × Yaemori',
+  'database': 'Database × Yaemori',
+  'fix': 'Fixmsgespera × Yaemori',
+  'grupo': 'Grupos × Yaemori',
+  'nable': 'On - off × Yaemori', 
+  'descargas': 'Descargas × Yaemori',
+  'tools': 'Herramientas × Yaemori',
+  'info': 'Información × Yaemori',
+  'nsfw': 'Nsfw × Yaemori', 
+  'owner': 'Propietario × Yaemori', 
+  'audio': 'Audios × Yaemori', 
+  'ai': 'Ai × Yaemori',
+  'transformador': 'Convertidores × Yaemori',
 }
 
 const defaultMenu = {
-  before: `Hola \`%name\` soy GenesisBot-MD, %greeting
+  before: `© mᥱᥒᥙ ᥆𝖿іᥴіᥲᥣ ძᥱ ᥡᥲᥱm᥆rіᑲ᥆𝗍 ☁️
 
-乂 _\`ᴜ\` \`ꜱ\` \`ᴜ\` \`ᴀ\` \`ʀ\` \`ɪ\` \`ᴏ\`_ 乂
+*•/• Info usuario •/•*
 
-• _\`ɴᴏᴍʙʀᴇ\`_ :: %name
-• _\`ʙᴏᴛ\`_ :: GenesisBot-MD
-• _\`ᴍᴏᴅᴏ\`_ :: Público
-• _\`ᴀᴄᴛɪᴠᴏ\`_ :: %muptime
-• _\`ᴜꜱᴜᴀʀɪᴏꜱ\`_ :: %totalreg
-• _\`ᴄᴏʀᴀᴢᴏɴᴇꜱ\`_ :: %corazones
-• _\`ɴɪᴠᴇʟ\`_ :: %level
+🌸 Cliente: \`\`\`%name\`\`\`
+✨️ Exp: \`\`\`%exp\`\`\`
+🍪 Galletas: \`\`\`%cookies\`\`\`
+🛡 Nivel: \`\`\`%level\`\`\`
+💫 Rango: \`\`\`%role\`\`\`
 
-乂 _\`ᴄ\` \`ᴏ\` \`ᴍ\` \`ᴀ\` \`ɴ\` \`ᴅ\` \`ᴏ\` \`ꜱ\`_ 乂
+*•/• Info del bot •/•*
+
+👑 Creador: ⏤͟͟͞͞Dev-Diego
+🪴 Modo: \`\`\`Publico\`\`\`
+📚 Libreria: \`\`\`Baileys\`\`\`
+🕖 Actividad: \`\`\`%muptime\`\`\`
+👤 Usuarios: \`\`\`%totalreg\`\`\`
+
+\t*L I S T A  -  D E  -  C O M A N D O S* 
 `.trimStart(),
-  header: '╭• •꒰─• *`%category`* ·ٜ۬･',
-  body: '│ %cmd\n',
-  footer: '╰• •───• •───• •───•\n',
-  after: `> BY GENESISBOT-MD X Angel-OFC`,
+    header: '*⏤͟͟͞͞%category᭄*\n',
+  body: '✰ %cmd',
+  footer: '',
+  after: `> ${dev}`,
 }
-let ppp = 'https://i.ibb.co/274wWbK/file.jpg'
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
-    let { exp, corazones, level, role } = global.db.data.users[m.sender]
+    let { exp, cookies, level, role } = global.db.data.users[m.sender]
     let { min, xp, max } = xpRange(level, global.multiplier)
     let name = await conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
@@ -114,7 +97,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
         help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
         tags: Array.isArray(plugin.tags) ? plugin.tags : [plugin.tags],
         prefix: 'customPrefix' in plugin,
-        corazones: plugin.corazones,
+        cookies: plugin.cookies,
         premium: plugin.premium,
         enabled: !plugin.disabled,
       }
@@ -136,8 +119,8 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
           ...help.filter(menu => menu.tags && menu.tags.includes(tag) && menu.help).map(menu => {
             return menu.help.map(help => {
               return body.replace(/%cmd/g, menu.prefix ? help : '%p' + help)
-                .replace(/%isdiamond/g, menu.diamond ? '◜🪙◞' : '')
-                .replace(/%isPremium/g, menu.premium ? '◜🎫◞' : '')
+                .replace(/%isdiamond/g, menu.diamond ? '(ⓓ)' : '')
+                .replace(/%isPremium/g, menu.premium ? '(Ⓟ)' : '')
                 .trim()
             }).join('\n')
           }),
@@ -161,43 +144,30 @@ botofc: (conn.user.jid == global.conn.user.jid ? '🚩 𝙴𝚂𝚃𝙴 𝙴𝚂
 totalexp: exp,
 xp4levelup: max - exp,
 github: _package.homepage ? _package.homepage.url || _package.homepage : '[unknown github url]',
-greeting, level, corazones, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
+greeting, level, cookies, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
 readmore: readMore
 }
 text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
 
 const who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 
-const pp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://telegra.ph/file/327f6ad853cb4f405aa80.jpg')
+const pp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://qu.ax/AdwJ.jpg')
 
-  let category = "video"
-  const db = './media/database/db.json'
-  const db_ = JSON.parse(fs.readFileSync(db))
-  const random = Math.floor(Math.random() * db_.links[category].length)
-  const rlink = db_.links[category][random]
-  global.vid = rlink
-  const response = await fetch(vid)
-  const gif = await response.buffer()
- // const img = imagen1
+await conn.reply(m.chat, '*Próximamente se remitirá el menú.*', fkontak, { contextInfo:{ forwardingScore: 2022, isForwarded: true, externalAdReply: {title: packname, body: dev, sourceUrl: redeshost, thumbnail: await (await fetch(pp)).buffer() }}})
 
-await m.react('🤍') 
-// await conn.reply(m.chat, '*ꪹ͜𓂃͡𝗖𝗮𝗿𝗴𝗮𝗻𝗱𝗼 𝗘𝗹 𝗠𝗲𝗻𝘂 𝗗𝗲 𝗹𝗮 𝗕𝗼𝘁...𓏲੭*', fakegif3, { contextInfo:{ forwardingScore: 2022, isForwarded: true, externalAdReply: {title: packname, body: '🤍 ¡Génesis la mejor Bot!', sourceUrl: canal, thumbnail: icons }}})
+await m.react('🚀') 
 
-// await conn.reply(m.chat, '🍟 Enviando el menú.....', m, rcanal)
-let imagen_menu = await getBuffer(ppp);
-await conn.sendFile(m.chat, imagen_menu, 'menu.jpg', Styles(text.trim()), fakegif3, null, fake)
-
-/* await conn.sendButton(m.chat, text, '@usxr_angelito0', ppp, [
-['', '']], null, [['CANAL 🐈‍⬛', `${canal}`], ['CANAL 2', `wa.me/59168683798`]], m) */
+await conn.sendMessage(m.chat, {text: text, contextInfo: { forwardingScore: 999, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterName: '© ᥡᥲᥱm᥆rіᑲ᥆𝗍 - ᥴһᥲᥒᥒᥱᥣ 🌱', newsletterJid: "120363263466636910@newsletter", }, externalAdReply: { title: '© ᥡᥲᥱm᥆rі ᑲ᥆𝗍 - mძ ⚡︎', body: dev, thumbnailUrl: 'https://qu.ax/OlTj.jpg', sourceUrl: redeshost, mediaType: 1, renderLargerThumbnail: true }}}, {quoted: fkontak})
 
   } catch (e) {
-    conn.reply(m.chat, '🔵 Lo sentimos, el menú tiene un error', m, rcanal, )
+    await m.react(error)
+    conn.reply(m.chat, '❌️ Lo sentimos, el menú tiene un error', m, rcanal, )
     throw e
   }
 }
-handler.help = ['menucompleto']
+handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['menuall', 'allmenú', 'allmenu'] 
+handler.command = ['menu', 'help', 'menú', 'menuall', 'allmenú', 'allmenu', 'menucompleto'] 
 handler.register = true
 
 export default handler
@@ -215,47 +185,29 @@ function clockString(ms) {
   var ase = new Date();
   var hour = ase.getHours();
 switch(hour){
-  case 0: hour = 'Buenas noches 🌙'; break;
-  case 1: hour = 'Buenas noches 💤'; break;
-  case 2: hour = 'Buenas noches 🦉'; break;
-  case 3: hour = 'Buenas noches ✨'; break;
-  case 4: hour = 'Buenos dias 💫'; break;
-  case 5: hour = 'Buenos dias 🌅'; break;
-  case 6: hour = 'Buenos dias 🌄'; break;
-  case 7: hour = 'Buenos dias 🌅'; break;
-  case 8: hour = 'Buenos dias 💫'; break;
-  case 9: hour = 'Buenos dias ✨'; break;
-  case 10: hour = 'Buenos dias 🌞'; break;
-  case 11: hour = 'Buenos dias 🌨'; break;
-  case 12: hour = 'Buenos dias ❄'; break;
-  case 13: hour = 'Buenos dias 🌤'; break;
-  case 14: hour = 'Buenas tardes 🌇'; break;
-  case 15: hour = 'Buenas tardes 🥀'; break;
-  case 16: hour = 'Buenas tardes 🌹'; break;
-  case 17: hour = 'Buenas tardes 🌆'; break;
-  case 18: hour = 'Buenas noches 🌙'; break;
-  case 19: hour = 'Buenas noches 🌃'; break;
-  case 20: hour = 'Buenas noches 🌌'; break;
-  case 21: hour = 'Buenas noches 🌃'; break;
-  case 22: hour = 'Buenas noches 🌙'; break;
-  case 23: hour = 'Buenas noches 🌃'; break;
+  case 0: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
+  case 1: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 💤'; break;
+  case 2: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🦉'; break;
+  case 3: hour = 'Bᴜᴇɴᴏs Dɪᴀs ✨'; break;
+  case 4: hour = 'Bᴜᴇɴᴏs Dɪᴀs 💫'; break;
+  case 5: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌅'; break;
+  case 6: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌄'; break;
+  case 7: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌅'; break;
+  case 8: hour = 'Bᴜᴇɴᴏs Dɪᴀs 💫'; break;
+  case 9: hour = 'Bᴜᴇɴᴏs Dɪᴀs ✨'; break;
+  case 10: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌞'; break;
+  case 11: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌨'; break;
+  case 12: hour = 'Bᴜᴇɴᴏs Dɪᴀs ❄'; break;
+  case 13: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌤'; break;
+  case 14: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌇'; break;
+  case 15: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🥀'; break;
+  case 16: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌹'; break;
+  case 17: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌆'; break;
+  case 18: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
+  case 19: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
+  case 20: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌌'; break;
+  case 21: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
+  case 22: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
+  case 23: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
 }
   var greeting = hour;
-
-/*const getBuffer = async (url, options) => {
-try {
-const res = await axios({
-method: 'get',
-url,
-headers: {
-'DNT': 1,
-'Upgrade-Insecure-Request': 1,
-},
-...options,
-responseType: 'arraybuffer',
-});
-return res.data;
-} catch (e) {
-console.log(`Error : ${e}`);
-}
-};*/
