@@ -3,14 +3,12 @@ const { generateWAMessageFromContent, prepareWAMessageMedia, proto, generateWAMe
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
     if (!text) return m.reply(`• *Ejemplo:* ${usedPrefix + command} metamorfosis 8d`);
-    
+
     await m.reply(wait);
-    
+
     async function createVideo(url) {
         const { videoMessage } = await generateWAMessageContent({
-            video: {
-                url
-            }
+            video: { url }
         }, {
             upload: conn.waUploadToServer
         });
@@ -23,39 +21,45 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
-    
+
     let push = [];
-    let { data } = await axios.get(`https://likee.com/api/search?query=${text}`); // Cambia la URL a la API de Likee
-    let res = data.results; // Ajusta esto según la estructura de la respuesta de Likee
+    let res;
+
+    try {
+        let { data } = await axios.get(`https://likee.com/api/search?query=${text}`);
+        res = data.result.data;
+    } catch (error) {
+        console.error('Error al buscar en Likee:', error);
+        return m.reply('Error al buscar, verifica la consulta o intenta más tarde.');
+    }
+
+    shuffleArray(res);
+    let ult = res.splice(0, 999);
     
-    shuffleArray(res); // Mezclar resultados
-    let ult = res.splice(0, 999); 
-    let i = 1;
-    
-    for (let item of ult) {
+    for (let lucuy of ult) {
         push.push({
             body: proto.Message.InteractiveMessage.Body.fromObject({
-                text: `*Título:* ${item.title}\n*Autor:* ${item.author.nickname}`
+                text: `*Titulo:* ${lucuy.title}\n*Autor:* ${lucuy.author.nickname}`
             }),
             footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                text: `👁️: ${formatViews(item.play_count)}\n️❤️: ${formatViews(item.digg_count)}\n️💬: ${formatViews(item.comment_count)}\n➡️: ${formatViews(item.share_count)}`
+                text: `👁️: ${formatViews(lucuy.play_count)}\n️❤️: ${formatViews(lucuy.digg_count)}\n️💬: ${formatViews(lucuy.comment_count)}\n➡️: ${formatViews(lucuy.share_count)}`
             }),
             header: proto.Message.InteractiveMessage.Header.fromObject({
                 title: '', 
                 hasMediaAttachment: true,
-                videoMessage: await createVideo(item.play) // Asegúrate de que item.play tenga la URL del video
+                videoMessage: await createVideo(lucuy.play)
             }),
             nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
                 buttons: [
                     {
                         "name": "cta_url",
-                        "buttonParamsJson": `{"display_text":"Canal","url":"${item.canal}"}`
+                        "buttonParamsJson": `{"display_text":"Canal","url":"${canal}"}`
                     }
                 ]
             })
         });
     }
-    
+
     const bot = generateWAMessageFromContent(m.chat, {
         viewOnceMessage: {
             message: {
@@ -74,23 +78,21 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
                         hasMediaAttachment: false
                     }),
                     carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-                        cards: [
-                            ...push
-                        ]
+                        cards: [...push]
                     })
                 })
             }
         }
     }, { quoted: m });
-    
+
     await conn.relayMessage(m.chat, bot.message, {
         messageId: bot.key.id
     });
 }
 
-handler.help = ["likeesearchslide", "lssearchslide"];
+handler.help = ["tiktoksearchslide", "ttsearchslide"];
 handler.tags = ["internet", "search"];
-handler.command = /^(likeesearchslide|lssearchslide)$/i;
+handler.command = /^(tiktoksearchslide|ttsearchslide)$/i;
 
 export default handler;
 
@@ -104,6 +106,5 @@ function formatViews(views) {
     } else {
         formatv = form;
     }
-    
     return formatv;
 }
