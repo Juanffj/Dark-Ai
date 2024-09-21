@@ -37,7 +37,7 @@ export default handler;
 
 /* New Line */
 async function generateImage(prompt) {
-    const url = 'https://api.bing.microsoft.com/v7.0/images/generate'; // Verifica la URL correcta de la API de Bing
+    const url = 'https://api.bing.microsoft.com/v7.0/images/generate'; // Verifica la URL correcta
     const data = {
         prompt: prompt,
         // Otros parámetros según la API de Bing
