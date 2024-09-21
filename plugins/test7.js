@@ -1,70 +1,36 @@
-// créditos para MauroAzcurra
-// código adaptado por karim-off 
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
-let handler = async (m, {
-    conn,
-    args,
-    usedPrefix,
-    command
-}) => {
-    let text;
-    if (args.length >= 1) {
-        text = args.slice(0).join(" ");
-    } else if (m.quoted && m.quoted.text) {
-        text = m.quoted.text;
-    } else throw "➤ `𝗔𝗩𝗜𝗦𝗢` 🐈‍⬛\n\n*AGREGA TU IDEA DE IMAGEN*\n_.seaArt Gatito Tierno_";
-    
-    await m.reply(wait);
+let handler = async (m, { conn, text }) => {
+    if (!text) return conn.reply(m.chat, '🤍 *¿Qué personaje de Dragon Ball quieres buscar?*', m);
 
-    try {
-        let data = await generateImage(text);
-        if (data && data.imageUrl) {
-            await conn.sendFile(m.chat, data.imageUrl, '', `🐈‍⬛ 𝗥𝗘𝗦𝗨𝗟𝗧𝗔𝗗𝗢 :`, m, false, {
-                mentions: [m.sender]
-            });
-        }
-    } catch (e) {
-        await m.reply("Error al generar la imagen");
+    await m.react('⏳'); // Espera
+    conn.reply(m.chat, `🤍 *Buscando ${text}...*`, m);
+
+    const url = `https://dragonball.dev/api/characters?name=${encodeURIComponent(text)}`;
+    const response = await fetch(url);
+    const json = await response.json();
+
+    if (!response.ok || json.length === 0) {
+        await m.react('❌'); // Error
+        return conn.reply(m.chat, '🤍 *¡Oops! Parece que hubo un error al buscar el personaje. Por favor, inténtalo de nuevo más tarde.*', m);
     }
+
+    const character = json[0]; // Tomar el primer personaje que coincida
+    const characterInfo = `🤍 *Información de ${character.name}*\n\n` +
+                          `🤍 *Nombre:* ${character.name}\n` +
+                          `🤍 *Raza:* ${character.race || 'Desconocido'}\n` +
+                          `🤍 *Poder:* ${character.power || 'Desconocido'}\n` +
+                          `🤍 *Altura:* ${character.height || 'Desconocido'}\n` +
+                          `🤍 *Peso:* ${character.weight || 'Desconocido'}\n\n` +
+                          `📖 *Descripción:*\n${character.description || 'Sin descripción disponible.'}\n\n` +
+                          `🔍 ¡Encuentra más detalles sobre este personaje en la wiki de Dragon Ball! 🔍\n` +
+                          `🔗 https://dragonball.fandom.com/wiki/${character.name.replace(' ', '_')}`;
+
+    conn.reply(m.chat, characterInfo, m);
+    await m.react('✅'); // Hecho
 }
 
-handler.help = ["seaArt"];
-handler.tags = ["ai"];
-handler.command = /^(seaArt|seaImg)$/i;
-handler.register = handler.limit = true;
+handler.help = ['dragonball *<personaje>*'];
+handler.tags = ['buscador'];
+handler.command = /^dragonball/i;
 export default handler;
-
-/* New Line */
-async function generateImage(prompt) {
-    const url = 'https://api.bing.microsoft.com/v7.0/images/generate'; // Verifica la URL correcta
-    const data = {
-        prompt: prompt,
-        // Otros parámetros según la API de Bing
-    };
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Ocp-Apim-Subscription-Key': 'TU_CLAVE_API', // Sustituye con tu clave API
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        const text = await response.text(); // Obtener la respuesta como texto
-        console.log(text); // Imprimir la respuesta para debug
-
-        if (!response.ok) {
-            console.error('Error en la respuesta:', response.status, text);
-            throw new Error(`Error en la API: ${response.status}`);
-        }
-
-        const result = JSON.parse(text); // Intentar convertir a JSON
-        return result; // Asegúrate de que esto coincida con la respuesta de la API
-    } catch (error) {
-        console.error("Error:", error);
-        throw error;
-    }
-}
