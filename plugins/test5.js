@@ -35,4 +35,4 @@ handler.command = ['threads', 'thdl', 'thread'];
 handler.tags = ['dl'];
 handler.help = ['threads <link>'];
 
-export default handler; */
+export default handler;
