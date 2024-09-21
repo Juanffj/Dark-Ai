@@ -37,19 +37,18 @@ export default handler;
 
 /* New Line */
 async function generateImage(prompt) {
+    const url = 'https://api.bing.microsoft.com/v7.0/images/generate'; // Verifica la URL correcta de la API de Bing
     const data = {
         prompt: prompt,
-        // Otros parámetros según la API de SeaArt
+        // Otros parámetros según la API de Bing
     };
-
-    const url = 'https://api.seaart.com/generate'; // Reemplaza con la URL real de la API de SeaArt
 
     try {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
+                'Ocp-Apim-Subscription-Key': 'TU_CLAVE_API', // Sustituye con tu clave API
                 'Content-Type': 'application/json'
-                // Añade aquí la autenticación si es necesaria
             },
             body: JSON.stringify(data)
         });
