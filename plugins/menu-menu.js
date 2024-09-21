@@ -2,6 +2,7 @@ import { promises } from 'fs'
 import { join } from 'path'
 import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
+import axios from 'axios';
 
 let Styles = (text, style = 1) => {
   var xStr = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
@@ -69,7 +70,7 @@ const defaultMenu = {
   footer: '╰• •───• •───• •───•\n',
   after: `> BY GENESISBOT-MD X Angel-OFC`,
 }
-let ppp = 'https://tinyurl.com/2dj3vd23'
+let ppp = 'https://i.ibb.co/274wWbK/file.jpg'
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
@@ -183,8 +184,8 @@ await m.react('🤍')
 // await conn.reply(m.chat, '*ꪹ͜𓂃͡𝗖𝗮𝗿𝗴𝗮𝗻𝗱𝗼 𝗘𝗹 𝗠𝗲𝗻𝘂 𝗗𝗲 𝗹𝗮 𝗕𝗼𝘁...𓏲੭*', fakegif3, { contextInfo:{ forwardingScore: 2022, isForwarded: true, externalAdReply: {title: packname, body: '🤍 ¡Génesis la mejor Bot!', sourceUrl: canal, thumbnail: icons }}})
 
 // await conn.reply(m.chat, '🍟 Enviando el menú.....', m, rcanal)
-
-await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), fakegif3, null, fake)
+let imagen_menu = await getBuffer(ppp);
+await conn.sendFile(m.chat, imagen_menu, 'menu.jpg', Styles(text.trim()), fakegif3, null, fake)
 
 /* await conn.sendButton(m.chat, text, '@usxr_angelito0', ppp, [
 ['', '']], null, [['CANAL 🐈‍⬛', `${canal}`], ['CANAL 2', `wa.me/59168683798`]], m) */
@@ -240,3 +241,21 @@ switch(hour){
   case 23: hour = 'Buenas noches 🌃'; break;
 }
   var greeting = hour;
+
+/*const getBuffer = async (url, options) => {
+try {
+const res = await axios({
+method: 'get',
+url,
+headers: {
+'DNT': 1,
+'Upgrade-Insecure-Request': 1,
+},
+...options,
+responseType: 'arraybuffer',
+});
+return res.data;
+} catch (e) {
+console.log(`Error : ${e}`);
+}
+};*/
