@@ -25,7 +25,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     }
     
     let push = [];
-    let { data } = await axios.get(`https://likee.com/search?query=${text}`); // Cambia la URL a la API de Likee
+    let { data } = await axios.get(`https://likee.com/api/search?query=${text}`); // Cambia la URL a la API de Likee
     let res = data.results; // Ajusta esto según la estructura de la respuesta de Likee
     
     shuffleArray(res); // Mezclar resultados
