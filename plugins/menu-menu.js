@@ -196,7 +196,7 @@ await conn.sendFile(m.chat, ppp, 'menu.jpg', Styles(text.trim()), fakegif3, null
 }
 handler.help = ['menucompleto']
 handler.tags = ['main']
-handler.command = ['menucompleto', 'allmenú', 'allmenu'] 
+handler.command = ['menuall', 'allmenú', 'allmenu'] 
 handler.register = true
 
 export default handler
