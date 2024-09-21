@@ -49,6 +49,7 @@ async function generateImage(prompt) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
+                // Añade aquí la autenticación si es necesaria
             },
             body: JSON.stringify(data)
         });
@@ -58,7 +59,7 @@ async function generateImage(prompt) {
 
         if (!response.ok) {
             console.error('Error en la respuesta:', response.status, text);
-            throw new Error('Error en la API');
+            throw new Error(`Error en la API: ${response.status}`);
         }
 
         const result = JSON.parse(text); // Intentar convertir a JSON
