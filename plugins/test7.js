@@ -6,25 +6,19 @@ let handler = async (m, { conn, text }) => {
     await m.react('⏳'); // Espera
     conn.reply(m.chat, `🤍 *Buscando ${text}...*`, m);
 
-    const url = `https://dragonball.dev/api/characters?name=${encodeURIComponent(text)}`;
+    const url = `https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(text)}`;
     const response = await fetch(url);
     const json = await response.json();
 
-    if (!response.ok || json.length === 0) {
+    if (!response.ok || json.data.length === 0) {
         await m.react('❌'); // Error
-        return conn.reply(m.chat, '🤍 *¡Oops! Parece que hubo un error al buscar el personaje. Por favor, inténtalo de nuevo más tarde.*', m);
+        return conn.reply(m.chat, '🤍 *¡Oops! No se encontró el personaje. Inténtalo de nuevo.*', m);
     }
 
-    const character = json[0]; // Tomar el primer personaje que coincida
-    const characterInfo = `🤍 *Información de ${character.name}*\n\n` +
-                          `🤍 *Nombre:* ${character.name}\n` +
-                          `🤍 *Raza:* ${character.race || 'Desconocido'}\n` +
-                          `🤍 *Poder:* ${character.power || 'Desconocido'}\n` +
-                          `🤍 *Altura:* ${character.height || 'Desconocido'}\n` +
-                          `🤍 *Peso:* ${character.weight || 'Desconocido'}\n\n` +
-                          `📖 *Descripción:*\n${character.description || 'Sin descripción disponible.'}\n\n` +
-                          `🔍 ¡Encuentra más detalles sobre este personaje en la wiki de Dragon Ball! 🔍\n` +
-                          `🔗 https://dragonball.fandom.com/wiki/${character.name.replace(' ', '_')}`;
+    const anime = json.data[0]; // Toma el primer anime que coincida
+    const characterInfo = `🤍 *Información sobre ${anime.attributes.canonicalTitle}*\n\n` +
+                          `🤍 *Sinopsis:* ${anime.attributes.synopsis || 'Sin sinopsis disponible.'}\n` +
+                          `🔗 Más detalles en: ${anime.attributes.canonicalTitle}`;
 
     conn.reply(m.chat, characterInfo, m);
     await m.react('✅'); // Hecho
