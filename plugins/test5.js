@@ -1,4 +1,6 @@
-/* import axios from 'axios';
+// creado por Angel-OFC 
+// no modifiques los créditos ñ
+import axios from 'axios';
 import cheerio from 'cheerio';
 
 let handler = async (m, { args, conn }) => { 
