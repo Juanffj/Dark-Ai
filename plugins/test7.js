@@ -53,7 +53,15 @@ async function generateImage(prompt) {
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        const text = await response.text(); // Obtener la respuesta como texto
+        console.log(text); // Imprimir la respuesta para debug
+
+        if (!response.ok) {
+            console.error('Error en la respuesta:', response.status, text);
+            throw new Error('Error en la API');
+        }
+
+        const result = JSON.parse(text); // Intentar convertir a JSON
         return result; // Asegúrate de que esto coincida con la respuesta de la API
     } catch (error) {
         console.error("Error:", error);
