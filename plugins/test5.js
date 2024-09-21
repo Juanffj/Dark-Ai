@@ -1,6 +1,6 @@
 // creado por Angel-OFC 
 // no modifiques los créditos ñ
-/* import axios from 'axios';
+import axios from 'axios';
 import cheerio from 'cheerio';
 
 let handler = async (m, { args, conn }) => { 
@@ -35,4 +35,4 @@ handler.command = ['threads', 'thdl', 'thread'];
 handler.tags = ['dl'];
 handler.help = ['threads <link>'];
 
-export default handler; */
+export default handler;
