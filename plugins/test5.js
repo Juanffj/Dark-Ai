@@ -12,8 +12,8 @@ let handler = async (m, { args, conn }) => {
         const response = await axios.get(args[0]);
         const $ = cheerio.load(response.data);
         
-        // Suponiendo que la imagen se encuentra en una etiqueta <img>
-        const imgUrl = $('img').first().attr('src'); // Ajusta el selector según la estructura HTML
+        // Ajusta el selector según la estructura de la página de Threads
+        const imgUrl = $('meta[property="og:image"]').attr('content'); // Usa la meta etiqueta de Open Graph
 
         if (!imgUrl) {
             throw new Error('No se encontró la imagen.');
