@@ -1,5 +1,5 @@
 // creado por Angel-OFC 
-// no modifiques los créditos ñ
+// no modifiques los créditos
 import axios from 'axios';
 import cheerio from 'cheerio';
 
