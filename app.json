@@ -1,0 +1,18 @@
+{
+"name": "GenesisBot-MD",
+"website": "https://github.com/Angelito-OFC",
+"description": "La bot más linda de WhatsApp",
+"repository": "https://github.com/Angelito-OFC/GenesisBot-MD",
+"logo": "https://telegra.ph/file/f487af86f3bce98aef2f0.jpg",
+"success_url": "https://github.com/Angelito-OFC/GenesisBot-MD",
+"keywords": [
+"nodejs", "heroku", "bot", "spanish", "english", "indonesian", "arab", "portuguese", "italian", "french", "whatsapp",
+"termux", "superbot", "multi-device", "md", "official", "javascript", "genesis-bot", "bot-genesis", "ai"],
+"image": "heroku/nodejs",
+"buildpacks": [
+{ "url": "heroku/nodejs" },
+{ "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest" },
+{ "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git" },
+{ "url": "https://github.com/bogini/heroku-buildpack-graphicsmagick" }    
+]
+}
