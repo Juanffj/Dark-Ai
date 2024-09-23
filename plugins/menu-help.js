@@ -130,17 +130,17 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
         ],
     });
 
-    let vid = "https://i.ibb.co/JjVKpg5/file.jpg";
-    let img = "https://i.ibb.co/KKSxbtb/file.jpg";
-    let img2 = "https://i.ibb.co/QHYqqk7/file.jpg";
-    let img3 = "https://i.ibb.co/JjVKpg5/file.jpg";
-    let img4 = "https://i.ibb.co/KKSxbtb/file.jpg";
-    let img5 = "https://i.ibb.co/QHYqqk7/file.jpg";
-    let img6 = "https://i.ibb.co/JjVKpg5/file.jpg";
-    let img8 = "https://i.ibb.co/KKSxbtb/file.jpg";
-    let img9 = "https://i.ibb.co/QHYqqk7/file.jpg";
-    let img10 = "https://i.ibb.co/JjVKpg5/file.jpg";
-    let img11 = "https://i.ibb.co/KKSxbtb/file.jpg";
+    let vid = "https://f.uguu.se/eEVvubyy.jpg";
+    let img = "https://a.uguu.se/cDjPtmqw.jpg";
+    let img2 = "https://f.uguu.se/aCbAFefz.jpg";
+    let img3 = "https://f.uguu.se/eEVvubyy.jpg";
+    let img4 = "https://a.uguu.se/cDjPtmqw.jpg";
+    let img5 = "https://f.uguu.se/aCbAFefz.jpg";
+    let img6 = "https://f.uguu.se/eEVvubyy.jpg";
+    let img8 = "https://a.uguu.se/cDjPtmqw.jpg";
+    let img9 = "https://f.uguu.se/aCbAFefz.jpg";
+    let img10 = "https://f.uguu.se/eEVvubyy.jpg";
+    let img11 = "https://a.uguu.se/cDjPtmqw.jpg";
 
     await conn.sendListB(m.chat, menu, txt, ` 𓏲୭᳟🤍̸̷̸̷᮫᮫໋໋݂݂ׄׄ.𝐌𝐄𝐍𝐔𝐒 𝐋𝐈𝐒𝐓𓏲᭔᷼⁩`, [vid, img, img2, img3, img4, img5, img6, img8, img9, img10, img11].getRandom(), listSections, estilo);
 };
