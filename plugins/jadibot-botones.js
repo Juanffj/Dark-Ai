@@ -6,6 +6,6 @@ let str = `ʙʏ: ᴀɴɢᴇʟ-ᴏꜰᴄ ʏ ɢᴇɴᴇꜱɪꜱ`
 await conn.sendButton(m.chat, `᥀·࣭࣪̇˖🤍 𝗖𝗢𝗠𝗢 𝗗𝗘𝗦𝗘𝗔 𝗩𝗜𝗡𝗖𝗨𝗟𝗔𝗥\n\n• 𝗦𝗘𝗟𝗘𝗖𝗖𝗜𝗢𝗡𝗔 𝗨𝗡 𝗕𝗢𝗧𝗢𝗡.\n`, str, media, [
 ['𝗤𝗥 🤍', '.serbotqr'],
 ['𝗖𝗢𝗗𝗘 🤍', '.serbotcode']], null, [
-['Creador', `https://wa.me/59168683798`]], estilo)}
+['ᴄʀᴇᴀᴅᴏʀ', `https://wa.me/59168683798`]], estilo)}
 handler.command = /^serbot$/i
 export default handler
