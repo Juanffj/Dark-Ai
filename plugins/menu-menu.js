@@ -65,9 +65,9 @@ const defaultMenu = {
 
 乂 _\`ᴄ\` \`ᴏ\` \`ᴍ\` \`ᴀ\` \`ɴ\` \`ᴅ\` \`ᴏ\` \`ꜱ\`_ 乂
 `.trimStart(),
-  header: '╭• •꒰─• *`%category`* ·ٜ۬･',
-  body: '│ %cmd\n',
-  footer: '╰• •───• •───• •───•\n',
+  header: '╭─(❀)❝┊ *_`%category`_* ┊❝(❀)',
+  body: '┊➧ %cmd\n',
+  footer: '╰───────────── –\n',
   after: `> BY GENESISBOT-MD X Angel-OFC`,
 }
 let ppp = 'https://f.uguu.se/hOQpNcUs.jpg'
