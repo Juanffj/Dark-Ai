@@ -24,29 +24,30 @@ global.owner = [
   ['']]
 
 //• ↳𝑺𝑶𝑳𝑶 𝑴𝑶𝑫𝑬𝑹𝑨𝑫𝑶𝑹𝑬𝑺!
-global.mods = ['5351524614', '56983298345', '50242073893', '', '']
-
-global.suittag = ['5351524614']
+global.mods = ['59168683798']
+global.suittag = ['59168683798']
 global.prems = []
 // Cambiar a false para usar el Bot desde el mismo numero del Bot.
 global.isBaileysFail = false
 
 //• ↳ ◜𝑴𝑨𝑹𝑪𝑨𝑺 𝑫𝑬 𝑨𝑮𝑼𝑨◞ • 💌
-global.packname = '𝗚𝗲𝗻𝗲𝘀𝗶𝘀 𝗕𝗼𝘁 𝗣𝗿𝗼'
+global.packname = '𝗚𝗲𝗻𝗲𝘀𝗶𝘀𝗕𝗼𝘁-𝗠𝗗'
 global.author = '@usxr_angelito0'
-global.wm = '𝗚𝗲𝗻𝗲𝘀𝗶𝘀 𝗣𝗿𝗼'
+global.wm = '𝗚𝗲𝗻𝗲𝘀𝗶𝘀 𝗜𝗔'
 global.titulowm = 'GenesisBot-Pro 🤍'
-global.titulowm2 = ''
+global.titulowm2 = 'ɢᴇɴᴇꜱɪꜱʙᴏᴛ-ᴍᴅ 🤍'
 global.igfg = '@usxr_angelito0'
 global.botname = '𝗚𝗲𝗻𝗲𝘀𝗶𝘀𝗕𝗼𝘁 🤍'
 global.dev = '`𝗚𝗲𝗻𝗲𝘀𝗶𝘀𝗕𝗼𝘁 🤍`\n*By • Titanium Team 💥*'
-global.textbot = '𝗚𝗲𝗻𝗲𝘀𝗶𝘀𝗕𝗼𝘁 : 𝗔𝗻𝗴𝗲𝗹𝗶𝘁𝗼 🤍'
-global.vs = '1.5.0'
+global.titu = '*[ BY: Genesis x Angel-OFC ]*'
+global.textbot = 'ɢᴇɴᴇꜱɪꜱʙᴏᴛ x ᴀɴɢᴇʟ-ᴏꜰᴄ 🤍'
+global.vs = '1.5.1'
 
 
 //• ↳ ◜𝑰𝑴𝑨́𝑮𝑬𝑵𝑬𝑺◞ • 🌇
 global.logo1 = fs.readFileSync('./src/logo1.png')
 global.logo7 = fs.readFileSync('./src/logofile4.jpg')
+global.logo8 = fs.readFileSync('./src/logofile5.jpg')
 global.logo2 = fs.readFileSync('./src/logo2.jpg')
 global.logo3 = fs.readFileSync('./src/logo3.jpg')
 global.logo4 = fs.readFileSync('./src/logo4.jpg')
