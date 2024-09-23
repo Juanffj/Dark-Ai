@@ -1,5 +1,5 @@
 let handler = async (m, { conn, command, usedPrefix }) => {
-let pp = 'https://tinyurl.com/29xdwbzy'
+let pp = 'https://f.uguu.se/bUYKjsnb.jpg'
 m.react('🤍')
 let name = await conn.getName(m.sender)
 let _uptime = process.uptime() * 1000
