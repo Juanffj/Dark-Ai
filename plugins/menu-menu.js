@@ -70,7 +70,7 @@ const defaultMenu = {
   footer: '╰───────────── –\n',
   after: `> BY GENESISBOT-MD X Angel-OFC`,
 }
-let ppp = 'https://f.uguu.se/hOQpNcUs.jpg'
+let ppp = 'https://iili.io/ds8Qx9f.md.png'
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
