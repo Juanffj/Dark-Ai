@@ -21,6 +21,6 @@ m.reply('Error Username tidak ditemukan\nSilahkan kirim Username yang valid!')
 
 }
 handler.help = ['stalktiktok <username>']
-handler.tags = ['fun']
+handler.tags = ['stalk']
 handler.command = /^(tiktokstalk|stalktiktok|ttstalk)$/i
 export default handler
