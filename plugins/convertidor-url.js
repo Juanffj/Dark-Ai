@@ -1,4 +1,4 @@
-import fs from "fs"
+/* import fs from "fs"
 import fetch from "node-fetch"
 import FormData from "form-data"
 
@@ -45,6 +45,62 @@ async function uploadUguu(path) {
     const json = await res.json()
     await fs.promises.unlink(path)   
     return json
+  } catch (e) {
+    await fs.promises.unlink(path)
+    throw "Upload failed"
+  }
+} */
+
+import fs from "fs"
+import fetch from "node-fetch"
+import FormData from "form-data"
+
+let handler = async m => {
+  try {
+    const q = m.quoted || m
+    const mime = q.mediaType || ""    
+    if (!/image|video|audio|sticker|document/.test(mime)) 
+      throw "¡No se proporcionan medios!"
+    const media = await q.download(true)
+    const fileSizeInBytes = fs.statSync(media).size    
+    if (fileSizeInBytes === 0) {
+      await m.reply("archivo vacío")
+      await fs.promises.unlink(media)
+      return
+    }   
+    if (fileSizeInBytes > 1073741824) {
+      await m.reply("El archivo es demasiado grande, el tamaño máximo es 1 GB")
+      await fs.promises.unlink(media)
+      return
+    }    
+    const { data } = await uploadFreeImageHost(media)
+    const caption = `*Link:*\n${data.url}`
+    await m.reply(caption)
+  } catch (e) {
+    await m.reply(`${e}`)
+  }
+}
+
+handler.help = ['tourl']
+handler.tags = ['convertir']
+handler.command = /^(tourl3|upload)$/i
+export default handler
+
+async function uploadFreeImageHost(path) {
+  try {
+    const form = new FormData()
+    form.append("file", fs.createReadStream(path))   
+    const res = await fetch("https://api.freeimage.host/v1/upload", {
+      method: "POST",
+      body: form
+    })    
+    const json = await res.json()
+    await fs.promises.unlink(path)   
+    if (json.success) {
+      return json
+    } else {
+      throw "Error en la subida: " + json.message
+    }
   } catch (e) {
     await fs.promises.unlink(path)
     throw "Upload failed"
