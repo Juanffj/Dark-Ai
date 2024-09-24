@@ -108,6 +108,6 @@ let handler = async (m, { conn }) => {
 
 handler.tags = ['convertir'];
 handler.help = ['tofreeimage'];
-handler.command = /^(tourl2|tofreeimage)$/i;
+handler.command = /^(tourl3)$/i;
 handler.register = true;
 export default handler;
