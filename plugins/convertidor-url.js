@@ -68,13 +68,11 @@ let handler = async m => {
 
     if (fileSizeInBytes === 0) {
       await m.reply("archivo vacío");
-      await fs.promises.unlink(media);
       return;
     }
     
     if (fileSizeInBytes > 5242880) { // 5 MB máximo para imágenes
       await m.reply("El archivo es demasiado grande, el tamaño máximo es 5 MB");
-      await fs.promises.unlink(media);
       return;
     }
 
@@ -103,11 +101,18 @@ async function uploadImageShack(path) {
       }
     });
 
-    await fs.promises.unlink(path);
+    // Solo intenta eliminar el archivo si existe
+    if (fs.existsSync(path)) {
+      await fs.promises.unlink(path);
+    }
+    
     if (!res.data || !res.data.link) throw "Upload failed";
     return res.data;
   } catch (e) {
-    await fs.promises.unlink(path);
+    // Intenta eliminar el archivo si ocurre un error
+    if (fs.existsSync(path)) {
+      await fs.promises.unlink(path);
+    }
     throw "Error en la carga";
   }
 }
