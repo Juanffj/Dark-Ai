@@ -13,7 +13,7 @@ let text = `
 ╭───═[ *Top ${len} Corazones 🤍* ]═────⋆
 │╭───────────────···
 ││ Tú eres el *${usersLim.indexOf(m.sender) + 1}* de *${usersLim.length}*
-││ ${sortedLim.slice(0, len).map(({ jid, cookies }, i) => `${i + 1}. ${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} *${corazones} 🤍*`).join`\n││ `}
+││ ${sortedLim.slice(0, len).map(({ jid, corazones }, i) => `${i + 1}. ${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} *${corazones} 🤍*`).join`\n││ `}
 │╰────────────────···
 ╰───────────═┅═──────────
 
@@ -35,8 +35,7 @@ m.reply(text, null, { mentions: conn.parseMention(text) })
 handler.help = ['lb']
 handler.tags = ['rpg']
 handler.command = ['leaderboard', 'lb'] 
-handler.group = true;
-handler.register = true
+handler.register = true 
 handler.fail = null
 handler.exp = 0
 
