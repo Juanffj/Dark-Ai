@@ -21,7 +21,7 @@ m.react('🐈‍⬛')
     const json = await axios.post('https://bot.lyo.su/quote/generate', obj, {headers: {'Content-Type': 'application/json'}});
     const buffer = Buffer.from(json.data.result.image, 'base64');
    let stiker = await sticker(buffer, false, global.packname, global.author);
-if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: packname, body: `La Mejor Bot 🌟`, mediaType: 2, sourceUrl: redes, thumbnail: icons}}}, { quoted: m })
+if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: packname, body: `La Bot mas Bonita 🤍`, mediaType: 2, sourceUrl: redes, thumbnail: icons}}}, { quoted: m })
 }
 handler.help = ['qc'];
 handler.tags = ['sticker'];
