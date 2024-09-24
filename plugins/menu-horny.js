@@ -29,7 +29,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname, args, command}) => {
 let tags = {
 'nsfw': 'ᴍᴇɴᴜ ᴀᴅᴜʟᴛᴏ',
 }
-let img = 'https://i.ibb.co/sQDM2NJ/file.jpg'
+let img = 'https://iili.io/ds8mmFI.md.png'
 
   try {
           // DEFAULT MENU
