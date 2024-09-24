@@ -17,7 +17,7 @@ if (!img) return conn.reply(m.chat, `⚠️ *_La conversión ha fallado, intenta
 
 let out
 try {
-stiker = await sticker(img, false, global.packsticker, global.author)
+stiker = await sticker(img, false, global.packsticker, global.textbot)
 } catch (e) {
 console.error(e)
 } finally {
