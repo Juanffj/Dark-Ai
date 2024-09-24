@@ -1,4 +1,4 @@
-/* import fs from "fs"
+import fs from "fs"
 import fetch from "node-fetch"
 import FormData from "form-data"
 
@@ -49,65 +49,4 @@ async function uploadUguu(path) {
     await fs.promises.unlink(path)
     throw "Upload failed"
   }
-} */
-
-import fs from 'fs';
-import FormData from 'form-data';
-import axios from 'axios';
-import path from 'path';
-
-let handler = async (m, { conn }) => {
-  let q = m.quoted ? m.quoted : m;
-  let mime = (q.msg || q).mimetype || '';
-
-  await m.react('🕒');
-  if (!mime.startsWith('image/')) {
-    return m.reply('Responde a una *Imagen.*');
-  }
-
-  let media = await q.download();
-  let tempFilePath = path.join(__dirname, 'temp_image.jpg'); // Ruta temporal para guardar la imagen
-
-  // Guardar el buffer en un archivo
-  fs.writeFileSync(tempFilePath, media);
-
-  let formData = new FormData();
-  formData.append('file', fs.createReadStream(tempFilePath));
-
-  try {
-    let api = await axios.post('https://freeimage.host/api/upload', formData, {
-      headers: {
-        ...formData.getHeaders(),
-      },
-    });
-
-    await m.react('✅');
-    if (api.data.success) {
-      let imgData = api.data.image;
-      let txt = '`F R E E I M A G E - U P L O A D E R`\n\n';
-      txt += `*🔖 Titulo* : ${q.filename || 'x'}\n`;
-      txt += `*🔖 Enlace* : ${imgData.url}\n`;
-      txt += `*🔖 Directo* : ${imgData.url}\n`;
-      txt += `*🔖 Mime* : ${mime}\n`;
-      txt += `*🔖 File* : ${q.filename || 'x.jpg'}\n`;
-      txt += `*🔖 Extension* : ${imgData.extension}\n`;
-      txt += `© By: Genesis`;
-      await conn.sendFile(m.chat, imgData.url, 'freeimage.jpg', txt, m);
-    } else {
-      await m.reply('Error al subir la imagen.');
-    }
-  } catch (error) {
-    await m.reply('Error en la carga: ' + error.message);
-  } finally {
-    // Eliminar el archivo temporal
-    if (fs.existsSync(tempFilePath)) {
-      fs.unlinkSync(tempFilePath);
-    }
-  }
-};
-
-handler.tags = ['convertir'];
-handler.help = ['tofreeimage'];
-handler.command = /^(tourl3)$/i;
-handler.register = true;
-export default handler;
+}
