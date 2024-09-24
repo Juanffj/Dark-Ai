@@ -97,15 +97,15 @@ global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo
 }}, { quoted: m }
 
 global.icono = [ 
-'https://i.ibb.co/gdq9Bvy/file.jpg',
-'https://i.ibb.co/Lhj6h4z/file.jpg',
-'https://i.ibb.co/47j98K2/file.jpg',
-'https://i.ibb.co/F4brkKt/file.jpg',
-'https://i.ibb.co/RzDQN2p/file.jpg',
-'https://i.ibb.co/89S9WdC/file.jpg',
-'https://i.ibb.co/bPQjtXW/file.jpg',
+'https://iili.io/dsvLXUJ.md.png',
+'https://iili.io/dsvpB1I.md.png',
+'https://iili.io/dsvyI3P.md.png',
+'https://iili.io/ds8JsVf.md.png',
+'https://iili.io/ds83u8N.md.png',
+'https://iili.io/ds8FYJV.md.png',
+'https://iili.io/ds8fK92.md.png',
 ].getRandom()
 
-global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363220939514640@newsletter", serverMessageId: 100, newsletterName: '𝑮𝒆𝒏𝒆𝒔𝒊𝒔-𝑩𝒐𝒕 - 𝑪𝒉𝒂𝒏𝒏𝒆𝒍', }, externalAdReply: { showAdAttribution: true, title: packname, body: '🤍 ¡Génesis Super Bot!', mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icons, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
+global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363220939514640@newsletter", serverMessageId: 100, newsletterName: '𝑮𝒆𝒏𝒆𝒔𝒊𝒔-𝑩𝒐𝒕 - 𝑪𝒉𝒂𝒏𝒏𝒆𝒍', }, externalAdReply: { showAdAttribution: true, title: packname, body: '🤍 ¡Génesis Super Bot!', mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
 
 export default handler
