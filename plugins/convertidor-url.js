@@ -51,68 +51,52 @@ async function uploadUguu(path) {
   }
 } */
 
-import fs from "fs";
-import axios from "axios";
-import FormData from "form-data";
+import fs from 'fs';
+import FormData from 'form-data';
+import axios from 'axios';
 
-let handler = async m => {
-  try {
-    const q = m.quoted || m;
-    const mime = q.mediaType || "";
-    
-    if (!/^image/.test(mime)) 
-      throw "¡Solo se permiten imágenes!";
-    
-    const media = await q.download(true);
-    const fileSizeInBytes = fs.statSync(media).size;
+let handler = async (m, { conn }) => {
+  let q = m.quoted ? m.quoted : m;
+  let mime = (q.msg || q).mimetype || '';
 
-    if (fileSizeInBytes === 0) {
-      await m.reply("archivo vacío");
-      return;
-    }
-    
-    if (fileSizeInBytes > 5242880) { // 5 MB máximo para imágenes
-      await m.reply("El archivo es demasiado grande, el tamaño máximo es 5 MB");
-      return;
-    }
-
-    const { data } = await uploadImageShack(media);
-    const caption = `*Link directo:*\n${data.link}`;
-    await m.reply(caption);
-  } catch (e) {
-    await m.reply(`${e}`);
+  await m.react('🕒');
+  if (!mime.startsWith('image/')) {
+    return m.reply('Responde a una *Imagen.*');
   }
-}
 
-handler.help = ['tourl'];
-handler.tags = ['convertir'];
-handler.command = /^(tourl3|upload)$/i;
-export default handler;
+  let media = await q.download();
+  let formData = new FormData();
+  formData.append('file', fs.createReadStream(media));
 
-async function uploadImageShack(path) {
   try {
-    const form = new FormData();
-    form.append("file", fs.createReadStream(path));
-    
-    const res = await axios.post("https://api.imageshack.com/v2/images", form, {
+    let api = await axios.post('https://freeimage.host/api/upload', formData, {
       headers: {
-        ...form.getHeaders(),
-        "Authorization": "Bearer YOUR_ACCESS_TOKEN" // Reemplaza con tu token de acceso
-      }
+        ...formData.getHeaders(),
+      },
     });
 
-    // Solo intenta eliminar el archivo si existe
-    if (fs.existsSync(path)) {
-      await fs.promises.unlink(path);
+    await m.react('✅');
+    if (api.data.success) {
+      let imgData = api.data.image;
+      let txt = '`F R E E I M A G E - U P L O A D E R`\n\n';
+      txt += `*🔖 Titulo* : ${q.filename || 'x'}\n`;
+      txt += `*🔖 Enlace* : ${imgData.url}\n`;
+      txt += `*🔖 Directo* : ${imgData.url}\n`; // Puedes ajustar esto según sea necesario
+      txt += `*🔖 Mime* : ${mime}\n`;
+      txt += `*🔖 File* : ${q.filename || 'x.jpg'}\n`;
+      txt += `*🔖 Extension* : ${imgData.extension}\n`;
+      txt += `© By: Genesis`;
+      await conn.sendFile(m.chat, imgData.url, 'freeimage.jpg', txt, m);
+    } else {
+      await m.reply('Error al subir la imagen.');
     }
-    
-    if (!res.data || !res.data.link) throw "Upload failed";
-    return res.data;
-  } catch (e) {
-    // Intenta eliminar el archivo si ocurre un error
-    if (fs.existsSync(path)) {
-      await fs.promises.unlink(path);
-    }
-    throw "Error en la carga";
+  } catch (error) {
+    await m.reply('Error en la carga: ' + error.message);
   }
-}
+};
+
+handler.tags = ['convertir'];
+handler.help = ['tofreeimage'];
+handler.command = /^(tourl3)$/i;
+handler.register = true;
+export default handler;
