@@ -78,8 +78,8 @@ let handler = async m => {
       return;
     }
 
-    const { data } = await uploadFreeImage(media);
-    const caption = `*Link:*\n${data?.image.url}`;
+    const { data } = await uploadImageShack(media);
+    const caption = `*Link directo:*\n${data.link}`;
     await m.reply(caption);
   } catch (e) {
     await m.reply(`${e}`);
@@ -91,19 +91,20 @@ handler.tags = ['convertir'];
 handler.command = /^(tourl3|upload)$/i;
 export default handler;
 
-async function uploadFreeImage(path) {
+async function uploadImageShack(path) {
   try {
     const form = new FormData();
     form.append("file", fs.createReadStream(path));
     
-    const res = await axios.post("https://freeimage.host/api/upload", form, {
+    const res = await axios.post("https://api.imageshack.com/v2/images", form, {
       headers: {
         ...form.getHeaders(),
+        "Authorization": "Bearer YOUR_ACCESS_TOKEN" // Reemplaza con tu token de acceso
       }
     });
 
     await fs.promises.unlink(path);
-    if (!res.data || !res.data.image) throw "Upload failed";
+    if (!res.data || !res.data.link) throw "Upload failed";
     return res.data;
   } catch (e) {
     await fs.promises.unlink(path);
