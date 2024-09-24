@@ -54,6 +54,7 @@ async function uploadUguu(path) {
 import fs from 'fs';
 import FormData from 'form-data';
 import axios from 'axios';
+import path from 'path';
 
 let handler = async (m, { conn }) => {
   let q = m.quoted ? m.quoted : m;
@@ -65,8 +66,13 @@ let handler = async (m, { conn }) => {
   }
 
   let media = await q.download();
+  let tempFilePath = path.join(__dirname, 'temp_image.jpg'); // Ruta temporal para guardar la imagen
+
+  // Guardar el buffer en un archivo
+  fs.writeFileSync(tempFilePath, media);
+
   let formData = new FormData();
-  formData.append('file', fs.createReadStream(media));
+  formData.append('file', fs.createReadStream(tempFilePath));
 
   try {
     let api = await axios.post('https://freeimage.host/api/upload', formData, {
@@ -81,7 +87,7 @@ let handler = async (m, { conn }) => {
       let txt = '`F R E E I M A G E - U P L O A D E R`\n\n';
       txt += `*🔖 Titulo* : ${q.filename || 'x'}\n`;
       txt += `*🔖 Enlace* : ${imgData.url}\n`;
-      txt += `*🔖 Directo* : ${imgData.url}\n`; // Puedes ajustar esto según sea necesario
+      txt += `*🔖 Directo* : ${imgData.url}\n`;
       txt += `*🔖 Mime* : ${mime}\n`;
       txt += `*🔖 File* : ${q.filename || 'x.jpg'}\n`;
       txt += `*🔖 Extension* : ${imgData.extension}\n`;
@@ -92,11 +98,16 @@ let handler = async (m, { conn }) => {
     }
   } catch (error) {
     await m.reply('Error en la carga: ' + error.message);
+  } finally {
+    // Eliminar el archivo temporal
+    if (fs.existsSync(tempFilePath)) {
+      fs.unlinkSync(tempFilePath);
+    }
   }
 };
 
 handler.tags = ['convertir'];
 handler.help = ['tofreeimage'];
-handler.command = /^(tourl3)$/i;
+handler.command = /^(tourl2|tofreeimage)$/i;
 handler.register = true;
 export default handler;
