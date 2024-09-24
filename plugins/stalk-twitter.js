@@ -21,7 +21,7 @@ conn.reply('error :v')
 }
 
 handler.help = ['twitterstalk <username>']
-handler.tags = ['fun']
+handler.tags = ['stalk']
 handler.command = ['twitterstalk']
 
 export default handler
