@@ -51,58 +51,62 @@ async function uploadUguu(path) {
   }
 } */
 
-import fs from "fs"
-import fetch from "node-fetch"
-import FormData from "form-data"
+import fs from "fs";
+import axios from "axios";
+import FormData from "form-data";
 
 let handler = async m => {
   try {
-    const q = m.quoted || m
-    const mime = q.mediaType || ""    
-    if (!/image|video|audio|sticker|document/.test(mime)) 
-      throw "¡No se proporcionan medios!"
-    const media = await q.download(true)
-    const fileSizeInBytes = fs.statSync(media).size    
+    const q = m.quoted || m;
+    const mime = q.mediaType || "";
+    
+    if (!/^image/.test(mime)) 
+      throw "¡Solo se permiten imágenes!";
+    
+    const media = await q.download(true);
+    const fileSizeInBytes = fs.statSync(media).size;
+
     if (fileSizeInBytes === 0) {
-      await m.reply("archivo vacío")
-      await fs.promises.unlink(media)
-      return
-    }   
-    if (fileSizeInBytes > 1073741824) {
-      await m.reply("El archivo es demasiado grande, el tamaño máximo es 1 GB")
-      await fs.promises.unlink(media)
-      return
-    }    
-    const { data } = await uploadFreeImageHost(media)
-    const caption = `*Link:*\n${data.url}`
-    await m.reply(caption)
+      await m.reply("archivo vacío");
+      await fs.promises.unlink(media);
+      return;
+    }
+    
+    if (fileSizeInBytes > 5242880) { // 5 MB máximo para imágenes
+      await m.reply("El archivo es demasiado grande, el tamaño máximo es 5 MB");
+      await fs.promises.unlink(media);
+      return;
+    }
+
+    const { data } = await uploadFreeImage(media);
+    const caption = `*Link:*\n${data?.image.url}`;
+    await m.reply(caption);
   } catch (e) {
-    await m.reply(`${e}`)
+    await m.reply(`${e}`);
   }
 }
 
-handler.help = ['tourl']
-handler.tags = ['convertir']
-handler.command = /^(tourl3|upload)$/i
-export default handler
+handler.help = ['tourl'];
+handler.tags = ['convertir'];
+handler.command = /^(tourl3|upload)$/i;
+export default handler;
 
-async function uploadFreeImageHost(path) {
+async function uploadFreeImage(path) {
   try {
-    const form = new FormData()
-    form.append("file", fs.createReadStream(path))   
-    const res = await fetch("https://api.freeimage.host/v1/upload", {
-      method: "POST",
-      body: form
-    })    
-    const json = await res.json()
-    await fs.promises.unlink(path)   
-    if (json.success) {
-      return json
-    } else {
-      throw "Error en la subida: " + json.message
-    }
+    const form = new FormData();
+    form.append("file", fs.createReadStream(path));
+    
+    const res = await axios.post("https://freeimage.host/api/upload", form, {
+      headers: {
+        ...form.getHeaders(),
+      }
+    });
+
+    await fs.promises.unlink(path);
+    if (!res.data || !res.data.image) throw "Upload failed";
+    return res.data;
   } catch (e) {
-    await fs.promises.unlink(path)
-    throw "Upload failed"
+    await fs.promises.unlink(path);
+    throw "Error en la carga";
   }
 }
