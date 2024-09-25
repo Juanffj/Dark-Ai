@@ -7,6 +7,38 @@
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Oswald&weight=300&size=37&duration=3000&pause=100&color=000000&background=601D6E00&center=true&vCenter=true&repeat=true&random=FALSO&width=660&height=90&lines=Angel-OFC+lanzó+la mejor+versión;De+Genesis Bot - 1.5.1;Con+nuevos+comandos+y+mejoras;GenesisBot-MD+El+Mejor Bot+De+WhatsApp" alt="Typing SVG"/></a>
 </div>
 
+### **`❕️ Información importante`**
+
+<details>
+ <summary><b> 🌹 Info Aquí</b></summary>
+
+* **Este proyecto no ofrece soporte oficial para su uso en Termux.** Termux es una aplicación de terminal para Android y, aunque puede ser utilizada para ejecutar diversos programas, **este proyecto no está diseñado ni probado específicamente para funcionar en Termux**. Por lo tanto, **no garantizamos compatibilidad ni soporte técnico en este entorno**.
+
+</details>
+
+<details>
+ <summary><b> 🌹 Info Bot</b></summary>
+
+* Este proyecto **no está afiliado de ninguna manera** con `WhatsApp`, `Inc. WhatsApp` es una marca registrada de `WhatsApp LLC`, y este bot es un **desarrollo independiente** que **no tiene ninguna relación oficial con la compañía**.
+
+</details>
+
+<details>
+ <summary><b> 🌹 Info V 3.0.2</b></summary>
+
+* 📢 USER DE TERMUX
+💥 Para los usuarios que intentan instalar el bot vía la aplicación **`termux`**, tenemos esta noticia.
+
+* 💥 El staff de **`MikaBot-MD`** da aviso a los usuarios de **`Termux`** que ya no es posible instalar el Bot debido a las actualizaciones y los últimos commits realizados por el equipo del bot
+
+* 💥 como tal más, esto se ah removido del repositorio oficial como tal, aquel usuario que intente instalar, deberá tener en cuenta que ya no se brindará soporte ni ya es instalable.
+
+> 💥 **`Gracias por visitar el repositorio MikaBot-MD`**
+
+</details>
+
+---
+
 ### CONTACTOS 💻
 <p>
 
