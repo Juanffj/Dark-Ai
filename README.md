@@ -24,7 +24,9 @@
 <details>
  <summary><b> 🤍 Info Bot</b></summary>
 
-* **Este Bot recibe soporte 24/7 diariamente si presenta fallos solo repórtelo para que lo solucionemos\n\nSi vas a instalar el Bot, o extraerlo toma en cuenta que está totalmente prohibida su venta en cualquier sentido xfavor toma en cuenta y respeta el trabajo del creador...**.
+* Este Bot recibe soporte 24/7 diariamente si presenta fallos solo repórtelo para que lo solucionemos
+
+* Si vas a instalar el Bot, o extraerlo toma en cuenta que está totalmente prohibida su venta en cualquier sentido xfavor toma en cuenta y respeta el trabajo del creador...
 
 </details>
 
