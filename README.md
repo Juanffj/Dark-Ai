@@ -10,7 +10,7 @@
 ### **`❕️ Información importante`**
 
 <details>
- <summary><b> 🤍 Info Aquí</b></summary>
+ <summary><b> 🤍 Nota Importante </b></summary>
 
 * **Este Bot de WhatsApp no ofrece soporte oficial para su uso en Termux.** Termux es una aplicación de terminal para Android y, aunque puede ser utilizada para ejecutar diversos programas, **este proyecto no está diseñado ni probado específicamente para funcionar en Termux**. Por lo tanto, **no garantizamos compatibilidad ni soporte técnico en este entorno**.
 
