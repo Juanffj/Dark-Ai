@@ -24,7 +24,7 @@
 </details>
 
 <details>
- <summary><b> 🤍 Info V 3.0.2</b></summary>
+ <summary><b> 🤍 Info V 1.5.1</b></summary>
 
 * 📢 USER DE TERMUX
 💥 Para los usuarios que intentan instalar el bot vía la aplicación **`termux`**, tenemos esta noticia.
@@ -33,7 +33,7 @@
 
 * 💥 como tal más, esto se ah removido del repositorio oficial como tal, aquel usuario que intente instalar, deberá tener en cuenta que ya no se brindará soporte ni ya es instalable.
 
-> 💥 **`Gracias por visitar el repositorio MikaBot-MD`**
+> 💥 **`Gracias por visitar el repositorio GenesisBot-MD`**
 
 </details>
 
