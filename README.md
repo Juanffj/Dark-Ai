@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=000000&lines=Versión+Actual+1.5.1;By+Angelito-OFC; WhatsApp+Bot+Node+js)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=000000&lines=Versión+Actual+1.5.1;By+Angelito-OFC; WhatsApp+Bot+Node+js+)](https://git.io/typing-svg)
 
 ## 🤍 **`G E N E S I S - M D`**
 
