@@ -24,9 +24,9 @@
 <details>
  <summary><b> 🤍 Info Bot</b></summary>
 
-* Este Bot recibe soporte 24/7 diariamente si presenta fallos solo repórtelo para que lo solucionemos
+* GenesisBot-MD recibe soporte 24/7 diariamente si llegas a ver un error repetitivamente o presenta fallos solo repórtelo para que lo solucionemos
 
-* Si vas a instalar el Bot, o extraerlo toma en cuenta que está totalmente prohibida su venta en cualquier sentido xfavor toma en cuenta y respeta el trabajo del creador...
+* Si vas a instalar el Bot, o extraerlo toma en cuenta que está totalmente prohibida su venta en cualquier sentido. si se usa para Ventas se tomará actos contra esta persona por no respetar los términos de nuestro Repositorio.
 
 </details>
 
