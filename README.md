@@ -22,7 +22,7 @@
 </details>
 
 <details>
- <summary><b> 🤍 Info Bot</b></summary>
+ <summary><b> 🤍 Importante </b></summary>
 
 * GenesisBot-MD recibe soporte 24/7 diariamente si llegas a ver un error repetitivamente o presenta fallos solo repórtelo para que lo solucionemos
 
