@@ -96,7 +96,7 @@ href="https://github.com/David-Chian"><img src="https://github.com/David-Chian.p
 <a href="https://github.com/Jostin-444"><img src="https://github.com/Jostin-444.png" width="100" height="100" alt="Jostin-444"/></a>
 <a href="https://github.com/MauroAzcurra"><img src="https://github.com/MauroAzcurra.png" width="100" height="100" alt="MauroAzcurra"/></a>
 
-### 🤍 CREADOR 
+### **`🤍 CREADOR`**
 <a
 href="https://github.com/Angelito-OFC"><img src="https://github.com/Angelito-OFC.png" width="130" height="130" alt="Angelito"/></a>
 
