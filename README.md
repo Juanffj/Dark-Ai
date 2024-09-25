@@ -37,24 +37,6 @@
 
 </details>
 
-
-### CONTACTOS 💻
-<p>
-
-
-
-<a href="https://api.whatsapp.com/send/?phone=+59897246324&text=Hola 👋 soporte de Génesis Bot &type=phone_number&app_absent=0" target="blank"><img src="https://img.shields.io/badge/Whatsapp-30302f?style=flat&logo=whatsapp" /></a>
- <a href="http://www.instagram.com/usxr_angelito0" target="blank"><img src="https://img.shields.io/badge/Instagram-30302f?style=flat&logo=instagram" /></a>
-<a href="https://www.threads.net/@usxr_angelito0" target="blank"><img src="https://img.shields.io/badge/Threads-30302f?style=flat&logo=threads" /></a>
-<a href="https://x.com/usxr_angelito0" target="blank"><img src="https://img.shields.io/badge/Twitter-30302f?style=flat&logo=x" /></a>
-
-> [!NOTE]
-> **Este Bot recibe soporte 24/7 diariamente si presenta fallos solo repórtelo para que lo solucionemos**
-
-
-> [!IMPORTANT]
-> **Si vas a instalar el Bot, o extraerlo toma en cuenta que está totalmente prohibida su venta en cualquier sentido xfavor toma en cuenta y respeta el trabajo del creador..**
-
 ### <img src="https://i.pinimg.com/originals/19/80/6e/19806e91932e6054965fc83b85241270.gif" alt="Prueba La Bot Aqui" width="42" height="42"> Prueba La Bot Aqui
 
 > Si Deseas Probar La Bot Antes De Instalarlo, Click Abajo.🟢
