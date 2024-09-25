@@ -31,7 +31,7 @@
 </details>
 
 <details>
- <summary><b> 🤍 Info V 1.5.1</b></summary>
+ <summary><b> 🤍 Versión 1.5.1</b></summary>
 
 * 📢 USER DE TERMUX
 💥 Para los usuarios que intentan instalar el bot vía la aplicación **`termux`**, tenemos esta noticia.
