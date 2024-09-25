@@ -33,14 +33,7 @@
 <details>
  <summary><b> 🤍 Versión 1.5.1</b></summary>
 
-* 📢 USER DE TERMUX
-💥 Para los usuarios que intentan instalar el bot vía la aplicación **`termux`**, tenemos esta noticia.
-
-* 💥 El staff de **`GenesisBot-MD`** da aviso a los usuarios de **`Termux`** que ya no es posible instalar el Bot debido a las actualizaciones y los últimos commits realizados por el equipo del bot
-
-* 💥 como tal más, esto se ah removido del repositorio oficial como tal, aquel usuario que intente instalar, deberá tener en cuenta que ya no se brindará soporte ni ya es instalable.
-
-> 💥 **`Gracias por visitar el repositorio GenesisBot-MD`**
+* **Este proyecto no ofrece soporte oficial para su uso en Termux.** Termux es una aplicación de terminal para Android y, aunque puede ser utilizada para ejecutar diversos programas, **este proyecto no está diseñado ni probado específicamente para funcionar en Termux**. Por lo tanto, **no garantizamos compatibilidad ni soporte técnico en este entorno**.
 
 </details>
 
